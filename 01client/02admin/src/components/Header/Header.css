@@ -1,0 +1,38 @@
+.headBox {
+    height: 10%;
+    background-color: #2f333e;
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titleBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.titleBox .icon {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.titleText {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.title1 {
+    color: #ffffff;
+}
+
+.title2 {
+    color: #ffffff;
+    font-weight: bold;
+}

@@ -1,0 +1,29 @@
+<!--index.wxml-->
+<view class="container">
+  <scroll-view class='headerBox' scroll-x="true">
+    <view class='headerItem' wx:for="{{courses}}" wx:key="index" wx:for-item="course">
+      <view class='headerItemView' bindtap='clickTopItem' data-yjs="{{index}}">
+        <view class='{{coursesIndex==index?"titleSelect":"title"}}'>{{course.name}}</view>
+        <view class='line' wx:if="{{coursesIndex==index}}"></view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class='divider'></view>
+  <scroll-view class='body' style='height:{{height}}rpx; ' scroll-y="true">
+    <view class='scrollItem' wx:for="{{courses[coursesIndex].chapters}}" wx:key="index" wx:for-item="chapter">
+      <view class='examinationView' bindtap='turnToPlay' data-coursesIndex="{{courses[coursesIndex].id}}" data-chapterIndex="{{index}}">
+        <image class='icon' src="../../imgs/index.png"></image>
+         <view >第{{index+1}}章:</view>
+        <view class='title'>{{chapter.title}}</view>
+      </view>
+    </view>
+  </scroll-view>
+
+
+
+
+
+
+
+
+</view>

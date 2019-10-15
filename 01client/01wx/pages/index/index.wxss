@@ -1,0 +1,74 @@
+.headerBox {
+  width: 700rpx;
+  white-space: nowrap;
+}
+
+.headerItem {
+  display: inline-block;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+}
+
+.headerItemView {
+  display: flex;
+  flex-direction: column;
+  height: 80rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  color: #555;
+  font-size: 33rpx;
+}
+
+.titleSelect {
+  color: #111;
+  font-size: 36rpx;
+}
+
+.line {
+  width: 50%;
+  height: 10rpx;
+  background: #2066ff;
+  border-radius: 5rpx;
+}
+
+.divider {
+  width: 750rpx;
+  height: 4rpx;
+  background: #eef0f5;
+}
+
+.examinationView {
+  width: 700rpx;
+  height: 150rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1rpx solid #333333;
+}
+
+.examinationView .title {
+  color: #111;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+
+
+.examinationView  .icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+
+.body{
+  width: 750rpx;
+}
+
+.scrollItem{
+  width: 100%;
+  display: inline-block;
+  padding-top: 40rpx;
+}

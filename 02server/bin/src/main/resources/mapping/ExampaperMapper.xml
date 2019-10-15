@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.ExampaperMapper" >
+  <resultMap id="BaseResultMap" type="com.ff.pojo.Exampaper" >
+    <id column="e_id" property="eId" jdbcType="INTEGER" />
+    <result column="e_title" property="eTitle" jdbcType="VARCHAR" />
+    <result column="creatTime" property="creattime" jdbcType="VARCHAR" />
+    <result column="validateTime" property="validatetime" jdbcType="INTEGER" />
+    <result column="validity" property="validity" jdbcType="VARCHAR" />
+    <result column="fulscore" property="fulscore" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="course_name" property="courseName" jdbcType="VARCHAR" />
+  
+  </resultMap>
+  <sql id="Base_Column_List" >
+    e_id, e_title, creatTime, validateTime, validity, fulscore, course_id, course_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from exampaper
+    where e_id = #{eId,jdbcType=INTEGER}
+  </select>
+  
+  <!--根据试卷名查询试卷  -->
+    <select id="selectByEtitle" resultMap="BaseResultMap" parameterType="com.ff.pojo.Exampaper" >
+    select 
+    <include refid="Base_Column_List" />
+    from exampaper
+    where e_title = #{eTitle}
+  </select>
+	<!--   查询所有试卷  -->
+   <select id="selectAllExampaper" resultMap="BaseResultMap" parameterType="com.ff.pojo.Exampaper" >
+    select 
+    <include refid="Base_Column_List" />
+    from exampaper
+    limit #{page,jdbcType=INTEGER},#{row,jdbcType=INTEGER}
+  </select> 
+  <!-- 批量删除试卷 -->
+  <delete id="delBatchExampaper" parameterType="java.util.List" >
+    delete from exampaper
+    where e_id in
+    <foreach item="x" collection="list" open="(" separator="," close=")">
+            #{x}
+    </foreach>
+  </delete>
+  
+  <insert id="insertExampaper" parameterType="com.ff.pojo.Exampaper" >
+    insert into exampaper (e_id, e_title, creatTime, 
+      validateTime, validity, fulscore, 
+      course_id, course_name)
+    values (#{eId,jdbcType=INTEGER}, #{eTitle,jdbcType=VARCHAR}, #{creattime,jdbcType=VARCHAR}, 
+      #{validatetime,jdbcType=INTEGER}, #{validity,jdbcType=VARCHAR}, #{fulscore,jdbcType=INTEGER}, 
+      #{courseId,jdbcType=INTEGER},#{courseName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ff.pojo.Exampaper" >
+    insert into exampaper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        e_id,
+      </if>
+      <if test="eTitle != null" >
+        e_title,
+      </if>
+      <if test="creattime != null" >
+        creatTime,
+      </if>
+      <if test="validatetime != null" >
+        validateTime,
+      </if>
+      <if test="validity != null" >
+        validity,
+      </if>
+      <if test="fulscore != null" >
+        fulscore,
+      </if>
+      <if test="courseId != null" >
+        course_id,
+      </if>
+      <if test="courseName != null" >
+        course_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="eTitle != null" >
+        #{eTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        #{creattime,jdbcType=VARCHAR},
+      </if>
+      <if test="validatetime != null" >
+        #{validatetime,jdbcType=INTEGER},
+      </if>
+      <if test="validity != null" >
+        #{validity,jdbcType=VARCHAR},
+      </if>
+      <if test="fulscore != null" >
+        #{fulscore,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+       <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ff.pojo.Exampaper" >
+    update exampaper
+    <set >
+      <if test="eTitle != null" >
+        e_title = #{eTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        creatTime = #{creattime,jdbcType=VARCHAR},
+      </if>
+      <if test="validatetime != null" >
+        validateTime = #{validatetime,jdbcType=INTEGER},
+      </if>
+      <if test="validity != null" >
+        validity = #{validity,jdbcType=VARCHAR},
+      </if>
+      <if test="fulscore != null" >
+        fulscore = #{fulscore,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null" >
+        course_name = #{courseName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ff.pojo.Exampaper" >
+    update exampaper
+    set e_title = #{eTitle,jdbcType=VARCHAR},
+      creatTime = #{creattime,jdbcType=VARCHAR},
+      validateTime = #{validatetime,jdbcType=INTEGER},
+      validity = #{validity,jdbcType=VARCHAR},
+      fulscore = #{fulscore,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=INTEGER},
+      course_name = #{courseName,jdbcType=VARCHAR}
+    where e_id = #{eId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectExam" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select * from exampaper_info ei,exampaper e,question q where ei.e_id = e.e_id and ei.q_id = q.q_id
+  </select>
+ 
+ 
+ 	 <!--根据名字模糊分页查询  -->
+  <select id="selectExampaper" resultMap="BaseResultMap" parameterType="com.ff.pojo.Exampaper">
+  	select <include refid="Base_Column_List" /> 
+  	from exampaper 
+  	<trim prefix="where " suffix=" " suffixOverrides="and" >
+	    <if test="eTitle != null" >
+          e_title like #{eTitle,jdbcType=VARCHAR} and
+        </if>
+    </trim>
+  	limit #{page,jdbcType=INTEGER},#{row,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(e_id) from exampaper
+  </select>
+</mapper>

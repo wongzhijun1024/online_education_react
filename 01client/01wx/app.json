@@ -1,0 +1,44 @@
+{
+  "pages": [
+        "pages/write/write",
+    "pages/index/index",
+    "pages/play/play",
+     "pages/examinationInfor/examinationInfor",
+    "pages/find/find",
+    "pages/user/user",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "距离考研110天",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "selectedColor": "#2266ff",
+    "color": "#b1b5bd",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "课堂",
+      "iconPath": "imgs/index.png",
+      "selectedIconPath": "imgs/index_select.png"
+    },{
+      "pagePath": "pages/write/write",
+      "text": "做题",
+      "iconPath": "imgs/write.png",
+      "selectedIconPath": "imgs/write_select.png"
+    },{
+      "pagePath": "pages/find/find",
+      "text": "发现",
+      "iconPath": "imgs/find.png",
+      "selectedIconPath": "imgs/find_select.png"
+    },{
+      "pagePath": "pages/user/user",
+      "text": "我的",
+      "iconPath": "imgs/user.png",
+      "selectedIconPath": "imgs/user_select.png"
+    }]
+  },
+  "sitemapLocation": "sitemap.json"
+}

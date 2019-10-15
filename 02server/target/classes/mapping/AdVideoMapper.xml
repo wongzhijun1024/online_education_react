@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.AdVideoMapper">
+	<resultMap id="BaseResultMap" type="com.ff.pojo.AdVideo">
+		<id column="id" property="id" />
+		<result column="av_name" property="name" />
+		<result column="av_url" property="url" />
+		<result column="ad_topic_id" property="adTopicId" />
+	</resultMap>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into ad_video(av_name,av_url,ad_topic_id)
+		values
+		(#{name},#{url},#{adTopicId})
+	</insert>
+
+	<select id="selectAdTopics" resultMap="BaseResultMap">
+		select * from ad_video order by vorder
+	</select>
+
+	<select id="selectAdTopic" resultMap="BaseResultMap">
+		select * from
+		ad_video
+		where
+		name = #{name}
+	</select>
+
+
+	<update id="updateVideo" parameterType="com.ff.pojo.AdVideo">
+		update ad_video
+		<set>
+			<if test="url != null">
+				av_url = #{url},
+			</if>
+			<if test="name != null">
+				av_name = #{name},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+</mapper>

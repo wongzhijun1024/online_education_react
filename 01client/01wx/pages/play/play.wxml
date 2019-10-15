@@ -1,0 +1,36 @@
+<view class='container'>
+  <video src="https://chengd-1253990303.cos.ap-chengdu.myqcloud.com/noi/video/2019-4-14-03Parkour%20Atlas.mp4" controls></video>
+
+  <view class='selectBox'>
+    <view class='itemView' wx:for="{{selectBoxList}}" wx:key="index" bindtap='selectAction' data-index="{{index}}">
+      <view class='{{selectIndex==index?"title":"title2"}}'>{{item.name}}</view>
+      <view class='{{selectIndex==index?"line":""}}'></view>
+    </view>
+  </view>
+  <view class='divider'></view>
+  <scroll-view class='body' style='height:{{height}}rpx; ' scroll-y="true" wx:if="{{selectIndex==0}}">
+    <view class='scrollItem' wx:for="{{course.chapters}}" wx:key="index" wx:for-item="chapter">
+      <view class='examinationView' bindtap='turnToPlay' data-coursesIndex="{{coursesIndex}}" data-chapterIndex="{{index}}">
+        <image class='icon' src="../../imgs/index.png"></image>
+         <view >第{{index+1}}章:</view>
+        <view class='title'>{{chapter.title}}</view>
+      </view>
+    </view>
+  </scroll-view>
+
+    <scroll-view class='body' style='height:{{height}}rpx; ' scroll-y="true" wx:else>
+    <view class='scrollItem' wx:for="{{conments}}" wx:key="index" wx:for-item="conment">
+      <view class='examinationView' >
+        <image class='icon' src="{{conment.url}}"></image>
+        <view class='contentView'>
+        <view>{{conment.name}}</view>
+         <view>{{conment.text}}</view>
+        
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  
+  
+</view>

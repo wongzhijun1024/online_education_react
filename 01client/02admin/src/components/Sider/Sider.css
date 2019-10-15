@@ -1,0 +1,19 @@
+.siderBox {
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+.headView {
+    height: 10%;
+    background-color: #2f333e;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sider {
+    height: 100%;
+}

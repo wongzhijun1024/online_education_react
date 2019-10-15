@@ -1,0 +1,79 @@
+.container{
+  width: 750rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.selectBox {
+  width: 750rpx;
+  white-space: nowrap;
+  display: flex;
+   height: 140rpx;
+  flex-direction: row;
+}
+
+.selectBox .itemView{
+  display: flex;
+  width: 370rpx;
+  margin-top: 40rpx;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.selectBox .itemView .title{
+  color: #2066ff;
+  font-size: 42rpx;
+}
+
+.selectBox .itemView .title2{
+  color: #999999;
+  font-size: 38rpx;
+}
+
+.selectBox .itemView .line{
+  background-color: #2066ff;
+  margin-top: 30rpx;
+  width: 350rpx;
+  height: 3rpx;
+}
+
+
+.divider {
+  width: 750rpx;
+  height: 4rpx;
+  background: #eef0f5;
+}
+
+.body{
+  width: 750rpx;
+}
+
+.scrollItem{
+  width: 100%;
+  display: inline-block;
+  padding-top: 40rpx;
+}
+
+.examinationView {
+  width: 700rpx;
+  height: 150rpx;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1rpx solid #333333;
+}
+
+.examinationView .title {
+  color: #111;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+
+
+.examinationView  .icon {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  border:1rpx solid fuchsia;
+}
