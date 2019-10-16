@@ -1,7 +1,7 @@
 import axios from "axios";
 import qs from "qs";
 import { ip, port } from "./config";
-const serverUrl = ip + port + "/";
+const serverUrl = ip + port + "/noi/";
 
 let net = {
   get: "",

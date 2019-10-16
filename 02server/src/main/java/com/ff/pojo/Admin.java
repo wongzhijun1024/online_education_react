@@ -6,7 +6,7 @@ public class Admin {
 	private String name;
 
 	private String passwd;
-	
+
 	private int type;
 
 	public Admin() {
@@ -42,6 +42,11 @@ public class Admin {
 
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
+	}
+
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", name=" + name + ", passwd=" + passwd + ", type=" + type + "]";
 	}
 
 }

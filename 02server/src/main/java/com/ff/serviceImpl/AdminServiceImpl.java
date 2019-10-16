@@ -24,13 +24,15 @@ public class AdminServiceImpl implements AdminService {
 			msg.setMsg("用户不存在，请联系管理员!");
 		} else {
 			// 获得查询的用户名
-			String passwd = buffer.getPasswd();
-			if (admin.getPasswd() != passwd) {
-				msg.setCode(0);// 用户存在，但是密码不正确
-				msg.setMsg("密码错误，请重新输入密码!");
-			} else {
+			String bufferPasswd = buffer.getPasswd();
+			String passwd = admin.getPasswd();
+
+			if (bufferPasswd.endsWith(passwd)) {
 				msg.setCode(1);// 用户合法
 				msg.setMsg("用户合法!");
+			} else {
+				msg.setCode(0);// 用户存在，但是密码不正确
+				msg.setMsg("密码错误，请重新输入密码!");
 			}
 
 		}
