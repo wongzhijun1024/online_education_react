@@ -7,6 +7,7 @@ import Product from "../../views/product/Product";
 import UserQuery from "../../views/user/query/Query";
 import TeacherQuery from "../../views/teacher/query/Query";
 import TeacherAdd from "../../views/teacher/add/Add";
+import VideoAdd from "../../views/video/add/Add";
 const { Content } = Layout;
 export default class MyContent extends React.Component {
   constructor() {
@@ -18,6 +19,7 @@ export default class MyContent extends React.Component {
     return (
       <Content className="contentBox">
         <Switch>
+          <Route exact path={"/home/video/add"} component={VideoAdd} />
           <Route exact path={"/home/teacher/query"} component={TeacherQuery} />
           <Route exact path={"/home/teacher/add"} component={TeacherAdd} />
           <Route exact path={"/home/user/query"} component={UserQuery} />
