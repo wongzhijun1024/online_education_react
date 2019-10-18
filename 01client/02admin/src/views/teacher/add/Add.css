@@ -8,3 +8,16 @@
     flex-direction: column;
     align-items: center;
 }
+
+.avatar-uploader > .ant-upload {
+  width: 128px;
+  height: 128px;
+}
+.teacher-name{
+  width: 100%;
+  height: 50px;
+  background: pink;
+}
+.input-name{
+  width: 70%;
+}
