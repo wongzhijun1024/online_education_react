@@ -1,7 +1,7 @@
 import axios from "axios";
 import qs from "qs";
 import { ip, port } from "./config";
-const serverUrl = ip + port + "/";
+const serverUrl = ip + port + "/noi/";
 
 let net = {
   get: "",
@@ -29,7 +29,7 @@ net.get = function(api, object, call) {
 net.post = function(api, object, call) {
   //1,封装请求地址
   let url = serverUrl + api;
-  console.log(url);
+  console.log("请求地址："+url);
   axios
     .post(url, qs.stringify(object))
     .then(function(response) {
