@@ -5,7 +5,33 @@
     width: 80%;
     height: 90%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+h1{
+    font-size: 24px;
+}
+.teacherShow{
+    width: 100%;
+    font-size: 20px;
+}
+.showQuery{
+    width: 100%;
+    height: 50px;
+    background: white;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 5px;
+}
+.showQuery>img{
+    width: 50px;
+    height: 50px;
+    border-radius:25px;
+    margin-right: 40px;
+}
+.showQuery>img+div{
+    margin-right: 40px;
 }

@@ -29,18 +29,64 @@ class MySider extends React.Component {
               title={
                 <span>
                   <Icon type="user" />
+                  视频管理
+                </span>
+              }
+            >
+              <Menu.Item key="sub11">
+                <Link to={"/home/video/add"}>
+                  <Icon type="pie-chart" />
+                  <span> 视频添加 </span>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="sub12">
+                <Link to={"/home/video/query"}>
+                  <Icon type="pie-chart" />
+                  <span> 视频查询 </span>
+                </Link>
+              </Menu.Item>
+            </SubMenu>
+            <SubMenu
+              key="sub2"
+              title={
+                <span>
+                  <Icon type="user" />
+                  题库管理
+                </span>
+              }
+            >
+              <Menu.Item key="sub21">
+                <Link to={"/home/examination/add"}>
+                  <Icon type="pie-chart" />
+                  <span> 试题添加 </span>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="sub22">
+                <Link to={"/home/examination/query"}>
+                  <Icon type="pie-chart" />
+                  <span> 试题查询 </span>
+                </Link>
+              </Menu.Item>
+            </SubMenu>
+            <SubMenu
+              key="sub3"
+              title={
+                <span>
+                  <Icon type="user" />
                   老师管理
                 </span>
               }
             >
-              <Menu.Item key="1">
+              <Menu.Item key="sub31">
                 <Link to={"/home/teacher/add"}>
                   <Icon type="pie-chart" />
                   <span> 老师添加 </span>
                 </Link>
               </Menu.Item>
 
-              <Menu.Item key="2">
+              <Menu.Item key="sub32">
                 <Link to={"/home/teacher/query"}>
                   <Icon type="pie-chart" />
                   <span> 老师查询 </span>
@@ -48,7 +94,7 @@ class MySider extends React.Component {
               </Menu.Item>
             </SubMenu>
 
-            <Menu.Item key="3">
+            <Menu.Item key="sub43">
               <Link to={"/home/product"}>
                 <Icon type="desktop" />
                 <span> 产品管理页面 </span>

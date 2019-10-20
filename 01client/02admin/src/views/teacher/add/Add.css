@@ -1,12 +1,34 @@
 .addView {
     position: absolute;
-    margin: 0px;
+    margin: 0;
     padding: 0px;
-    width: 80%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+}
+
+.flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+.teacher-title{
+  width: 100%;
+  height: 100px;
+  font-weight: 700;
+  font-size: 24px;
+  background: white;
+}
+.teacher-title>img{
+  height: 100%;   
+  width: 100px;  
 }
 
 .avatar-uploader > .ant-upload {
@@ -16,8 +38,34 @@
 .teacher-name{
   width: 100%;
   height: 50px;
-  background: pink;
 }
 .input-name{
   width: 70%;
+}
+.teacher-list{
+  width: 100%;
+  background: white;
+}
+.select{
+  width: 100%;
+}
+
+.addForm{
+  width: 50%;
+  height: 50%;
+  background-color:#98BEF6;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  padding: 10px 20px;
+  display: none;
+}
+.cancleBox{
+  width: 100%;
+  text-align: right;
+}
+.ant-list-split .ant-list-item {
+    border-bottom: none;
 }

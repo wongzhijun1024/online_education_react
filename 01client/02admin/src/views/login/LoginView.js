@@ -34,6 +34,7 @@ export default class LoginView extends React.Component {
     net.post("adminCheck", { name: userName, passwd: inputPasswd }, function(
       data
     ) {
+      console.log(data);
       let code = data.code;
       //3，根据后台服务器返回的数据进行相关的操作
       if (code === 1) {

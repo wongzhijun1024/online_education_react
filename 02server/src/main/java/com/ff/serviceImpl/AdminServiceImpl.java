@@ -17,6 +17,8 @@ public class AdminServiceImpl implements AdminService {
 	public Msg check(Admin admin) {
 		// 创建信息对象
 		Msg msg = new Msg();
+
+		System.out.println(admin);
 		// 查询用户信息
 		Admin buffer = adminMapper.check(admin);
 		// 验证用户的合法性
