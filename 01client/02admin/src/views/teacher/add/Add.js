@@ -154,7 +154,7 @@ export default class Add extends React.Component {
               avatar={<Avatar src={item.src} />}
               title={<a href="https://ant.design">{item.name}</a>}
               description={item.introduce}
-            />
+            /> 
           </List.Item>
         )}
       />
