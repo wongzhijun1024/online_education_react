@@ -29,21 +29,21 @@ class MySider extends React.Component {
               title={
                 <span>
                   <Icon type="user" />
-                  视频管理
+                  课程管理
                 </span>
               }
             >
               <Menu.Item key="sub11">
-                <Link to={"/home/video/add"}>
+                <Link to={"/home/courses/add"}>
                   <Icon type="pie-chart" />
-                  <span> 视频添加 </span>
+                  <span> 课程添加 </span>
                 </Link>
               </Menu.Item>
 
               <Menu.Item key="sub12">
-                <Link to={"/home/video/query"}>
+                <Link to={"/home/courses/list"}>
                   <Icon type="pie-chart" />
-                  <span> 视频查询 </span>
+                  <span> 课程列表 </span>
                 </Link>
               </Menu.Item>
             </SubMenu>

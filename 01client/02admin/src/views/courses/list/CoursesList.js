@@ -1,7 +1,7 @@
 import React from "react";
-import "./Query.css";
+import "./CoursesList.css";
 import { Button } from "antd";
-export default class Query extends React.Component {
+export default class CoursesList extends React.Component {
   render() {
     return (
       <div className="teacherQueryView">
