@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.AdminMapper">
+	<resultMap id="BaseResultMap" type="com.ff.pojo.Admin">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="passwd" property="passwd" />
+		<result column="type" property="type" />
+	</resultMap>
+	<sql id="user_column">
+		id, name, passwd
+	</sql>
+
+	<!-- 登录 -->
+	<select id="check" resultMap="BaseResultMap"
+		parameterType="com.ff.pojo.Admin">
+		select
+		<include refid="user_column" />
+	from admin
+	where name = #{name}
+	</select>
+
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="user_column" />
+		from admin
+		where sys_id = #{sysId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from admin
+		where sys_id =
+		#{sysId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ff.pojo.Admin">
+		insert into admin (sys_id,
+		sys_name, sys_pwd
+		)
+		values (#{sysId,jdbcType=INTEGER},
+		#{sysName,jdbcType=CHAR},
+		#{sysPwd,jdbcType=CHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ff.pojo.Admin">
+		insert into admin
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sysId != null">
+				sys_id,
+			</if>
+			<if test="sysName != null">
+				sys_name,
+			</if>
+			<if test="sysPwd != null">
+				sys_pwd,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sysId != null">
+				#{sysId,jdbcType=INTEGER},
+			</if>
+			<if test="sysName != null">
+				#{sysName,jdbcType=CHAR},
+			</if>
+			<if test="sysPwd != null">
+				#{sysPwd,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.ff.pojo.Admin">
+		update admin
+		<set>
+			<if test="sysName != null">
+				sys_name = #{sysName,jdbcType=CHAR},
+			</if>
+			<if test="sysPwd != null">
+				sys_pwd = #{sysPwd,jdbcType=CHAR},
+			</if>
+		</set>
+		where sys_id = #{sysId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.ff.pojo.Admin">
+		update admin
+		set
+		sys_name = #{sysName,jdbcType=CHAR},
+		sys_pwd = #{sysPwd,jdbcType=CHAR}
+		where sys_id =
+		#{sysId,jdbcType=INTEGER}
+	</update>
+
+	<!-- 修改密码 -->
+	<update id="updateMiMa" parameterType="com.ff.pojo.Admin">
+		update admin
+		set sys_pwd =
+		#{sysPwd,jdbcType=VARCHAR}
+		where sys_name = #{sysName,jdbcType=INTEGER}
+	</update>
+
+	<!--根据名字模糊分页查询 -->
+	<select id="selectAdmin" resultMap="BaseResultMap"
+		parameterType="com.ff.pojo.Admin">
+		select
+		<include refid="user_column" />
+		from admin
+		<trim prefix="where " suffix=" " suffixOverrides="and">
+			<if test="sysName != null">
+				sys_name like #{sysName,jdbcType=VARCHAR} and
+			</if>
+		</trim>
+		limit #{page,jdbcType=INTEGER},#{row,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectCount" resultType="java.lang.Integer">
+		select count(sys_id) from admin
+		<trim prefix="where " suffix=" " suffixOverrides="and">
+			<if test="sysName != null">
+				sys_name like #{sysName,jdbcType=VARCHAR} and
+			</if>
+			<if test="sysPwd != null">
+				sys_pwd like #{sysPwd,jdbcType=VARCHAR} and
+			</if>
+		</trim>
+	</select>
+
+	<delete id="delBatchAdmin" parameterType="java.util.List">
+		delete from admin
+		where sys_id in
+		<foreach item="x" collection="list" open="(" separator=","
+			close=")">
+			#{x}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.VideoMapper" >
+  <resultMap id="BaseResultMap" type="com.ff.pojo.Video" >
+    <id column="id" property="id" />
+    <result column="name" property="name"  />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name
+  </sql>
+  <select id="selectVideosByChapterId" resultMap="BaseResultMap" >
+    select * 
+    from video
+    where chapter_id = #{chapter_id} order by chapterOrder
+  </select>
+  
+
+  <insert id="insert" parameterType="com.ff.pojo.Video" keyProperty="id" useGeneratedKeys="true">
+    insert into video (name,chapter_id,chapterOrder)
+    values (#{name}, #{chapter_id},#{chapterOrder})
+  </insert>
+
+ 
+  
+  <!-- 查询所有视频 -->
+  <select id="selectAllVideo" resultMap="BaseResultMap">
+  		select * from video
+  </select>
+  
+ 
+</mapper>

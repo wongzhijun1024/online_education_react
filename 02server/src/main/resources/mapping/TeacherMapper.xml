@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.TeacherMapper">
+	<resultMap id="BaseResultMap" type="com.ff.pojo.Teacher">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+	</resultMap>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into teachers(name,introduce,tkey)
+		values
+		(#{name},#{introduce},#{tkey})
+	</insert>
+
+	<select id="selectTeachers" resultMap="BaseResultMap">
+		select * from
+		teachers
+	</select>
+
+	<select id="selectTeacher" resultMap="BaseResultMap">
+		select * from
+		teachers
+		where
+		name = #{name}
+	</select>
+
+</mapper>

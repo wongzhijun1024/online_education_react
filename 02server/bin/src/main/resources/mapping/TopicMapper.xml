@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.TopicMapper">
+	<resultMap id="BaseResultMap" type="com.ff.pojo.Topic">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name
+	</sql>
+
+	<insert id="insert">
+		insert into topic(name)
+		values (#{name})
+	</insert>
+
+	<select id="selectTopics" resultMap="BaseResultMap">
+		select * from
+		topic
+	</select>
+
+	<select id="selectTopic" resultMap="BaseResultMap">
+		select * from
+		topic
+		where name = #{name}
+	</select>
+
+</mapper>

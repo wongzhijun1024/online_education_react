@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.ff.pojo.Course" >
+    <id column="id" property="id" />
+    <result column="name" property="name"  />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name
+  </sql>
+  <select id="selectCoursesByTopicId" resultMap="BaseResultMap" >
+    select * 
+    from course
+    where topicId = #{topicId}
+  </select>
+
+  
+  <insert id="insert" parameterType="com.ff.pojo.Course" keyProperty="id" useGeneratedKeys="true">
+    insert into course (name,price,discountPrice,introduce,imageUrl,topicId)
+    values (#{name}, #{price},#{discountPrice},#{introduce},#{imageUrl},#{topicId})
+  </insert>
+
+ 
+  
+  <!-- 查询所有课程 -->
+  <select id="selectAllCourse" resultMap="BaseResultMap">
+  		select * from course
+  </select>
+  
+
+  <!-- 查询所有课程 -->
+  <select id="selectCourseByName" resultMap="BaseResultMap" >
+  		select * from course
+  		where name = #{name}
+  </select>
+  
+</mapper>

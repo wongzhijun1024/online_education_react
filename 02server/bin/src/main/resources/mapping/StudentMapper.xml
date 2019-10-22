@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.ff.pojo.Student" >
+    <id column="s_id" property="sId" jdbcType="INTEGER" />
+    <result column="s_name" property="sName" jdbcType="CHAR" />
+    <result column="s_pwd" property="sPwd" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    s_id, s_name, s_pwd
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student
+    where s_id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ff.pojo.Student" >
+    insert into student (s_name, s_pwd)
+    values (#{sName,jdbcType=CHAR}, #{sPwd,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ff.pojo.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        s_id,
+      </if>
+      <if test="sName != null" >
+        s_name,
+      </if>
+      <if test="sPwd != null" >
+        s_pwd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=CHAR},
+      </if>
+      <if test="sPwd != null" >
+        #{sPwd,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ff.pojo.Student" >
+    update student
+    <set >
+      <if test="sName != null" >
+        s_name = #{sName,jdbcType=CHAR},
+      </if>
+      <if test="sPwd != null" >
+        s_pwd = #{sPwd,jdbcType=CHAR},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ff.pojo.Student" >
+    update student
+    set s_name = #{sName,jdbcType=CHAR},
+      s_pwd = #{sPwd,jdbcType=CHAR}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="login" resultMap="BaseResultMap" parameterType="com.ff.pojo.Student">
+	select 
+	<include refid="Base_Column_List" />
+	from student 
+	where s_name = #{sName,jdbcType=VARCHAR} and
+      s_pwd = #{sPwd,jdbcType=VARCHAR}
+	</select>
+	
+	 <!--根据名字模糊分页查询  -->
+  <select id="selectStu" resultMap="BaseResultMap" parameterType="com.ff.pojo.Student">
+  	select <include refid="Base_Column_List" /> 
+  	from student 
+  	<trim prefix="where " suffix=" " suffixOverrides="and" >
+	    <if test="sName != null" >
+          s_name like #{sName,jdbcType=VARCHAR} and
+        </if>
+    </trim>
+  	limit #{page,jdbcType=INTEGER},#{row,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(s_id) from student
+  	<trim prefix="where " suffix=" " suffixOverrides="and" >
+	   <if test="sName != null" >
+        s_name like #{sName,jdbcType=VARCHAR} and
+      </if>
+    </trim>
+  </select>
+  
+   <delete id="delBatchStu" parameterType="java.util.List">
+  		delete from student 
+  		  where s_id in 
+        <foreach item="x" collection="list" open="(" separator="," close=")">
+            #{x}
+        </foreach>
+  </delete>
+  
+  	 <!-- 修改密码 -->
+  <update id="updateMiMa" parameterType="com.ff.pojo.Student">
+  	update student
+  	set s_pwd = #{sPwd,jdbcType=VARCHAR}
+  	where s_name = #{sName,jdbcType=INTEGER}
+  </update>
+</mapper>

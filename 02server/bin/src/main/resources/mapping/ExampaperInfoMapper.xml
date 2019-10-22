@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ff.dao.ExampaperInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ff.pojo.ExampaperInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="e_id" jdbcType="INTEGER" property="eId" />
+    <result column="q_id" jdbcType="INTEGER" property="qId" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, e_id, q_id, score
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exampaper_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exampaper_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <!-- 根据试卷id删除信息 -->
+  <delete id="deleteByEid" parameterType="java.lang.Integer">
+    delete from exampaper_info
+    where e_id in
+    <foreach item="x" collection="list" open="(" separator="," close=")">
+            #{x}
+    </foreach>
+  </delete>
+  <insert id="insertExampaperInfo" parameterType="java.lang.Integer">
+    insert into exampaper_info (e_id, q_id, 
+      score)
+    values (#{eId,jdbcType=INTEGER}, #{qId,jdbcType=INTEGER}, 
+      #{score,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ff.pojo.ExampaperInfo">
+    insert into exampaper_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="eId != null">
+        e_id,
+      </if>
+      <if test="qId != null">
+        q_id,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="eId != null">
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="qId != null">
+        #{qId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ff.pojo.ExampaperInfo">
+    update exampaper_info
+    <set>
+      <if test="eId != null">
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="qId != null">
+        q_id = #{qId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ff.pojo.ExampaperInfo">
+    update exampaper_info
+    set e_id = #{eId,jdbcType=INTEGER},
+      q_id = #{qId,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

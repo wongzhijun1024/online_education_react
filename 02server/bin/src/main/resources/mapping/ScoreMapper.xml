@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.ScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.ff.pojo.Score" >
+    <id column="sc_id" property="scId" jdbcType="INTEGER" />
+    <result column="student_name" property="studentName" jdbcType="CHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="e_title" property="eTitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sc_id, student_name, score, e_title
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from score
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from score
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ff.pojo.Score" >
+    insert into score (sc_id, student_name, score, 
+      e_title)
+    values (#{scId,jdbcType=INTEGER}, #{studentName,jdbcType=CHAR}, #{score,jdbcType=INTEGER}, 
+      #{eTitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ff.pojo.Score" >
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scId != null" >
+        sc_id,
+      </if>
+      <if test="studentName != null" >
+        student_name,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="eTitle != null" >
+        e_title,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scId != null" >
+        #{scId,jdbcType=INTEGER},
+      </if>
+      <if test="studentName != null" >
+        #{studentName,jdbcType=CHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="eTitle != null" >
+        #{eTitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ff.pojo.Score" >
+    update score
+    <set >
+      <if test="studentName != null" >
+        student_name = #{studentName,jdbcType=CHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="eTitle != null" >
+        e_title = #{eTitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ff.pojo.Score" >
+    update score
+    set student_name = #{studentName,jdbcType=CHAR},
+      score = #{score,jdbcType=INTEGER},
+      e_title = #{eTitle,jdbcType=VARCHAR}
+    where sc_id = #{scId,jdbcType=INTEGER}
+  </update>
+  
+      <!-- 保存学生成绩 -->
+    <insert id="insertScore" parameterType="com.ff.pojo.Score" >
+      insert into score ( student_name, score, 
+        e_title)
+      values (#{studentName,jdbcType=CHAR}, #{score,jdbcType=INTEGER}, 
+        #{eTitle})
+    </insert> 
+    
+      <!-- 根据学生姓名和试卷名查询成绩 -->
+      <select id="selectByEtitleAndStuName" resultMap="BaseResultMap" parameterType="com.ff.pojo.Score" >
+      select 
+      <include refid="Base_Column_List" />
+      from score
+      where  student_name = #{studentName,jdbcType=CHAR} and e_title = #{eTitle,jdbcType=CHAR}
+    </select>
+    <!--根据学生姓名查询成绩   -->
+  <select id="selectByStuName" resultMap="BaseResultMap" parameterType="com.ff.pojo.Score">
+  	select 
+      <include refid="Base_Column_List" />
+      from score
+ 	where student_name = #{studentName}
+	limit #{page,jdbcType=INTEGER},#{row,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(sc_id) from score where student_name = #{studentName}
+  </select>
+  
+  <select id="selectScoreByStuName" resultMap="BaseResultMap" parameterType="com.ff.pojo.Score">
+  	select 
+      <include refid="Base_Column_List" />
+      from score
+ 	where student_name = #{studentName}
+  </select>
+</mapper>
