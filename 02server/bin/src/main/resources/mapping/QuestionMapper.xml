@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.ff.pojo.Question" >
+    <id column="q_id" property="qId" jdbcType="INTEGER" />
+    <result column="question" property="question" jdbcType="VARCHAR" />
+    <result column="q_course" property="qCourse" jdbcType="VARCHAR" />
+    <result column="q_type" property="qType" jdbcType="VARCHAR" />
+    <result column="q_hard" property="qHard" jdbcType="VARCHAR" />
+    <result column="A" property="a" jdbcType="VARCHAR" />
+    <result column="B" property="b" jdbcType="VARCHAR" />
+    <result column="C" property="c" jdbcType="VARCHAR" />
+    <result column="D" property="d" jdbcType="VARCHAR" />
+    <result column="q_score" property="qScore" jdbcType="INTEGER" />
+    <result column="Answer" property="answer" jdbcType="CHAR" />
+    <association property="exampaperInfo" javaType="com.ff.pojo.ExampaperInfo">
+    	<id column="id" jdbcType="INTEGER" property="id" />
+   		 <result column="e_id" jdbcType="INTEGER" property="eId" />
+    	<result column="q_id" jdbcType="INTEGER" property="qId" />
+    	<result column="score" jdbcType="INTEGER" property="score" />
+    	<collection property="exampapersList" ofType="com.ff.pojo.Exampaper"  >
+    		    <id column="e_id" property="eId" jdbcType="INTEGER" />
+    <result column="e_title" property="eTitle" jdbcType="VARCHAR" />
+    <result column="creatTime" property="creattime" jdbcType="DATE" />
+    <result column="validateTime" property="validatetime" jdbcType="INTEGER" />
+    <result column="validity" property="validity" jdbcType="DATE" />
+    <result column="fulscore" property="fulscore" jdbcType="INTEGER" />
+    <result column="course_id" property="courseId" jdbcType="INTEGER" />
+    	
+    	</collection>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    q_id, question, q_course, q_type, q_hard, A, B, C, D, q_score, Answer
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from question
+    where q_id = #{qId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from question
+    where q_id = #{qId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ff.pojo.Question" >
+    insert into question (q_id, question, q_course, 
+      q_type, q_hard, A, B, 
+      C, D, q_score, Answer
+      )
+    values (#{qId,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, #{qCourse,jdbcType=VARCHAR}, 
+      #{qType,jdbcType=VARCHAR}, #{qHard,jdbcType=VARCHAR}, #{a,jdbcType=VARCHAR}, #{b,jdbcType=VARCHAR}, 
+      #{c,jdbcType=VARCHAR}, #{d,jdbcType=VARCHAR}, #{qScore,jdbcType=INTEGER}, #{answer,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ff.pojo.Question" >
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="qId != null" >
+        q_id,
+      </if>
+      <if test="question != null" >
+        question,
+      </if>
+      <if test="qCourse != null" >
+        q_course,
+      </if>
+      <if test="qType != null" >
+        q_type,
+      </if>
+      <if test="qHard != null" >
+        q_hard,
+      </if>
+      <if test="a != null" >
+        A,
+      </if>
+      <if test="b != null" >
+        B,
+      </if>
+      <if test="c != null" >
+        C,
+      </if>
+      <if test="d != null" >
+        D,
+      </if>
+      <if test="qScore != null" >
+        q_score,
+      </if>
+      <if test="answer != null" >
+        Answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="qId != null" >
+        #{qId,jdbcType=INTEGER},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="qCourse != null" >
+        #{qCourse,jdbcType=VARCHAR},
+      </if>
+      <if test="qType != null" >
+        #{qType,jdbcType=VARCHAR},
+      </if>
+      <if test="qHard != null" >
+        #{qHard,jdbcType=VARCHAR},
+      </if>
+      <if test="a != null" >
+        #{a,jdbcType=VARCHAR},
+      </if>
+      <if test="b != null" >
+        #{b,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null" >
+        #{c,jdbcType=VARCHAR},
+      </if>
+      <if test="d != null" >
+        #{d,jdbcType=VARCHAR},
+      </if>
+      <if test="qScore != null" >
+        #{qScore,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ff.pojo.Question" >
+    update question
+    <set >
+      <if test="question != null" >
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="qCourse != null" >
+        q_course = #{qCourse,jdbcType=VARCHAR},
+      </if>
+      <if test="qType != null" >
+        q_type = #{qType,jdbcType=VARCHAR},
+      </if>
+      <if test="qHard != null" >
+        q_hard = #{qHard,jdbcType=VARCHAR},
+      </if>
+      <if test="a != null" >
+        A = #{a,jdbcType=VARCHAR},
+      </if>
+      <if test="b != null" >
+        B = #{b,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null" >
+        C = #{c,jdbcType=VARCHAR},
+      </if>
+      <if test="d != null" >
+        D = #{d,jdbcType=VARCHAR},
+      </if>
+      <if test="qScore != null" >
+        q_score = #{qScore,jdbcType=INTEGER},
+      </if>
+      <if test="answer != null" >
+        Answer = #{answer,jdbcType=CHAR},
+      </if>
+    </set>
+    where q_id = #{qId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ff.pojo.Question" >
+    update question
+    set question = #{question,jdbcType=VARCHAR},
+      q_course = #{qCourse,jdbcType=VARCHAR},
+      q_type = #{qType,jdbcType=VARCHAR},
+      q_hard = #{qHard,jdbcType=VARCHAR},
+      A = #{a,jdbcType=VARCHAR},
+      B = #{b,jdbcType=VARCHAR},
+      C = #{c,jdbcType=VARCHAR},
+      D = #{d,jdbcType=VARCHAR},
+      q_score = #{qScore,jdbcType=INTEGER},
+      Answer = #{answer,jdbcType=CHAR}
+    where q_id = #{qId,jdbcType=INTEGER}
+  </update>
+  
+    
+  
+  
+  <!--根据名字模糊分页查询  -->
+  <select id="selectQuestion" resultMap="BaseResultMap" parameterType="com.ff.pojo.Question">
+  	select <include refid="Base_Column_List" /> 
+  	from question 
+  	<trim prefix="where " suffix=" " suffixOverrides="and" >
+	    <if test="question != null" >
+          question like #{question,jdbcType=VARCHAR} and
+        </if>
+    </trim>
+  	limit #{page,jdbcType=INTEGER},#{row,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(q_id) from question
+  	<trim prefix="where " suffix=" " suffixOverrides="and" >
+	   <if test="question != null" >
+        question like #{question,jdbcType=VARCHAR} and
+      </if>
+    </trim>
+  </select>
+  
+  <select id="selectQuestionByeId" resultType="com.ff.pojo.Question">
+  	select * from question where id in(select e_id from exampaper_info where q_id = #{id})
+  </select>
+  
+  <!-- 查询所有题目 -->
+    <select id="selectAllQuestion" resultMap="BaseResultMap" parameterType="com.ff.pojo.Question">
+  	select <include refid="Base_Column_List" /> 
+  	from question 
+  </select>
+  
+  <!-- 根据科目和题型和难易程度查询所有题 -->
+    <select id="selectAllQuestionByQcourseAndQtypeAndQhard" resultMap="BaseResultMap" parameterType="com.ff.pojo.Question">
+  	select <include refid="Base_Column_List" /> 
+  	from question where q_course=#{qCourse} and q_type=#{qType} and q_hard=#{qHard}
+  </select>
+  
+  <delete id="delBatchQuestion" parameterType="java.util.List">
+  		delete from question 
+  		  where q_id in 
+        <foreach item="x" collection="list" open="(" separator="," close=")">
+            #{x}
+        </foreach>
+  </delete>
+  <select id="selectExampaper" resultMap="BaseResultMap" >
+  	select  
+		q.*,e.*,ei.*  
+		 from exampaper_info ei, exampaper e, question q where ei.e_id=e.e_id and ei.q_id= q.q_id
+  </select>
+  
+  <select id="selectExampaperByTitle" resultMap="BaseResultMap" >
+  	select  
+		q.*,e.*,ei.*  
+		 from exampaper_info ei, exampaper e, question q where ei.e_id=e.e_id and ei.q_id= q.q_id and e_title=#{eTitle}
+  </select>
+  
+</mapper>
