@@ -132,8 +132,8 @@ export default class Add extends React.Component {
     return (
       <div className="addView">
         <div className = "teacher-title flex">
+          <span>老师添加页面</span>
           <img src = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3800569146,487832050&fm=26&gp=0.jpg" />
-          <span>老师添加页面以及老师风采</span>
         </div>
       {/* 老师风采，浏览老师 */}
       <div className = "select">
@@ -181,7 +181,6 @@ export default class Add extends React.Component {
         listType="picture-card"
         className="avatar-uploader"
         showUploadList={false}
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         beforeUpload={this.beforeUpload}
         onChange={this.handleChange}
       >

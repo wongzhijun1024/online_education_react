@@ -7,6 +7,7 @@ import UserQuery from "../../views/user/query/Query";
 import TeacherQuery from "../../views/teacher/query/Query";
 import TeacherAdd from "../../views/teacher/add/Add";
 import VideoAdd from "../../views/video/add/Add";
+import Release from "../"
 const { Content } = Layout;
 export default class MyContent extends React.Component {
   constructor() {

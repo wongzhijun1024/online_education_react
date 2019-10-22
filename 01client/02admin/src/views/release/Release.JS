@@ -1,7 +1,7 @@
 import React from "react";
-import "./Query.css";
+import "./Release.css";
 import { List, Avatar,Input} from "antd";
-import net from "../../../utils/net";
+import net from "../../utils/net";
 const { Search } = Input;
 const data = [
   {
@@ -45,7 +45,7 @@ const data = [
     introduce:"教PHP的老师"
   },
 ];
-export default class Query extends React.Component {
+export default class Release extends React.Component {
     constructor() {
       super();
       this.state = {
