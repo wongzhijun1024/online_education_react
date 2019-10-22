@@ -25,8 +25,7 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value = "adminCheck")
 	public Msg loginPage(Admin admin, HttpServletRequest req, HttpServletResponse resp) {
-		Msg msg = new Msg();
-		return msg;
+		return adminService.check(admin);
 	}
 
 }

@@ -1,6 +1,6 @@
 let actionTypes = require("../actions/ActionTypes");
 const initialState = {
-  collapsed: true
+  collapsed: false
 };
 
 export default function counterReducer(state = initialState, action) {

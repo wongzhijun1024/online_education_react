@@ -14,8 +14,8 @@ export default class HomeView extends React.Component {
         <Layout>
           <Header></Header>
           <Content></Content>
+        {/* <Footer>好好喝点水</Footer> */}
         </Layout>
-        <Footer></Footer>
       </Layout>
     );
   }

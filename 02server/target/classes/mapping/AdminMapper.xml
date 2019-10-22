@@ -16,8 +16,8 @@
 		parameterType="com.ff.pojo.Admin">
 		select
 		<include refid="user_column" />
-		from admin
-		where name = #{name}
+	from admin
+	where name = #{name}
 	</select>
 
 

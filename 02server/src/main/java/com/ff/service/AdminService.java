@@ -11,6 +11,6 @@ public interface AdminService {
 	 * @param 用户信息
 	 * @return 是否合法
 	 */
-	Msg check(Admin a);
+	Msg check(Admin admin);
 
 }

@@ -34,6 +34,7 @@ export default class LoginView extends React.Component {
     net.post("adminCheck", { name: userName, passwd: inputPasswd }, function(
       data
     ) {
+      console.log(data);
       let code = data.code;
       //3，根据后台服务器返回的数据进行相关的操作
       if (code === 1) {
@@ -58,7 +59,7 @@ export default class LoginView extends React.Component {
   render() {
     return (
       <div className="view">
-        <view className="content">
+        <div className="content">
           <h1>登录页面</h1>
           <div className="loginVeiw">
             <div className="content">
@@ -95,7 +96,7 @@ export default class LoginView extends React.Component {
               </Row>
             </div>
           </div>
-        </view>
+        </div>
       </div>
     );
   }
