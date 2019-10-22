@@ -55,7 +55,7 @@ public class UploadController {
 
 		CosTool cosTool = new CosTool();
 
-		return cosTool.uploadFile(CosTool.IMAGE_FOLDER, file);
+		return null;
 	}
 
 	@RequestMapping(value = "/video", method = RequestMethod.POST)
@@ -64,8 +64,8 @@ public class UploadController {
 
 		CosTool cosTool = new CosTool();
 
-		UploadMsg msg = cosTool.uploadFile(CosTool.VIDEO_FOLDER, file);
-		return msg;
+		// UploadMsg msg = cosTool.uploadFile(CosTool.VIDEO_FOLDER, file);
+		return null;
 
 	}
 

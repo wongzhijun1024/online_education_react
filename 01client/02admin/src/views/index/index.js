@@ -5,7 +5,7 @@ export default class Index extends React.Component {
     return localStorage.getItem("user") === null ? (
       <Redirect to="/login" />
     ) : (
-      <Redirect to="/home/teacher/add" />
+      <Redirect to="/home/courses/add" />
     );
   }
 }

@@ -4,29 +4,26 @@ public class UploadMsg {
 	/**
 	 * 成功状态
 	 */
-	private int status;
+	private int status = -1;
 	/**
 	 * 提示信息
 	 */
-	private String msg;
+	private String msg = "文件为空";
 	/**
-	 * 返回key值
+	 * 存储数据
 	 */
-	private String key;
-	/**
-	 * 视频名字
-	 */
-	private String name;
+	private Object ob;
 
 	public UploadMsg() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public UploadMsg(int status, String msg, String name, String key) {
+	public UploadMsg(int status, String msg, Object ob) {
+		super();
 		this.status = status;
 		this.msg = msg;
-		this.name = name;
-		this.key = key;
+		this.ob = ob;
 	}
 
 	public int getStatus() {
@@ -45,25 +42,17 @@ public class UploadMsg {
 		this.msg = msg;
 	}
 
-	public String getKey() {
-		return key;
+	public Object getOb() {
+		return ob;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setOb(Object ob) {
+		this.ob = ob;
 	}
 
 	@Override
 	public String toString() {
-		return "UploadMsg [status=" + status + ", msg=" + msg + ", key=" + key + ", name=" + name + "]";
+		return "UploadMsg [status=" + status + ", msg=" + msg + ", ob=" + ob + "]";
 	}
 
 }

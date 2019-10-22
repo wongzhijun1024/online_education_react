@@ -13,7 +13,7 @@ public class Teacher {
 	/**
 	 * 老师图片
 	 */
-	private String image;
+	private String tkey;
 	/**
 	 * 老师介绍
 	 */
@@ -23,6 +23,13 @@ public class Teacher {
 		super();
 	}
 
+	public Teacher(int id, String name, String tkey, String introduce) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.tkey = tkey;
+		this.introduce = introduce;
+	}
 
 	public int getId() {
 		return id;
@@ -40,12 +47,12 @@ public class Teacher {
 		this.name = name;
 	}
 
-	public String getImage() {
-		return image;
+	public String getTkey() {
+		return tkey;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setTkey(String tkey) {
+		this.tkey = tkey;
 	}
 
 	public String getIntroduce() {
@@ -54,6 +61,11 @@ public class Teacher {
 
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
+	}
+
+	@Override
+	public String toString() {
+		return "Teacher [id=" + id + ", name=" + name + ", tkey=" + tkey + ", introduce=" + introduce + "]";
 	}
 
 }

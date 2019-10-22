@@ -3,15 +3,11 @@ package com.ff.util;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.ff.pojo.UploadMsg;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
@@ -61,45 +57,100 @@ public class CosTool {
 
 	}
 
-	public UploadMsg uploadFile(int type, MultipartFile file) {
-		if (file == null) {
-			return new UploadMsg(0, "文件为空", "", null);
-		}
-		String oldFileName = file.getOriginalFilename();
-		String name = oldFileName.substring(0, oldFileName.lastIndexOf("."));
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH);
-		int day = cal.get(Calendar.DATE);
+//	public UploadMsg uploadFile(int type, MultipartFile file) {
+//		if (file == null) {
+//			return new UploadMsg(0, "文件为空", "", null);
+//		}
+//		String oldFileName = file.getOriginalFilename();
+//		String name = oldFileName.substring(0, oldFileName.lastIndexOf("."));
+//		Calendar cal = Calendar.getInstance();
+//		int year = cal.get(Calendar.YEAR);
+//		int month = cal.get(Calendar.MONTH);
+//		int day = cal.get(Calendar.DATE);
+//
+//		// 简单文件上传, 最大支持 5 GB, 适用于小文件上传, 建议 20 M 以下的文件使用该接口
+//		// 大文件上传请参照 API 文档高级 API 上传
+//		File localFile = null;
+//
+//		String fileType = "";
+//		switch (type) {
+//		case VIDEO_FOLDER:
+//			fileType = videoFolder;
+//			break;
+//		case IMAGE_FOLDER:
+//			fileType = imageFolder;
+//			break;
+//		}
+//
+//		try {
+//			localFile = File.createTempFile("temp", null);
+//			file.transferTo(localFile);
+//			// 指定要上传到 COS 上的路径
+//			String key = "/" + this.tengxun + "/" + fileType + "/" + year + "-" + month + "-" + day + "-" + oldFileName;
+//
+//			PutObjectRequest putObjectRequest = new PutObjectRequest(this.bucket, key, localFile);
+//			PutObjectResult putObjectResult = getCosclient().putObject(putObjectRequest);
+//			return new UploadMsg(1, "上传成功", name, putObjectRequest.getKey());
+//		} catch (IOException e) {
+//			return new UploadMsg(-1, e.getMessage(), "", null);
+//		} finally {
+//			// 关闭客户端(关闭后台线程)
+//			destroy();
+//		}
+//	}
 
-		// 简单文件上传, 最大支持 5 GB, 适用于小文件上传, 建议 20 M 以下的文件使用该接口
-		// 大文件上传请参照 API 文档高级 API 上传
-		File localFile = null;
+	public List<String> uploadFile(int type, List<MultipartFile> list) {
+		List<String> keyList = new ArrayList<>();
 
-		String fileType = "";
-		switch (type) {
-		case VIDEO_FOLDER:
-			fileType = videoFolder;
-			break;
-		case IMAGE_FOLDER:
-			fileType = imageFolder;
-			break;
+		// 获得列表长度
+		int length = list.size();
+		for (int i = 0; i < length; i++) {
+			// 获得文件
+			MultipartFile file = list.get(i);
+			// 获得文件的原始地址
+			String oldFileName = file.getOriginalFilename();
+			// 获得文件后缀位置
+			String name = oldFileName.substring(0, oldFileName.lastIndexOf("."));
+			// 获得时间
+			Calendar cal = Calendar.getInstance();
+			int year = cal.get(Calendar.YEAR);
+			int month = cal.get(Calendar.MONTH);
+			int day = cal.get(Calendar.DATE);
+			// 简单文件上传, 最大支持 5 GB, 适用于小文件上传, 建议 20 M 以下的文件使用该接口
+			// 大文件上传请参照 API 文档高级 API 上传
+			File localFile = null;
+
+			String fileType = "";
+			switch (type) {
+			case VIDEO_FOLDER:
+				fileType = videoFolder;
+				break;
+			case IMAGE_FOLDER:
+				fileType = imageFolder;
+				break;
+			}
+
+			try {
+				localFile = File.createTempFile("temp", null);
+				file.transferTo(localFile);
+				// 指定要上传到 COS 上的路径
+				String key = "/" + this.tengxun + "/" + fileType + "/" + year + "-" + month + "-" + day + "-"
+						+ oldFileName;
+				// 把图片上传到图片服务器
+				PutObjectRequest putObjectRequest = new PutObjectRequest(this.bucket, key, localFile);
+				PutObjectResult putObjectResult = getCosclient().putObject(putObjectRequest);
+				// 保存Key值
+				keyList.add(putObjectRequest.getKey());
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+			}
+
 		}
 
-		try {
-			localFile = File.createTempFile("temp", null);
-			file.transferTo(localFile);
-			// 指定要上传到 COS 上的路径
-			String key = "/" + this.tengxun + "/" + fileType + "/" + year + "-" + month + "-" + day + "-" + oldFileName;
-			PutObjectRequest putObjectRequest = new PutObjectRequest(this.bucket, key, localFile);
-			PutObjectResult putObjectResult = getCosclient().putObject(putObjectRequest);
-			return new UploadMsg(1, "上传成功", name, putObjectRequest.getKey());
-		} catch (IOException e) {
-			return new UploadMsg(-1, e.getMessage(), "", null);
-		} finally {
-			// 关闭客户端(关闭后台线程)
-			destroy();
-		}
+		destroy();
+
+		return keyList;
+
 	}
 
 	public String getUrl(String key) {
