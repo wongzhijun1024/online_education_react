@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.AdTopicMapper">
+	<resultMap id="BaseResultMap" type="com.ff.pojo.AdTopic">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<collection property="adVideos" javaType="ArrayList"
+			ofType="com.ff.pojo.AdVideo" column="ad_topic_id">
+			<id column="ad_topic_id" property="adTopicId" />
+			<id column="id" property="id" />
+		</collection>
+	</resultMap>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into ad_topic(at_name)
+		values (#{name})
+	</insert>
+
+
+	<resultMap type="com.ff.pojo.AdTopic" id="resultAdTopicMap">
+		<result property="id" column="id" />
+		<result property="name" column="at_name" />
+		<collection property="adVideos" ofType="com.ff.pojo.AdVideo"
+			column="id" select="getAdVideoById">
+		</collection>
+	</resultMap>
+
+	<select id="selectAdTopics" resultMap="resultAdTopicMap">
+		SELECT *
+		FROM ad_topic
+	</select>
+
+	<resultMap type="com.ff.pojo.AdVideo" id="resultAdVideoMap">
+		<result property="id" column="id" />
+		<result property="name" column="av_name" />
+		<result property="url" column="av_url" />
+		<result property="adTopicId" column="ad_topic_id" />
+	</resultMap>
+
+	<select id="getAdVideoById" resultMap="resultAdVideoMap">
+		select * from
+		ad_video
+		where
+		ad_topic_id = #{id}
+	</select>
+
+
+
+
+	<select id="selectAdTopic" resultMap="BaseResultMap">
+		select * from
+		ad_topic
+		where
+		name = #{name}
+	</select>
+
+</mapper>
