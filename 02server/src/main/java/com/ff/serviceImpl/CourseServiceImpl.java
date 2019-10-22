@@ -33,7 +33,14 @@ public class CourseServiceImpl implements CourseService {
 
 			msg.setMsg("操作成功!");
 
-			msg.setObject(courseMapper.selectCourseAll());
+			CosTool cosTool = new CosTool();
+			for (int i = 0; i < list.size(); i++) {
+				// 到腾讯云服务器换图片地址
+				String url = cosTool.getUrl(list.get(i).getUrl());
+				list.get(i).setUrl(url);
+			}
+
+			msg.setObject(list);
 		}
 
 		return msg;

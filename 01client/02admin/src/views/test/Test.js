@@ -16,8 +16,8 @@ export default class Test extends React.Component {
     net.uploadFile(
       "courses/add",
       {
-        name: "数学",
-        introduce: "好介绍",
+        name: "语文",
+        introduce: "这个课程也非常好，大家认真哈！",
         state: 1,
         teacherId: 0,
         ctype: 1,
