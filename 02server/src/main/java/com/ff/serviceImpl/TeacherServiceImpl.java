@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ff.dao.TeacherMapper;
 import com.ff.pojo.Msg;
@@ -44,22 +42,12 @@ public class TeacherServiceImpl implements TeacherService {
 			return msg;
 		}
 
-		if (!(request instanceof MultipartHttpServletRequest)) {
-			msg.setMsg("请求类型不对");
+		CosTool cosTool = new CosTool();
+		List<String> keyList = cosTool.uploadFile(CosTool.VIDEO_FOLDER, request);
+
+		if (keyList.size() == 0) {
+			msg.setMsg("图片添加失败!");
 			return msg;
-		}
-
-		// 获得文件数据流，表单数据和图片一起提交给后台,图片是以二进制对象形式
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		List<String> keyList = null;
-
-		try {
-
-			CosTool cosTool = new CosTool();
-			List<MultipartFile> list = multipartRequest.getFiles("files");
-			keyList = cosTool.uploadFile(CosTool.VIDEO_FOLDER, list);
-		} catch (Exception e1) {
-
 		}
 
 		teacher.setTkey(keyList.get(0));
@@ -74,7 +62,6 @@ public class TeacherServiceImpl implements TeacherService {
 			msg.setCode(-1);
 			msg.setMsg("添加(" + teacher.getName() + ")老师失败!");
 		}
-
 		return msg;
 	}
 

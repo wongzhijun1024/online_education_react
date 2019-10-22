@@ -7,7 +7,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.ff.pojo.UploadMsg;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
@@ -99,8 +104,16 @@ public class CosTool {
 //		}
 //	}
 
-	public List<String> uploadFile(int type, List<MultipartFile> list) {
+	public List<String> uploadFile(int type, HttpServletRequest request) {
 		List<String> keyList = new ArrayList<>();
+
+		if (!(request instanceof MultipartHttpServletRequest)) {
+
+			return keyList;
+		}
+		// 获得文件数据流，表单数据和图片一起提交给后台,图片是以二进制对象形式
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		List<MultipartFile> list = multipartRequest.getFiles("files");
 
 		// 获得列表长度
 		int length = list.size();

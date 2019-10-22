@@ -8,6 +8,8 @@ import TeacherQuery from "../../views/teacher/query/Query";
 import TeacherAdd from "../../views/teacher/add/Add";
 import CoursesList from "../../views/courses/list/CoursesList";
 import CoursesAdd from "../../views/courses/add/CoursesAdd";
+import Test from "../../views/test/Test";
+
 const { Content } = Layout;
 export default class MyContent extends React.Component {
   constructor() {
@@ -20,6 +22,7 @@ export default class MyContent extends React.Component {
       <Content className="contentBox">
         <Switch>
           <Route exact path={"/home/courses/list"} component={CoursesList} />
+          <Route exact path={"/home/test"} component={Test} />
           <Route exact path={"/home/courses/add"} component={CoursesAdd} />
           <Route exact path={"/home/teacher/query"} component={TeacherQuery} />
           <Route exact path={"/home/teacher/add"} component={TeacherAdd} />

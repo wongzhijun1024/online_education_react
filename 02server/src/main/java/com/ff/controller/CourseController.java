@@ -23,10 +23,10 @@ public class CourseController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "allcourses")
+	@RequestMapping(value = "courses/all")
 	@ResponseBody
 	public Msg selectAllCourse() {
-		return courseService.selectAllCourse();
+		return courseService.selectCourseAll();
 	}
 
 	/**
@@ -40,11 +40,11 @@ public class CourseController {
 		return courseService.selectCoursesByTopicId(topic);
 	}
 
-	@RequestMapping(value = "addCourses")
+	@RequestMapping(value = "courses/add")
 	@ResponseBody
 	public Msg addCourses(Course course, HttpServletResponse resp, HttpServletRequest req) {
 
-		return courseService.insertCourses(course);
+		return courseService.insertCourses(course, req);
 	}
 
 }

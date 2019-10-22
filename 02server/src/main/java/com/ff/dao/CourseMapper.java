@@ -12,8 +12,7 @@ public interface CourseMapper {
 	/**
 	 * 增加课程
 	 * 
-	 * @param record
-	 *            课程
+	 * @param record 课程
 	 * @return 返回成功标志
 	 */
 	int insert(Course record);
@@ -24,13 +23,12 @@ public interface CourseMapper {
 	 * @return
 	 */
 
-	List<Course> selectAllCourse();
+	List<Course> selectCourseAll();
 
 	/**
 	 * 根据科目的id号查询对应课程
 	 * 
-	 * @param id
-	 *            科目id
+	 * @param id 科目id
 	 * @return 查询的所有课程
 	 */
 	List<Course> getCoursesByTopicId(int id);
@@ -38,8 +36,7 @@ public interface CourseMapper {
 	/**
 	 * 根据课程的名字查询课程
 	 * 
-	 * @param name
-	 *            课程名字
+	 * @param name 课程名字
 	 * @return 返回对应的课程
 	 */
 	Course getCourseByName(String name);

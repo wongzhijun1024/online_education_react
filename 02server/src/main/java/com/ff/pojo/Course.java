@@ -1,7 +1,5 @@
 package com.ff.pojo;
 
-import java.util.List;
-
 public class Course {
 	/**
 	 * 课程id
@@ -14,14 +12,9 @@ public class Course {
 	private String name;
 
 	/**
-	 * 课程价格
+	 * 状态值。 0：未发布；1：更新中；2：完结
 	 */
-	private float price;
-
-	/**
-	 * 折扣价格
-	 */
-	private float discountPrice;
+	private int state;
 
 	/**
 	 * 课程介绍
@@ -31,25 +24,31 @@ public class Course {
 	/**
 	 * 课程图片
 	 */
-	private String imageUrl;
+	private String url;
 
 	/**
-	 * 主题id
+	 * 老师id
 	 */
-	private int topicId;
+	private int teacherId;
 
-	/**
-	 * 每个课程里面的章节
-	 */
-	private List<Chapter> list;
 	/*
-	 * 课程
+	 * 会员类型。0，免费；1，普通会员；2，超级会员；
 	 */
-	private String msg = "course";
-	
+	private int ctype;
 
 	public Course() {
+		super();
+	}
 
+	public Course(int id, String name, int state, String introduce, String url, int teacherId, int ctype) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.state = state;
+		this.introduce = introduce;
+		this.url = url;
+		this.teacherId = teacherId;
+		this.ctype = ctype;
 	}
 
 	public int getId() {
@@ -68,20 +67,12 @@ public class Course {
 		this.name = name;
 	}
 
-	public float getPrice() {
-		return price;
+	public int getState() {
+		return state;
 	}
 
-	public void setPrice(float price) {
-		this.price = price;
-	}
-
-	public float getDiscountPrice() {
-		return discountPrice;
-	}
-
-	public void setDiscountPrice(float discountPrice) {
-		this.discountPrice = discountPrice;
+	public void setState(int state) {
+		this.state = state;
 	}
 
 	public String getIntroduce() {
@@ -92,38 +83,34 @@ public class Course {
 		this.introduce = introduce;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public int getTopicId() {
-		return topicId;
+	public int getTeacherId() {
+		return teacherId;
 	}
 
-	public void setTopicId(int topicId) {
-		this.topicId = topicId;
+	public void setTeacherId(int teacherId) {
+		this.teacherId = teacherId;
 	}
 
-	public List<Chapter> getList() {
-		return list;
+	public int getCtype() {
+		return ctype;
 	}
 
-	public void setList(List<Chapter> list) {
-		this.list = list;
+	public void setCtype(int ctype) {
+		this.ctype = ctype;
 	}
 
-	public String getMsg() {
-		return msg;
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", name=" + name + ", state=" + state + ", introduce=" + introduce + ", url=" + url
+				+ ", teacherId=" + teacherId + ", ctype=" + ctype + "]";
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
-
-	
-	
 }
