@@ -28,7 +28,7 @@ class MySider extends React.Component {
               key="sub1"
               title={
                 <span>
-                  <Icon type="user" />
+                  <Icon type="play-circle" />
                   课程管理
                 </span>
               }
@@ -51,8 +51,8 @@ class MySider extends React.Component {
               key="sub2"
               title={
                 <span>
-                  <Icon type="user" />
-                  题库管理
+                  <Icon type="edit" />
+                  <span>题库管理</span>
                 </span>
               }
             >
@@ -75,7 +75,7 @@ class MySider extends React.Component {
               title={
                 <span>
                   <Icon type="user" />
-                  老师管理
+                  <span>老师管理</span>
                 </span>
               }
             >

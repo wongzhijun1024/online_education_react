@@ -1,11 +1,55 @@
-.teacherQueryView {
-    position: absolute;
-    margin: 0px;
+*{
     padding: 0px;
-    width: 80%;
-    height: 90%;
+    margin: 0px;
+}
+.courseBox{
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+}
+.pageHeader{
+    width: 90%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-bottom: 2px solid gainsboro;
+    margin:20px 0px 30px 0px;
+}
+.header_left{
+    font-size: 18px;
+}
+.header_right{
+    height: 32px;
+    border-radius: 3px;
+    background-color: #5CB85C;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+}
+.headerBtn{
+    padding: 0px 10px;
+    color: white;
+}
+.headerBtn:hover{
+    color: white;
+}
+.nav{
+    width: 90%;
+    list-style: none;
+    /* border-bottom: 1px solid #DCDCDC; */
+}
+.navTitle>a{
+    color: #555;
+    padding: 10px 15px;
+    cursor: default;
+    border: 1px solid #DCDCDC;
+    border-radius: 3px;
+    border-bottom-color: transparent;
+}
+.btnGroup{
+    
 }

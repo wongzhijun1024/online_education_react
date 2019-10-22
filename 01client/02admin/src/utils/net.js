@@ -29,6 +29,7 @@ net.get = function(api, object, call) {
 net.post = function(api, object, call) {
   //1,封装请求地址
   let url = serverUrl + api;
+  console.log("请求地址："+url);
   axios
     .post(url, qs.stringify(object))
     .then(function(response) {

@@ -5,7 +5,7 @@ import Header from "../../components/Header/Header";
 import Sider from "../../components/Sider/Sider";
 import Content from "../../components/Content/Content";
 
-const { Footer } = Layout;
+// const { Footer } = Layout;
 export default class HomeView extends React.Component {
   render() {
     return (
@@ -15,7 +15,6 @@ export default class HomeView extends React.Component {
           <Header></Header>
           <Content></Content>
         </Layout>
-        {/* <Footer></Footer> */}
       </Layout>
     );
   }
