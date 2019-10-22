@@ -110,6 +110,18 @@ export default class CoursesAdd extends React.Component {
            </div>
          </div>
 
+         <div className = "addCourseBox">
+           <label>封面图片</label>
+           <div>
+             <Upload onRemove={this.removeFile} beforeUpload={this.beforeUpload}>
+            <Button>
+            <Icon type="upload" /> Select File
+             </Button>
+           </Upload>
+           <div>请上传jpg, gif, png格式的图片, 建议图片尺寸为 480×270px。建议图片大小不超过2MB。</div>
+           </div>
+         </div>
+
 
 
         </div>
