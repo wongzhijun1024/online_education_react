@@ -47,21 +47,24 @@ net.uploadFile = function(api, object, call) {
 
   //创建form对象
   let param = new FormData();
-
+  //装载数据
   for (let key in object) {
     //如果当前的键是fileList，说明传递的是文件
-    if (key === "fileList") {
-      param.append("files", object[key]);
+    if (key === "files") {
+      for (let i = 0; i < object[key].length; i++) {
+        param.append("files", object[key][i]);
+      }
     } else {
       param.append(key, object[key]);
     }
   }
 
+  //添加请求头
   let config = {
     headers: {
       "Content-Type": "multipart/form-data"
     }
-  }; //添加请求头
+  };
   axios.post(url, param, config).then(response => {
     call(response.data);
   });

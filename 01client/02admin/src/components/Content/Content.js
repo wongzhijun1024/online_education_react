@@ -6,10 +6,10 @@ import User from "../../views/user/infor/User";
 import UserQuery from "../../views/user/query/Query";
 import TeacherQuery from "../../views/teacher/query/Query";
 import TeacherAdd from "../../views/teacher/add/Add";
-import VideoQuery from "../../views/video/list/Query";
-import VideoAdd from "../../views/video/add/Add";
 import ExaminationQuery from "../../views/examination/query/Query";
 import ExaminationAdd from "../../views/examination/add/Add";
+import CoursesList from "../../views/courses/list/CoursesList";
+import CoursesAdd from "../../views/courses/add/CoursesAdd";
 const { Content } = Layout;
 export default class MyContent extends React.Component {
   constructor() {
@@ -21,12 +21,10 @@ export default class MyContent extends React.Component {
     return (
       <Content className="contentBox">
         <Switch>
-          <Route exact path={"/home/video/query"} component={VideoQuery} />
-          <Route exact path={"/home/video/add"} component={VideoAdd} />
-          <Route exact path={"/home/video/query"} component={VideoQuery} />
-          <Route exact path={"/home/video/add"} component={VideoAdd} />
           <Route exact path={"/home/examination/query"} component={ExaminationQuery} />
           <Route exact path={"/home/examination/add"} component={ExaminationAdd} />
+          <Route exact path={"/home/courses/list"} component={CoursesList} />
+          <Route exact path={"/home/courses/add"} component={CoursesAdd} />
           <Route exact path={"/home/teacher/query"} component={TeacherQuery} />
           <Route exact path={"/home/teacher/add"} component={TeacherAdd} />
           <Route exact path={"/home/user/query"} component={UserQuery} />

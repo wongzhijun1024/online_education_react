@@ -7,19 +7,22 @@
 	</resultMap>
 
 	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
-		insert into teacher(name,introduce)
-		values (#{name},#{introduce})
+		insert
+		into teachers(name,introduce,tkey)
+		values
+		(#{name},#{introduce},#{tkey})
 	</insert>
 
 	<select id="selectTeachers" resultMap="BaseResultMap">
 		select * from
-		teacher
+		teachers
 	</select>
 
 	<select id="selectTeacher" resultMap="BaseResultMap">
 		select * from
-		teacher
-		where name = #{name}
+		teachers
+		where
+		name = #{name}
 	</select>
 
 </mapper>
