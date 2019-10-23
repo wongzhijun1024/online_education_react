@@ -1,25 +1,41 @@
 import React from "react";
 import "./CoursesList.css";
-import { Button } from "antd";
+import { Button, Select, Input, Table, Tabs } from "antd";
+import CourseListCpt from "../../../components/CourseList/CourseListCpt";
 export default class CoursesList extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      fileList: []
+    };
+  };
+
   render() {
+    const { TabPane } = Tabs;
+    function callback(key) {
+      console.log(key);
+    }
+  
     return (
       <div className="courseBox">
         <div className="pageHeader">
-            <h1 className="header_left">课程管理</h1>
-            < div className = "header_right" >
-               <a href="#" target="blank" className="headerBtn">创建课程</a>
-            </div>
+          <h1 className="header_left">课程管理</h1>
+          <div className="header_right">
+            <Button className="headerBtn" style={{ backgroundColor: '#5CB85C', color: 'white' }}>创建课程</Button>
+          </div>
         </div>
-        <ul className="nav">
-            <li className="navTitle">
-                <a href="../list/CoursesList.js">课程管理</a>
-            </li>
-        </ul>
         <div className="btnGroup">
-          <a href="">普通课程</a>
-          <a href="">班级课程</a>
-          <a href="">会员课程</a>
+          <Tabs defaultActiveKey="1" onChange={callback}>
+            <TabPane tab="普通课程" key="1">
+              <CourseListCpt></CourseListCpt>
+            </TabPane>
+            <TabPane tab="班级课程" key="2">
+              <CourseListCpt></CourseListCpt>
+        </TabPane>
+            <TabPane tab="会员课程" key="3">
+              <CourseListCpt></CourseListCpt>
+        </TabPane>
+          </Tabs>
         </div>
       </div>
     );

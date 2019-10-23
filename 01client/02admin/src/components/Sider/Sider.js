@@ -29,7 +29,7 @@ class MySider extends React.Component {
               title={
                 <span>
                   <Icon type="play-circle" />
-                  课程管理
+                  <span>课程管理</span>
                 </span>
               }
             >
