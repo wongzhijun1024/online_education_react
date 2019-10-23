@@ -7,7 +7,7 @@ export default class CoursesAdd extends React.Component {
     super();
     this.state = {
       fileList: [],
-      value: 1
+      value: 0
     };
   }
   onChange = e => {
@@ -18,17 +18,20 @@ export default class CoursesAdd extends React.Component {
   };
   upload = e => {
     //获得姓名
-    let name = "小明";
+    let name = "小王";
     //获得介绍
     let introduce = "获得介绍";
     //获得文件的数据
     let fileList = this.state.fileList;
 
     net.uploadFile(
-      "teacherAdd",
+      "courses/add",
       {
         name: name,
         introduce: introduce,
+        state: 1,
+        teacherId: 0,
+        ctype: 1,
         files: fileList
       },
       function(ob) {
@@ -51,6 +54,7 @@ export default class CoursesAdd extends React.Component {
   };
 
   beforeUpload = file => {
+    console.log(file);
     //获得文件的数据
     let fileList = this.state.fileList;
     //添加文件
@@ -80,20 +84,20 @@ export default class CoursesAdd extends React.Component {
 
          <div className = "addCourseBox">
            <label for = "title"><span style = {{color:"red",marginRight:"3px"}}>*</span>课程标题</label>
-           <Input placeholder="Basic usage" id = "title" />
+           <Input  placeholder="" id = "title" />
          </div>
 
          <div className = "addCourseBox">
            <label for = "title01">课程副标题</label>
-           <Input placeholder="Basic usage" id = "title01" />
+           <Input placeholder="" id = "title01" />
          </div>
         <div className = "addCourseBox">
            <label>连载状态</label>
            <div>
              <Radio.Group onChange={this.onChange} value={this.state.value}>
-              <Radio value={1}>非连载课程</Radio>
-              <Radio value={2}>更新中</Radio>
-              <Radio value={3}>已完结</Radio>
+              <Radio value={0}>非连载课程</Radio>
+              <Radio value={1}>更新中</Radio>
+              <Radio value={2}>已完结</Radio>
             </Radio.Group>
            </div>
          </div>
@@ -111,32 +115,15 @@ export default class CoursesAdd extends React.Component {
          </div>
 
          <div className = "addCourseBox">
-           <label>封面图片</label>
-           <div>
-             <Upload onRemove={this.removeFile} beforeUpload={this.beforeUpload}>
-            <Button>
-            <Icon type="upload" /> Select File
-             </Button>
-           </Upload>
-           <div>请上传jpg, gif, png格式的图片, 建议图片尺寸为 480×270px。建议图片大小不超过2MB。</div>
-           </div>
+           <label for = "title02">课程简介</label>
+           <Input placeholder="" id = "title02" />
          </div>
 
-
+        <Button  type="primary" onClick={this.upload} style={{ marginTop: 16,background:"#43BB60"}}>
+          保存
+        </Button>
 
         </div>
-        <Row>
-          <Col span={12}>col-12</Col>
-          <Col span={12}>col-12</Col>
-        </Row>
-        <Upload onRemove={this.removeFile} beforeUpload={this.beforeUpload}>
-          <Button>
-            <Icon type="upload" /> Select File
-          </Button>
-        </Upload>
-        <Button type="primary" onClick={this.upload} style={{ marginTop: 16 }}>
-          上传文件
-        </Button>
       </div>
     );
   }
