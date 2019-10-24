@@ -1,14 +1,17 @@
 import React from "react";
 import "./CourseInformation.css";
-import { Upload, Input, Icon, Button,Radio} from "antd";
+import { Upload, Input, Icon, Button,Radio,Select } from "antd";
 import net from "../../../../utils/net";
-
+const { Option } = Select;
+const  arr = [];
 export default class CourseInformation extends React.Component {
   constructor() {
     super();
     this.state = {
       fileList: [],
-      value: 0
+      value: 0,
+      teachers:[],
+      teacherId:""
     };
   }
 
@@ -20,19 +23,22 @@ export default class CourseInformation extends React.Component {
   };
   upload = e => {
     //获得姓名
-    let name = "小王";
+    let name = this.refs.courseName.state.value;
     //获得介绍
-    let introduce = "获得介绍";
+    let introduce = this.refs.instroduce.state.value;
     //获得文件的数据
     let fileList = this.state.fileList;
-
+    // 获取状态值
+    let state = this.state.value;
+    // 获得老师的id
+    let teacherId = this.state.teacherId;
     net.uploadFile(
       "courses/add",
       {
         name: name,
         introduce: introduce,
-        state: 1,
-        teacherId: 0,
+        state: state,
+        teacherId: teacherId,
         ctype: 1,
         files: fileList
       },
@@ -41,6 +47,23 @@ export default class CourseInformation extends React.Component {
       }
     );
   };
+
+  componentDidMount(){
+    let that = this;
+    net.get("teachers",
+            {},
+            function(ob){
+              let teacher = [];
+              let length = ob.data.object.length;
+              for(let i = 0; i<length; i++){
+                  teacher.push(ob.data.object[i]);
+              }
+              that.setState = ({
+                  teachers:teacher
+              });
+            });
+           console.log(that.state.teachers);
+     };
 
   removeFile = file => {
     //获得文件的数据
@@ -56,7 +79,6 @@ export default class CourseInformation extends React.Component {
   };
 
   beforeUpload = file => {
-    console.log(file);
     //获得文件的数据
     let fileList = this.state.fileList;
     //添加文件
@@ -66,7 +88,12 @@ export default class CourseInformation extends React.Component {
       fileList: fileList
     });
   };
-
+   handleChangeTeacher=(value)=>{
+      let teacherId = value;
+      this.setState = ({
+        teacherId:teacherId
+      });
+  }
   render() {
     return (
       <div className = "coursesAdd-1">
@@ -79,12 +106,19 @@ export default class CourseInformation extends React.Component {
 
          <div className = "addCourseBox">
            <label for = "title"><span style = {{color:"red",marginRight:"3px"}}>*</span>课程标题</label>
-           <Input  placeholder="" id = "title" />
+           <Input ref = "courseName"  placeholder="" id = "title" />
          </div>
 
          <div className = "addCourseBox">
-           <label for = "title01">课程副标题</label>
-           <Input placeholder="" id = "title01" />
+           <label for = "title01">选择老师</label>
+           <div>
+             {this.state.teachers}
+             <Select defaultValue= "小王" style={{ width: 120 }} onChange={this.handleChangeTeacher}>
+                      <Option value="0">小王</Option>
+                      <Option value="1">小明</Option>
+                      <Option value="2">小李</Option>
+             </Select>
+           </div>
          </div>
         <div className = "addCourseBox">
            <label>连载状态</label>
@@ -111,7 +145,7 @@ export default class CourseInformation extends React.Component {
 
          <div className = "addCourseBox">
            <label for = "title02">课程简介</label>
-           <Input placeholder="" id = "title02" />
+           <Input ref = "instroduce" placeholder="" id = "title02" />
          </div>
 
         <Button  type="primary" onClick={this.upload} style={{ marginTop: 16,background:"#43BB60"}}>
