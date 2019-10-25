@@ -9,8 +9,21 @@
     justify-content: center;
     align-items: center;
 }
-h1{
+.teacherQueryBox{
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
     font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.teacherQueryBox>img{
+    width: 78px;
+    height: 78px;
 }
 .teacherShow{
     width: 100%;

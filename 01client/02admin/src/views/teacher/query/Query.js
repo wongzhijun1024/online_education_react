@@ -74,20 +74,24 @@ export default class Query extends React.Component {
   render() {
     return (
       <div className="teacherQueryView">
-        <h1>老师查询页面</h1>
+        <div className = "teacherQueryBox">
+          <span>老师查询页面</span>
+          <img src = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3800569146,487832050&fm=26&gp=0.jpg" />
+          </div>
+        <div className = "teacherShow">查询老师：</div>
         <Search
         placeholder="请输入你所要查询的老师的名字"
         enterButton="Search"
         size="large"
         onSearch={this.searchTeacher}
       />
-      <div className = "teacherShow">查询结果</div>
+      <div className = "teacherShow">查询结果：</div>
         <div className = "showQuery">
-         <img src = {this.state.searchList[0].src} />
+         <img src = {this.state.searchList[0].src}/>
           <div>{this.state.searchList[0].name}</div>
           <div>{this.state.searchList[0].instroduce}</div>
         </div>
-        <div className = "teacherShow">部分老师的信息展示</div>
+        <div className = "teacherShow">部分老师的信息展示：</div>
         <List
       className = "teacher-list flex"
         itemLayout="horizontal"

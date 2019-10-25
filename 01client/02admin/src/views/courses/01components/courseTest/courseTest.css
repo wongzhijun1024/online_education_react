@@ -1,0 +1,77 @@
+.courseTestBox{
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 700px;
+    background-color: white;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.testHeader{
+    width: 97%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #F0F0F0;
+}
+.testTitle{
+    font-size: 20px;
+    color: #595959;
+}
+.btnBox{
+    padding-bottom: 20px;
+}
+.importBox{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    background-color: rgba(0, 0, 0, 0.56);
+    z-index: 100;
+    display: none;
+}
+.importContent{
+    width:480px;
+    height: 250px;
+    background-color: #FFFFFF;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -240px;
+    margin-top: -200px;
+    border-radius: 5px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.importTitle{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 90%;
+    height: 20px;
+    padding-top: 10px;
+}
+.importUpload{
+    width: 90%;
+    height: 70%;
+    background-color: #FAFAFA;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #43BC60;
+}
+.ant-upload{
+    margin-bottom: 10px;
+}
+.deleteBtn{
+    background-color: #ECECEC;
+}
