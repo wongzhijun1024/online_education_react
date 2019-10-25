@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.VideoMapper">
+	<resultMap id="filesMap" type="com.ff.pojo.MyFile">
+		<id column="id" property="id" />
+		<result column="url" property="url" />
+		<result column="fileId" property="fileId" />
+	</resultMap>
+
+	<!-- 根据id获得文件集合 -->
+	<select id="selectFileById" resultMap="filesMap">
+		select *from files
+		where
+		fileId = #{fileId}
+	</select>
+
+	<!-- 增加新视频 -->
+	<insert id="insert" parameterType="com.ff.pojo.MyFile"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into files
+		(url,fileId)
+		values
+		(#{url},
+		#{fileId})
+	</insert>
+
+
+
+	<!-- 查询所有视频 -->
+	<select id="selectAllVideo" resultMap="videoMap">
+		select * from video
+	</select>
+
+
+
+
+
+	<!-- 根据视频信息查询视频 -->
+	<select id="getVideo" resultMap="videoMap">
+		select * from video where id =
+		#{id}
+	</select>
+
+
+</mapper>

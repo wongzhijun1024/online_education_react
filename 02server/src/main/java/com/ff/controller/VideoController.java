@@ -23,7 +23,7 @@ public class VideoController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "allVideos")
+	@RequestMapping(method = RequestMethod.GET, value = "video/all")
 	@ResponseBody
 	public Msg selectAllVideo() {
 		return videoService.selectAllVideo();
@@ -42,13 +42,11 @@ public class VideoController {
 
 	@RequestMapping(value = "addVideo")
 	@ResponseBody
-	public Msg addVideo(Video video, HttpServletResponse resp, HttpServletRequest req) {
+	public Msg addVideo(Video video, HttpServletResponse resp, HttpServletRequest request) {
 
-		return videoService.insertVideo(video);
+		return videoService.insertVideo(video, request);
 	}
-	
-	
-	
+
 	/**
 	 * 根据视频的ID查询对应的视频
 	 * 

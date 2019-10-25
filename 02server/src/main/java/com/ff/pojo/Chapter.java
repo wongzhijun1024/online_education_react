@@ -1,5 +1,7 @@
 package com.ff.pojo;
 
+import java.util.List;
+
 public class Chapter {
 
 	/**
@@ -22,16 +24,22 @@ public class Chapter {
 	 */
 	private int order;
 
+	/**
+	 * 视频列表
+	 */
+	private List<Video> videos;
+
 	public Chapter() {
 		super();
 	}
 
-	public Chapter(int id, String name, int coursesId, int order) {
+	public Chapter(int id, String name, int coursesId, int order, List<Video> videos) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.coursesId = coursesId;
 		this.order = order;
+		this.videos = videos;
 	}
 
 	public int getId() {
@@ -66,9 +74,18 @@ public class Chapter {
 		this.order = order;
 	}
 
+	public List<Video> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
+	}
+
 	@Override
 	public String toString() {
-		return "Chapter [id=" + id + ", name=" + name + ", coursesId=" + coursesId + ", order=" + order + "]";
+		return "Chapter [id=" + id + ", name=" + name + ", coursesId=" + coursesId + ", order=" + order + ", videos="
+				+ videos + "]";
 	}
 
 }

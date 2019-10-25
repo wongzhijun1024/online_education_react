@@ -1,5 +1,7 @@
 package com.ff.pojo;
 
+import java.util.List;
+
 public class Course {
 	/**
 	 * 课程id
@@ -36,11 +38,17 @@ public class Course {
 	 */
 	private int ctype;
 
+	/**
+	 * 当前课程的所有章节
+	 */
+	private List<Chapter> chapters;
+
 	public Course() {
 		super();
 	}
 
-	public Course(int id, String name, int state, String introduce, String url, int teacherId, int ctype) {
+	public Course(int id, String name, int state, String introduce, String url, int teacherId, int ctype,
+			List<Chapter> chapters) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -49,6 +57,7 @@ public class Course {
 		this.url = url;
 		this.teacherId = teacherId;
 		this.ctype = ctype;
+		this.chapters = chapters;
 	}
 
 	public int getId() {
@@ -107,10 +116,18 @@ public class Course {
 		this.ctype = ctype;
 	}
 
+	public List<Chapter> getChapters() {
+		return chapters;
+	}
+
+	public void setChapters(List<Chapter> chapters) {
+		this.chapters = chapters;
+	}
+
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", name=" + name + ", state=" + state + ", introduce=" + introduce + ", url=" + url
-				+ ", teacherId=" + teacherId + ", ctype=" + ctype + "]";
+				+ ", teacherId=" + teacherId + ", ctype=" + ctype + ", chapters=" + chapters + "]";
 	}
 
 }

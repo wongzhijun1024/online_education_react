@@ -9,19 +9,19 @@
 	</resultMap>
 
 
-	<resultMap id="mapChain" type="com.ff.pojo.Chapter">
+	<resultMap id="ChapterMapLeaf" type="com.ff.pojo.Chapter">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
-		<result column="corder" property="order" />
-		<collection property="list" javaType="ArrayList"
+		<result column="c_order" property="order" />
+		<collection property="videos" javaType="ArrayList"
 			ofType="com.ff.pojo.Video" column="id"
 			select="com.ff.dao.VideoMapper.getVideosByChapterId">
 		</collection>
 	</resultMap>
-	<select id="getChaptersByCourseId" resultMap="chapterMap">
+	<select id="getChaptersByCourseId" resultMap="ChapterMapLeaf">
 		select *from
 		chapter
-		where course_id = #{id} order by c_order
+		where coursesId = #{id} order by c_order
 	</select>
 
 

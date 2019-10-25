@@ -1,6 +1,9 @@
 package com.ff.serviceImpl;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ff.dao.VideoMapper;
@@ -18,7 +21,7 @@ public class VideoServiceImpl implements VideoService {
 
 	@Override
 	public Msg selectAllVideo() {
-		List<Video> list = videoMapper.getAllVideo();
+		List<Video> list = videoMapper.selectAllVideo();
 		Msg msg = new Msg();
 		msg.setCode(1);
 		msg.setObject(list);
@@ -35,13 +38,12 @@ public class VideoServiceImpl implements VideoService {
 			msg.setMsg("没有(" + chapter.getName() + ")对应的视频，请添加视频");
 		} else {
 			CosTool cosTool = new CosTool();
-			for(Video video : videos) {
-				
-				
+			for (Video video : videos) {
+
 				video.setUrl(cosTool.getUrl(video.getUrl()));
 			}
 			cosTool.destroy();
-			cosTool=null;
+			cosTool = null;
 			msg.setCode(1);
 			msg.setObject(videos);
 		}
@@ -49,25 +51,43 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
-	public Msg insertVideo(Video video) {
+	public Msg insertVideo(Video video, HttpServletRequest request) {
+
 		Msg msg = new Msg();
-		if (videoMapper.insert(video) == 1) {
-			msg.setCode(1);
-			msg.setMsg("添加视频(" + video.getName() + ")成功!");
-			
-			CosTool cosTool = new CosTool();
-			
-			video.setUrl(cosTool.getUrl(video.getUrl()));
-			
-			cosTool.destroy();
-			cosTool=null;
-			
-			msg.setObject(video);
-		} else {
-			msg.setCode(1);
-			msg.setMsg("添加视频(" + video.getName() + ")失败!");
-			msg.setObject(video);
+
+		// 查询是否已经存在该老师
+		if (videoMapper.getVideosByName(video).size() >= 1) {
+			msg.setCode(2);
+			msg.setMsg("已经存在(" + video.getName() + ")视频");
+			return msg;
 		}
+
+		CosTool cosTool = new CosTool();
+		List<String> keyList = cosTool.uploadFile(CosTool.VIDEO_FOLDER, request);
+
+		if (keyList.size() == 0) {
+			msg.setMsg("图片添加失败!");
+			return msg;
+		}
+
+//
+//		if (videoMapper.insert(video) == 1) {
+//			msg.setCode(1);
+//			msg.setMsg("添加视频(" + video.getName() + ")成功!");
+//
+//			CosTool cosTool = new CosTool();
+//
+//			video.setUrl(cosTool.getUrl(video.getUrl()));
+//
+//			cosTool.destroy();
+//			cosTool = null;
+//
+//			msg.setObject(video);
+//		} else {
+//			msg.setCode(1);
+//			msg.setMsg("添加视频(" + video.getName() + ")失败!");
+//			msg.setObject(video);
+//		}
 
 		return msg;
 	}
@@ -84,18 +104,18 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	public Msg getVideo(Video video) {
 		Msg msg = new Msg();
-		Video buffer=videoMapper.getVideo(video);
-		
-		if(buffer!=null) {
+		Video buffer = videoMapper.getVideo(video);
+
+		if (buffer != null) {
 			msg.setCode(1);
 			CosTool cosTool = new CosTool();
-			
+
 			buffer.setUrl(cosTool.getUrl(buffer.getUrl()));
 			cosTool.destroy();
-			cosTool=null;
+			cosTool = null;
 			msg.setObject(buffer);
 		}
-		
+
 		return msg;
 	}
 

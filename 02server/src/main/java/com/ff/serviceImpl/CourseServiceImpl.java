@@ -95,4 +95,28 @@ public class CourseServiceImpl implements CourseService {
 		return msg;
 	}
 
+	@Override
+	public Msg selectCourseAllLeaf() {
+		Msg msg = new Msg();
+
+		// 获得课程数据
+		List<Course> list = courseMapper.selectCourseAllLeaf();
+		if (list != null && list.size() >= 1) {
+			msg.setCode(1);
+
+			msg.setMsg("操作成功!");
+
+//			CosTool cosTool = new CosTool();
+//			for (int i = 0; i < list.size(); i++) {
+//				// 到腾讯云服务器换图片地址
+//				String url = cosTool.getUrl(list.get(i).getUrl());
+//				list.get(i).setUrl(url);
+//			}
+
+			msg.setObject(list);
+		}
+
+		return msg;
+	}
+
 }

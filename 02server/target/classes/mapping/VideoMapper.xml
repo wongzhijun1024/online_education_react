@@ -9,7 +9,7 @@
 
 	<!-- 根据章节id获得视频 -->
 	<select id="getVideosByChapterId" resultMap="videoMap">
-		select *from video
+		select *from videos
 		where chapter_id = #{id} order by v_order
 	</select>
 
@@ -25,17 +25,21 @@
 
 
 	<!-- 查询所有视频 -->
-	<select id="getAllVideo" resultMap="videoMap">
+	<select id="selectAllVideo" resultMap="videoMap">
 		select * from video
 	</select>
-	
-	
-		<!-- 根据视频信息查询视频 -->
+
+
+
+
+
+	<!-- 根据视频信息查询视频 -->
 	<select id="getVideo" resultMap="videoMap">
-		select * from video where id = #{id} 
+		select * from video where id =
+		#{id}
 	</select>
-	
-	
+
+
 
 	<!-- 根据id更新视频 -->
 	<update id="updateById" parameterType="com.ff.pojo.Video">

@@ -5,29 +5,22 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.ff.pojo.Chapter;
+
 import com.ff.pojo.Msg;
-import com.ff.service.ChapterService;
+import com.ff.service.CourseService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ChapterTest {
+public class CourseTest {
 	@Autowired
-	private ChapterService chapterService;
+	private CourseService courseService;
 
 	@Test
 	public void ChapterTest() {
 
-		Chapter chapter = new Chapter();
+		Msg msg = courseService.selectCourseAllLeaf();
 
-		chapter.setName("继承机制");
-		chapter.setCoursesId(1);
-		chapter.setOrder(2);
-
-		Msg msg = chapterService.insertChapter(chapter);
-
-		System.out.println(msg);
-
+		System.out.print(msg);
 	}
 
 }
