@@ -3,7 +3,7 @@ package com.ff.pojo;
 import java.io.Serializable;
 import java.util.List;
 
-public class AdTopic implements Serializable{
+public class AdTopic implements Serializable {
 
 	/**
 	 * 视频主题id
@@ -14,7 +14,7 @@ public class AdTopic implements Serializable{
 	 * 视频名字
 	 */
 	private String name;
-	
+
 	/**
 	 * 广告视频
 	 */
@@ -48,6 +48,5 @@ public class AdTopic implements Serializable{
 	public String toString() {
 		return "AdTopic [id=" + id + ", name=" + name + ", adVideos=" + adVideos + "]";
 	}
-	
-	
+
 }

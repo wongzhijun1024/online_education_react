@@ -1,7 +1,5 @@
 package com.ff.pojo;
 
-import java.util.List;
-
 public class Chapter {
 
 	/**
@@ -15,27 +13,25 @@ public class Chapter {
 	private String name;
 
 	/**
-	 * 章节对应的课程id号
+	 * 课程id
 	 */
-	private int course_id;
-	
+	private int coursesId;
+
 	/**
-	 * 章节顺序
+	 * 排列的顺序
 	 */
 	private int order;
 
-	/**
-	 * 章节对应的视频
-	 */
-	private List<Video> list;
-
-	/**
-	 * 章节
-	 */
-	private String msg = "chapter";
-
 	public Chapter() {
 		super();
+	}
+
+	public Chapter(int id, String name, int coursesId, int order) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.coursesId = coursesId;
+		this.order = order;
 	}
 
 	public int getId() {
@@ -54,28 +50,12 @@ public class Chapter {
 		this.name = name;
 	}
 
-	public int getCourse_id() {
-		return course_id;
+	public int getCoursesId() {
+		return coursesId;
 	}
 
-	public void setCourse_id(int course_id) {
-		this.course_id = course_id;
-	}
-
-	public List<Video> getList() {
-		return list;
-	}
-
-	public void setList(List<Video> list) {
-		this.list = list;
-	}
-
-	public String getMsg() {
-		return msg;
-	}
-
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setCoursesId(int coursesId) {
+		this.coursesId = coursesId;
 	}
 
 	public int getOrder() {
@@ -85,7 +65,10 @@ public class Chapter {
 	public void setOrder(int order) {
 		this.order = order;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Chapter [id=" + id + ", name=" + name + ", coursesId=" + coursesId + ", order=" + order + "]";
+	}
 
 }
