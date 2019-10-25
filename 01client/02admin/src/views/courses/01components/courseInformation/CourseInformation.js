@@ -3,7 +3,14 @@ import "./CourseInformation.css";
 import { Upload, Input, Icon, Button,Radio,Select } from "antd";
 import net from "../../../../utils/net";
 const { Option } = Select;
-const  arr = [];
+const  arr = [
+  { id:1,
+    name:"hmc"},
+  {
+    id:2,name:"mac"},
+  {
+    id:3,name:"nihao"}
+];
 export default class CourseInformation extends React.Component {
   constructor() {
     super();
@@ -40,7 +47,8 @@ export default class CourseInformation extends React.Component {
         state: state,
         teacherId: teacherId,
         ctype: 1,
-        files: fileList
+        files: fileList,
+        firstName:""
       },
       function(ob) {
         console.log(ob);
@@ -53,16 +61,13 @@ export default class CourseInformation extends React.Component {
     net.get("teachers",
             {},
             function(ob){
-              let teacher = [];
-              let length = ob.data.object.length;
-              for(let i = 0; i<length; i++){
-                  teacher.push(ob.data.object[i]);
-              }
-              that.setState = ({
-                  teachers:teacher
+              let firstName = ob.data.object[0].name;
+              that.setState({
+                  teachers:ob.data.object,
+                  firstName:firstName
               });
-            });
-           console.log(that.state.teachers);
+         
+            }); 
      };
 
   removeFile = file => {
@@ -90,9 +95,22 @@ export default class CourseInformation extends React.Component {
   };
    handleChangeTeacher=(value)=>{
       let teacherId = value;
-      this.setState = ({
+      this.setState({
         teacherId:teacherId
       });
+  }
+
+ showTeacherOptions=()=>{
+
+if(this.state.teachers.length<1)
+     return;  
+  let teacher = this.state.teachers;
+     let teachers =  teacher.map(item=>{
+               return (<Option key = {item.id} value={item.id}>
+                      {item.name}
+                      </Option>);
+                      })
+      return teachers;
   }
   render() {
     return (
@@ -112,11 +130,8 @@ export default class CourseInformation extends React.Component {
          <div className = "addCourseBox">
            <label for = "title01">选择老师</label>
            <div>
-             {this.state.teachers}
-             <Select defaultValue= "小王" style={{ width: 120 }} onChange={this.handleChangeTeacher}>
-                      <Option value="0">小王</Option>
-                      <Option value="1">小明</Option>
-                      <Option value="2">小李</Option>
+             <Select defaultValue= "小刚" style={{ width: 120 }} onChange={this.handleChangeTeacher}>
+                      {this.showTeacherOptions()}
              </Select>
            </div>
          </div>
