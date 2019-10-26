@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ff.dao.VideoMapper;
 import com.ff.pojo.Chapter;
 import com.ff.pojo.Msg;
+import com.ff.pojo.MyFile;
 import com.ff.pojo.Video;
 import com.ff.service.VideoService;
 import com.ff.util.CosTool;
@@ -62,32 +63,39 @@ public class VideoServiceImpl implements VideoService {
 			return msg;
 		}
 
-		CosTool cosTool = new CosTool();
-		List<String> keyList = cosTool.uploadFile(CosTool.VIDEO_FOLDER, request);
+		if (videoMapper.insert(video) == 1) {
+			msg.setCode(1);
+			// 更新文件id，通过文件id查找files表对应的图片key，通过key查找腾讯服务器的图片
+			video.setFileId("video" + video.getId());
+			// 把fileID更新到video表里面
+			videoMapper.updateById(video);
+			// 插入视频文件
+			CosTool cosTool = new CosTool();
+			List<String> keyList = cosTool.uploadFile(CosTool.VIDEO_FOLDER, request);
+			if (keyList.size() > 1) {
 
-		if (keyList.size() == 0) {
-			msg.setMsg("图片添加失败!");
-			return msg;
+			} else {
+				msg.setMsg("添加视频(" + video.getName() + ")成功!");
+			}
+
+		} else {
+			msg.setCode(1);
+			msg.setMsg("添加视频(" + video.getName() + ")失败!");
+			msg.setObject(video);
 		}
 
-//
-//		if (videoMapper.insert(video) == 1) {
-//			msg.setCode(1);
-//			msg.setMsg("添加视频(" + video.getName() + ")成功!");
-//
-//			CosTool cosTool = new CosTool();
-//
-//			video.setUrl(cosTool.getUrl(video.getUrl()));
-//
-//			cosTool.destroy();
-//			cosTool = null;
-//
-//			msg.setObject(video);
-//		} else {
-//			msg.setCode(1);
-//			msg.setMsg("添加视频(" + video.getName() + ")失败!");
-//			msg.setObject(video);
+		FilesServiceImpl filesServiceImpl = new FilesServiceImpl();
+
+//		for(int i=0;i<keyList.size();i++) {
+//			MyFile myFile = new MyFile();
+//			myFile.setUrl(keyList.get(i));
+//			myFile.setFileId(fileId);
 //		}
+//		
+//		
+//		
+//		MyFile myFile = new MyFile();
+//		filesServiceImpl.insertFile(file)
 
 		return msg;
 	}

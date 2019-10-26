@@ -40,7 +40,7 @@ public class VideoController {
 		return videoService.selectVideosByChapterId(chapter);
 	}
 
-	@RequestMapping(value = "addVideo")
+	@RequestMapping(value = "video/add")
 	@ResponseBody
 	public Msg addVideo(Video video, HttpServletResponse resp, HttpServletRequest request) {
 

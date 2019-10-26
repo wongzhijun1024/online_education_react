@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ff.dao.VideoMapper">
+<mapper namespace="com.ff.dao.FilesMapper">
 	<resultMap id="filesMap" type="com.ff.pojo.MyFile">
 		<id column="id" property="id" />
 		<result column="url" property="url" />
@@ -23,23 +23,6 @@
 		(#{url},
 		#{fileId})
 	</insert>
-
-
-
-	<!-- 查询所有视频 -->
-	<select id="selectAllVideo" resultMap="videoMap">
-		select * from video
-	</select>
-
-
-
-
-
-	<!-- 根据视频信息查询视频 -->
-	<select id="getVideo" resultMap="videoMap">
-		select * from video where id =
-		#{id}
-	</select>
 
 
 </mapper>

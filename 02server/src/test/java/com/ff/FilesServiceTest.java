@@ -5,22 +5,24 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.ff.pojo.Msg;
-import com.ff.service.CourseService;
+import com.ff.pojo.MyFile;
+import com.ff.serviceImpl.FilesServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FilesServiceTest {
 	@Autowired
-	private CourseService courseService;
+	private FilesServiceImpl filesServiceImpl;
 
 	@Test
-	public void ChapterTest() {
+	public void FilesTest() {
 
-		Msg msg = courseService.selectCourseAllLeaf();
+		MyFile file = new MyFile();
 
-		System.out.print(msg);
+		file.setUrl("123");
+		file.setFileId("vedio123");
+		filesServiceImpl.insertFile(file);
+
 	}
 
 }
