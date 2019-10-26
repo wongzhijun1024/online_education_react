@@ -5,9 +5,9 @@ public class Video {
 	private int id;
 
 	/**
-	 * 视频Id
+	 * 视频地址
 	 */
-	private String fileId;
+	private String url;
 
 	/**
 	 * 视频名字
@@ -17,7 +17,7 @@ public class Video {
 	/**
 	 * 章节id
 	 */
-	private int chapter_id;
+	private int chapterId;
 
 	/**
 	 * 节
@@ -34,12 +34,12 @@ public class Video {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Video(int id, String fileId, String name, int chapter_id, String msg, int order) {
+	public Video(int id, String url, String name, int chapterId, String msg, int order) {
 		super();
 		this.id = id;
-		this.fileId = fileId;
+		this.url = url;
 		this.name = name;
-		this.chapter_id = chapter_id;
+		this.chapterId = chapterId;
 		this.msg = msg;
 		this.order = order;
 	}
@@ -52,12 +52,12 @@ public class Video {
 		this.id = id;
 	}
 
-	public String getFileId() {
-		return fileId;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setFileId(String fileId) {
-		this.fileId = fileId;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public String getName() {
@@ -68,12 +68,12 @@ public class Video {
 		this.name = name;
 	}
 
-	public int getChapter_id() {
-		return chapter_id;
+	public int getChapterId() {
+		return chapterId;
 	}
 
-	public void setChapter_id(int chapter_id) {
-		this.chapter_id = chapter_id;
+	public void setChapterId(int chapterId) {
+		this.chapterId = chapterId;
 	}
 
 	public String getMsg() {
@@ -94,8 +94,8 @@ public class Video {
 
 	@Override
 	public String toString() {
-		return "Video [id=" + id + ", fileId=" + fileId + ", name=" + name + ", chapter_id=" + chapter_id + ", msg="
-				+ msg + ", order=" + order + "]";
+		return "Video [id=" + id + ", url=" + url + ", name=" + name + ", chapterId=" + chapterId + ", msg=" + msg
+				+ ", order=" + order + "]";
 	}
 
 }

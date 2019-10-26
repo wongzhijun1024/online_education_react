@@ -1,11 +1,8 @@
 package com.ff.service;
 
-import java.util.List;
-
 import com.ff.pojo.Chapter;
 import com.ff.pojo.Course;
 import com.ff.pojo.Msg;
-import com.ff.pojo.Topic;
 
 public interface ChapterService {
 	/**
@@ -21,6 +18,13 @@ public interface ChapterService {
 	 * @return
 	 */
 	Msg selectChaptersByCourseId(Course course);
+
+	/**
+	 * 根据课程的id号查询科目,包含子节点
+	 * 
+	 * @return
+	 */
+	Msg selectChaptersByCourseIdLeaf(Course course);
 
 	/**
 	 * 插入课程

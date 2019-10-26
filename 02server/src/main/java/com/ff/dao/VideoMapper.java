@@ -31,32 +31,17 @@ public interface VideoMapper {
 	int updateById(Video video);
 
 	/**
-	 * 查询全部的视频
-	 * 
-	 * @return 视频列表
-	 */
-	List<Video> selectAllVideo();
-
-	/**
 	 * 
 	 * @param id 视频的id
 	 * @return 视频列表
 	 */
-	List<Video> getVideosByChapterId(int id);
+	List<Video> selectVideosByChapterId(int id);
 
 	/**
 	 * 
 	 * @param video 视频数据
 	 * @return 视频列表
 	 */
-	List<Video> getVideosByName(Video video);
-
-	/**
-	 * 根据视频相关信息查询视频
-	 * 
-	 * @param video
-	 * @return
-	 */
-	Video getVideo(Video video);
+	List<Video> selectVideosByName(Video video);
 
 }

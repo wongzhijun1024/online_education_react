@@ -27,7 +27,14 @@ public interface ChapterMapper {
 	 * @param id 课程的id
 	 * @return 课程列表
 	 */
-	List<Chapter> getChaptersByCourseId(int id);
+	List<Chapter> selectChaptersByCourseId(int id);
+
+	/**
+	 * 
+	 * @param id 课程的id
+	 * @return 课程列表包含子节点
+	 */
+	List<Chapter> selectChaptersByCourseIdLeaf(int id);
 
 	/**
 	 * 根据名字查询课程

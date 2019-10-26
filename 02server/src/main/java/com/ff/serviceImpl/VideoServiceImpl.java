@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.ff.dao.VideoMapper;
 import com.ff.pojo.Chapter;
 import com.ff.pojo.Msg;
-import com.ff.pojo.MyFile;
 import com.ff.pojo.Video;
 import com.ff.service.VideoService;
 import com.ff.util.CosTool;
@@ -21,19 +20,10 @@ public class VideoServiceImpl implements VideoService {
 	private VideoMapper videoMapper;
 
 	@Override
-	public Msg selectAllVideo() {
-		List<Video> list = videoMapper.selectAllVideo();
-		Msg msg = new Msg();
-		msg.setCode(1);
-		msg.setObject(list);
-		return msg;
-	}
-
-	@Override
 	public Msg selectVideosByChapterId(Chapter chapter) {
 		Msg msg = new Msg();
 		// 根据科目id获得对应的课程列表
-		List<Video> videos = videoMapper.getVideosByChapterId(chapter.getId());
+		List<Video> videos = videoMapper.selectVideosByChapterId(chapter.getId());
 		if (videos.size() == 0) {
 			msg.setCode(2);
 			msg.setMsg("没有(" + chapter.getName() + ")对应的视频，请添加视频");
@@ -57,45 +47,33 @@ public class VideoServiceImpl implements VideoService {
 		Msg msg = new Msg();
 
 		// 查询是否已经存在该老师
-		if (videoMapper.getVideosByName(video).size() >= 1) {
+		if (videoMapper.selectVideosByName(video).size() >= 1) {
 			msg.setCode(2);
 			msg.setMsg("已经存在(" + video.getName() + ")视频");
 			return msg;
 		}
 
+		CosTool cosTool = new CosTool();
+		List<String> keyList = cosTool.uploadFile(CosTool.VIDEO_FOLDER, request);
+
+		if (keyList.size() == 0) {
+			msg.setMsg("图片添加失败!");
+			return msg;
+		}
+
+		// 保存视频地址
+		video.setUrl(keyList.get(0));
+
 		if (videoMapper.insert(video) == 1) {
 			msg.setCode(1);
-			// 更新文件id，通过文件id查找files表对应的图片key，通过key查找腾讯服务器的图片
-			video.setFileId("video" + video.getId());
-			// 把fileID更新到video表里面
-			videoMapper.updateById(video);
-			// 插入视频文件
-			CosTool cosTool = new CosTool();
-			List<String> keyList = cosTool.uploadFile(CosTool.VIDEO_FOLDER, request);
-			if (keyList.size() > 1) {
-
-			} else {
-				msg.setMsg("添加视频(" + video.getName() + ")成功!");
-			}
-
+			msg.setMsg("添加视频(" + video.getName() + ")成功!");
+			// 根据key值到腾讯服务器换视频地址
+			video.setUrl(cosTool.getUrl(video.getUrl()));
+			msg.setObject(video);
 		} else {
 			msg.setCode(1);
 			msg.setMsg("添加视频(" + video.getName() + ")失败!");
-			msg.setObject(video);
 		}
-
-		FilesServiceImpl filesServiceImpl = new FilesServiceImpl();
-
-//		for(int i=0;i<keyList.size();i++) {
-//			MyFile myFile = new MyFile();
-//			myFile.setUrl(keyList.get(i));
-//			myFile.setFileId(fileId);
-//		}
-//		
-//		
-//		
-//		MyFile myFile = new MyFile();
-//		filesServiceImpl.insertFile(file)
 
 		return msg;
 	}
@@ -106,24 +84,6 @@ public class VideoServiceImpl implements VideoService {
 		if (videoMapper.updateById(video) == 1) {
 			msg.setCode(1);
 		}
-		return msg;
-	}
-
-	@Override
-	public Msg getVideo(Video video) {
-		Msg msg = new Msg();
-		Video buffer = videoMapper.getVideo(video);
-
-		if (buffer != null) {
-			msg.setCode(1);
-			CosTool cosTool = new CosTool();
-
-			buffer.setUrl(cosTool.getUrl(buffer.getUrl()));
-			cosTool.destroy();
-			cosTool = null;
-			msg.setObject(buffer);
-		}
-
 		return msg;
 	}
 

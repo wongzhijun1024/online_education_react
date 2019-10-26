@@ -23,4 +23,12 @@ public class CourseTest {
 		System.out.print(msg);
 	}
 
+	@Test
+	public void selectCourseLeafTest() {
+
+		Msg msg = courseService.selectCourseAllLeaf();
+
+		System.out.print(msg);
+	}
+
 }

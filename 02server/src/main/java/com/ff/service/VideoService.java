@@ -7,12 +7,6 @@ import com.ff.pojo.Msg;
 import com.ff.pojo.Video;
 
 public interface VideoService {
-	/**
-	 * 查询所有的視頻
-	 * 
-	 * @return 所有的視頻
-	 */
-	Msg selectAllVideo();
 
 	/**
 	 * 根据科目的id号查询科目
@@ -36,13 +30,5 @@ public interface VideoService {
 	 * @return
 	 */
 	Msg updateById(Video video);
-
-	/**
-	 * 根据id获得视频
-	 * 
-	 * @param video
-	 * @return
-	 */
-	Msg getVideo(Video video);
 
 }

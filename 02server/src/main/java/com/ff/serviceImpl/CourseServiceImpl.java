@@ -1,14 +1,9 @@
 package com.ff.serviceImpl;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.ff.dao.CourseMapper;
 import com.ff.pojo.Course;
 import com.ff.pojo.Msg;
@@ -103,16 +98,7 @@ public class CourseServiceImpl implements CourseService {
 		List<Course> list = courseMapper.selectCourseAllLeaf();
 		if (list != null && list.size() >= 1) {
 			msg.setCode(1);
-
 			msg.setMsg("操作成功!");
-
-//			CosTool cosTool = new CosTool();
-//			for (int i = 0; i < list.size(); i++) {
-//				// 到腾讯云服务器换图片地址
-//				String url = cosTool.getUrl(list.get(i).getUrl());
-//				list.get(i).setUrl(url);
-//			}
-
 			msg.setObject(list);
 		}
 

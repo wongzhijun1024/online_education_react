@@ -17,9 +17,6 @@ public class VideoTest {
 	@Test
 	public void ChapterTest() {
 
-		Msg msg = videoService.selectAllVideo();
-
-		System.out.print(msg);
 	}
 
 }

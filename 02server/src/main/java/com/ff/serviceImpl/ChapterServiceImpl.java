@@ -28,7 +28,22 @@ public class ChapterServiceImpl implements ChapterService {
 	public Msg selectChaptersByCourseId(Course course) {
 		Msg msg = new Msg();
 		// 根据科目id获得对应的课程列表
-		List<Chapter> chapters = chapterMapper.getChaptersByCourseId(course.getId());
+		List<Chapter> chapters = chapterMapper.selectChaptersByCourseIdLeaf(course.getId());
+		if (chapters.size() == 0) {
+			msg.setCode(2);
+			msg.setMsg("没有(" + course.getName() + ")对应的章节，请添加章节");
+		} else {
+			msg.setCode(1);
+			msg.setObject(chapters);
+		}
+		return msg;
+	}
+
+	@Override
+	public Msg selectChaptersByCourseIdLeaf(Course course) {
+		Msg msg = new Msg();
+		// 根据科目id获得对应的课程列表
+		List<Chapter> chapters = chapterMapper.selectChaptersByCourseIdLeaf(course.getId());
 		if (chapters.size() == 0) {
 			msg.setCode(2);
 			msg.setMsg("没有(" + course.getName() + ")对应的章节，请添加章节");
