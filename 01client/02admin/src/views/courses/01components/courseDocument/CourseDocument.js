@@ -18,26 +18,35 @@ const rowSelection = {
     {
         title: '文件名',
         dataIndex: 'name',
-        render: text => <a>{text}</a>,
+        render: text =>text,
+    },
+    {
+        title: '章节',
+        dataIndex: 'chapters',
+        render:chapters =>{
+          if(chapters.length<1){
+              return;
+          }
+          let firstName = chapters[0].name
+          return(
+              <Select defaultValue= {firstName} style={{ width: 120 }} >
+                {
+                  chapters.map(function(item){
+                      return(
+                      <Option value={item.name}>{item.name}</Option>
+                      )
+                  })
+                }
+              </Select>
+          );
+        }
     },
     {
         title: '课程介绍',
         dataIndex: 'introduce',
-        render:text =><Select defaultValue="lucy" style={{ width: 120 }} >
-                  <Option value="jack">Jack</Option>
-                  <Option value="lucy">Lucy</Option>
-                  <Option value="Yiminghe">yiminghe</Option>
-                  </Select>
-    },
-    ];
-    const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        introduce: 'New York No. 1 Lake Park'
+        render: text =>text,
     }
     ];
-
 
 export default class CourseDocument extends React.Component {
   constructor() {
@@ -48,16 +57,25 @@ export default class CourseDocument extends React.Component {
       courseName:"",
       courseChapter:"",
       courseSection:"",
-      values:undefined
+      values:undefined,
+      allLeaf:[],
+      chapterId:null,
     };
   }
 
-  // handleChange01(value) {
-  //     console.log(`selected ${value}`);
-  //   }
+  componentDidMount(){
+    let that = this;
+      net.get("courses/all/leaf",
+        {},
+        function(ob){
+          that.setState({
+            allLeaf:ob.data.object,
+          }); 
+        });
+  }
 
   onChange = e => {
-    console.log('radio checked', e.target.value);
+    // console.log('radio checked', e.target.value);
     this.setState({
       value: e.target.value,
     });
@@ -67,20 +85,19 @@ export default class CourseDocument extends React.Component {
     let fileName = this.refs.fileName.state.value;
     //获得介绍
     let introduce = this.refs.fileIntroduction.state.value;
-    console.log(fileName,introduce);
     //获得文件的数据
     let fileList = this.state.fileList;
     //章节id
-    let chapterId = 1;
+    let chapterId = 13;
     // 章节顺序
     let order = 0
-    net.uploadFile(
-      "addVideo",
+    net.post(
+      "video/add",
       {
         name: fileName,
-        order: order,
         chapterId:chapterId,
-        files: fileList
+        files: fileList,
+        order: order
       },
       function(ob) {
         console.log(ob);
@@ -123,29 +140,45 @@ export default class CourseDocument extends React.Component {
       this.refs.addFiles.style.display = "none";
   }
 
-  handleChangeName=(value)=> {
-    let courseName = value;
-    this.setState = {
-        courseName:courseName,
-    }
-};
-    handleChangeChapter=(value)=> {
-    let Chapter = value;
-    this.setState = {
-        courseChapter:Chapter,
-    }
-};
-    handleChangeSection=(value)=> {
-    let section = value;
-    this.setState = {
-        courseSection:section,
-    }
-};
 
-onChangeCourse = value => {
-    console.log(value);
+onChangeCourse = (value) => {
     this.setState({ values: value});
+    if(isNaN(value)){
+      return;
+    }
+    this.setState({
+      chapterId:Number(value)
+    });
+    console.log(this.state.chapterId);
   };
+
+ showTreeList=()=>{
+    let allLeaf = this.state.allLeaf;
+    let length = allLeaf.length;
+    if(length < 1){
+      return;
+    }
+    let allLeafs = allLeaf.map(function(item){
+      return (
+        <TreeNode value={item.name} title={item.name} key={item.id}>
+          {item.chapters.map(function(item1){
+            return(
+              <TreeNode  value={item1.id} title={item1.name} key = {item1.id} > 
+                  {
+                    item1.videos.map(function(item2){
+                      return(
+                        <TreeNode value={item2.name} title={item2.name} key={item2.id} />
+                      )
+                    })
+                  }
+              </TreeNode>
+            );
+          })}
+        </TreeNode>
+      );
+    });
+    return allLeafs;
+ }
 
   render() {
     return (
@@ -161,7 +194,7 @@ onChangeCourse = value => {
            <Table className = "courseTable"
             rowSelection={rowSelection} 
             columns={columns} 
-            dataSource={data}
+            dataSource={this.state.allLeaf}
            pagination={{ pageSize: 12, position: "right" }}
            />
          </div>
@@ -185,15 +218,7 @@ onChangeCourse = value => {
                     treeDefaultExpandAll
                     onChange={this.onChangeCourse}
                   >
-                  <TreeNode value="c语言" title="c语言" key="0-1">
-                    <TreeNode value="第一章" title="第一章" key="0-1-1">
-                      <TreeNode value="第一小节" title="第一小节" key="random" />
-                      <TreeNode value="第二小节" title="第二小节" key="random1" />
-                    </TreeNode>
-                    <TreeNode value="第二章" title="第二章" key="random2">
-                      <TreeNode value="第一小节" title="第一小节" key="random3" />
-                    </TreeNode>
-                  </TreeNode>
+                    {this.showTreeList()}
                 </TreeSelect>
             </div>
             </div>
