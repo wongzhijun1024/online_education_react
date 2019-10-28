@@ -26,6 +26,14 @@ public interface CourseMapper {
 	List<Course> selectCourseAll();
 
 	/**
+	 * 查询所有的课程,包含子节点
+	 * 
+	 * @return
+	 */
+
+	List<Course> selectCourseAllLeaf();
+
+	/**
 	 * 根据科目的id号查询对应课程
 	 * 
 	 * @param id 科目id

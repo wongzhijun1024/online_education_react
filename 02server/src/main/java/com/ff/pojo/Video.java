@@ -17,12 +17,12 @@ public class Video {
 	/**
 	 * 章节id
 	 */
-	private int chapter_id;
-	
+	private int chapterId;
+
 	/**
 	 * 节
 	 */
-	private String msg ="video";
+	private String msg = "video";
 
 	/**
 	 * 章节顺序
@@ -31,6 +31,17 @@ public class Video {
 
 	public Video() {
 		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Video(int id, String url, String name, int chapterId, String msg, int order) {
+		super();
+		this.id = id;
+		this.url = url;
+		this.name = name;
+		this.chapterId = chapterId;
+		this.msg = msg;
+		this.order = order;
 	}
 
 	public int getId() {
@@ -57,12 +68,20 @@ public class Video {
 		this.name = name;
 	}
 
-	public int getChapter_id() {
-		return chapter_id;
+	public int getChapterId() {
+		return chapterId;
 	}
 
-	public void setChapter_id(int chapter_id) {
-		this.chapter_id = chapter_id;
+	public void setChapterId(int chapterId) {
+		this.chapterId = chapterId;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 	public int getOrder() {
@@ -73,14 +92,10 @@ public class Video {
 		this.order = order;
 	}
 
-	public String getMsg() {
-		return msg;
+	@Override
+	public String toString() {
+		return "Video [id=" + id + ", url=" + url + ", name=" + name + ", chapterId=" + chapterId + ", msg=" + msg
+				+ ", order=" + order + "]";
 	}
-
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
-	
-	
 
 }

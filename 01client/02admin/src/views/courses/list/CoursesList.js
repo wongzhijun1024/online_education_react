@@ -1,7 +1,7 @@
 import React from "react";
 import "./CoursesList.css";
 import { Button, Select, Input, Table, Tabs } from "antd";
-import CourseListCpt from "../../../components/CourseList/CourseListCpt";
+import CourseListCpt from "../01components/CourseList/CourseListCpt";
 export default class CoursesList extends React.Component {
   constructor() {
     super();
@@ -29,12 +29,9 @@ export default class CoursesList extends React.Component {
             <TabPane tab="普通课程" key="1">
               <CourseListCpt></CourseListCpt>
             </TabPane>
-            <TabPane tab="班级课程" key="2">
+            {/* <TabPane tab="班级课程" key="2">
               <CourseListCpt></CourseListCpt>
-        </TabPane>
-            <TabPane tab="会员课程" key="3">
-              <CourseListCpt></CourseListCpt>
-        </TabPane>
+            </TabPane> */}
           </Tabs>
         </div>
       </div>

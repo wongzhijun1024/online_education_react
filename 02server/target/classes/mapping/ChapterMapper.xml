@@ -4,32 +4,52 @@
 	<resultMap id="chapterMap" type="com.ff.pojo.Chapter">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
-		<result column="corder" property="order" />
-		<collection property="list" javaType="ArrayList" ofType="com.ff.pojo.Video"
-			column="id" select="com.ff.dao.VideoMapper.getVideosByChapterId">
-		</collection>
+		<result column="courseId" property="courseId" />
+		<result column="cOrder" property="cOrder" />
 	</resultMap>
 
-	<select id="getChaptersByCourseId" resultMap="chapterMap">
+
+	<resultMap id="ChapterMapLeaf" type="com.ff.pojo.Chapter">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="c_order" property="order" />
+		<collection property="videos" javaType="ArrayList"
+			ofType="com.ff.pojo.Video" column="id"
+			select="com.ff.dao.VideoMapper.selectVideosByChapterId">
+		</collection>
+	</resultMap>
+	<select id="getChaptersByCourseId" resultMap="ChapterMapLeaf">
 		select *from
-		chapter
-		where course_id = #{id} order by corder
+		chapters
+		where coursesId = #{id} order by c_order
 	</select>
+
+
+	<select id="selectChaptersByCourseIdLeaf"
+		resultMap="ChapterMapLeaf">
+		select *from
+		chapters
+		where coursesId = #{id} order by c_order
+	</select>
+
 
 
 	<insert id="insert" parameterType="com.ff.pojo.Chapter"
 		keyProperty="id" useGeneratedKeys="true">
-		insert into chapter
-		(name,course_id,corder)
-		values (#{name}, #{course_id},#{order})
+		insert into
+		chapters(name,coursesId,c_order)
+		values(#{name},#{coursesId},#{order})
 	</insert>
 
 
 
-	<!-- 查询所有科目 -->
-	<select id="getAllChapter" resultMap="chapterMap">
-		select * from course
+
+	<!-- 根据姓名查询数据 -->
+	<select id="selectByName" resultMap="chapterMap">
+		select * from chapters where
+		name = #{name}
 	</select>
+
 
 
 

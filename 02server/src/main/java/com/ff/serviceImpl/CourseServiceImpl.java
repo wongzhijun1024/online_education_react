@@ -1,14 +1,9 @@
 package com.ff.serviceImpl;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.ff.dao.CourseMapper;
 import com.ff.pojo.Course;
 import com.ff.pojo.Msg;
@@ -90,6 +85,21 @@ public class CourseServiceImpl implements CourseService {
 		} else {
 			msg.setCode(3);
 			msg.setMsg("增加(" + course.getName() + ")课程失败!");
+		}
+
+		return msg;
+	}
+
+	@Override
+	public Msg selectCourseAllLeaf() {
+		Msg msg = new Msg();
+
+		// 获得课程数据
+		List<Course> list = courseMapper.selectCourseAllLeaf();
+		if (list != null && list.size() >= 1) {
+			msg.setCode(1);
+			msg.setMsg("操作成功!");
+			msg.setObject(list);
 		}
 
 		return msg;

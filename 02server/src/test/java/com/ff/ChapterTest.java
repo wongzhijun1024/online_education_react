@@ -1,0 +1,33 @@
+package com.ff;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import com.ff.pojo.Chapter;
+import com.ff.pojo.Msg;
+import com.ff.service.ChapterService;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ChapterTest {
+	@Autowired
+	private ChapterService chapterService;
+
+	@Test
+	public void ChapterTest() {
+
+		Chapter chapter = new Chapter();
+
+		chapter.setName("继承机制");
+		chapter.setCoursesId(1);
+		chapter.setOrder(2);
+
+		Msg msg = chapterService.insertChapter(chapter);
+
+		System.out.println(msg);
+
+	}
+
+}

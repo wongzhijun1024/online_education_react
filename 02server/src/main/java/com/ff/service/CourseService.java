@@ -15,6 +15,13 @@ public interface CourseService {
 	Msg selectCourseAll();
 
 	/**
+	 * 查询全部的课程，包含里面的子节点
+	 * 
+	 * @return 数据
+	 */
+	Msg selectCourseAllLeaf();
+
+	/**
 	 * 根据科目的id号查询课程
 	 * 
 	 * @return

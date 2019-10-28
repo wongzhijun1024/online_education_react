@@ -1,28 +1,22 @@
 package com.ff;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.ff.dao.AdTopicMapper;
-import com.ff.dao.TopicMapper;
-import com.ff.pojo.AdTopic;
-import com.ff.pojo.Topic;
+import com.ff.pojo.Msg;
+import com.ff.service.VideoService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AdTopicTest {
+public class VideoTest {
 	@Autowired
-	private AdTopicMapper adTopicMapper;
+	private VideoService videoService;
 
 	@Test
-	public void adTopicsTest() {
+	public void ChapterTest() {
 
-		List<AdTopic> list = adTopicMapper.selectAdTopics();
-		System.out.println(list.size());
 	}
+
 }
