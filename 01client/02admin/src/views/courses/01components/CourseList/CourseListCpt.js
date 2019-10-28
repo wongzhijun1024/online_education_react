@@ -2,6 +2,8 @@ import React from "react";
 import { Table, Divider, Button, Select, Icon } from "antd";
 import "./CourseListCpt.css";
 import net from "../../../../utils/net";
+// import { Link } from "react-router-dom";
+
 
 export default class MyUserAdd extends React.Component {
   constructor() {
@@ -71,6 +73,7 @@ export default class MyUserAdd extends React.Component {
         render: text => {
           return (
             <div>
+              {/* <link to="../"> */}
               <Button style={{ backgroundColor: "1px solid #CCCCCC" }}>管理</Button>
               <Divider type="vertical" />
               <Button>删除</Button>
