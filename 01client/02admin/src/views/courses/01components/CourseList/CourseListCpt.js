@@ -59,11 +59,11 @@ export default class MyUserAdd extends React.Component {
         dataIndex: 'introduce',
         key: 'introduce',
       },
-      // {
-      //   title: '课程视频',
-      //   dataIndex: 'video',
-      //   key: 'video',
-      // },
+      {
+        title: '课程视频',
+        dataIndex: 'video',
+        key: 'video',
+      },
       {
         title: '操作',
         dataIndex: 'action',
@@ -73,7 +73,7 @@ export default class MyUserAdd extends React.Component {
             <div>
               <Button style={{ backgroundColor: "1px solid #CCCCCC" }}>管理</Button>
               <Divider type="vertical" />
-              {/* <a onClick={this.deletUser.bind(this, text.courseId)}>删除</a> */}
+              <Button>删除</Button>
             </div>
           );
         }
