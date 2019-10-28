@@ -2,13 +2,22 @@ import React from "react";
 import "./courseCreate.css";
 import { Icon, Button, Input, Select } from "antd";
 import net from "../../../../utils/net";
-import E from 'wangeditor'
+import E from 'wangeditor';
+import {
+  Link
+} from 'react-router-dom'
 export default class MyCourseCreate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       editorContent: ''
     };
+  };
+
+  showProps() { 
+    // <Link to={`${this.props.match.path}`}>
+    console.log(this.props.match.path);
+    
   }
   componentDidMount() {
     const elemMenu = this.refs.editorElemMenu;
@@ -161,7 +170,9 @@ export default class MyCourseCreate extends React.Component {
           </div>
           <div className="keepBtn">
             <Button style={{ backgroundColor: "#43BC60", width: "120px", textAlign: "center", color: "white" }}>保存，下一步</Button>
-            <span>返回</span>
+            <Link to={"/home/courses/add"}>
+              <Button onClick={this.showProps.bind(this)}>返回</Button>
+            </Link>
           </div>
         </div>
       </div>
