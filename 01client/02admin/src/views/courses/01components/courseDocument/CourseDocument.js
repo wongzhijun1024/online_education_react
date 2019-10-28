@@ -1,8 +1,9 @@
 import React from "react";
 import "./CourseDocument.css";
-import {Icon, Button,Table,Select,Input,Upload} from "antd";
+import {Icon, Button,Table,Select,Input,Upload,TreeSelect} from "antd";
 import net from "../../../../utils/net";
 const { Option } = Select;
+const { TreeNode } = TreeSelect;
 
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
@@ -13,7 +14,6 @@ const rowSelection = {
     name: record.name,
   }),
 };
-
     const columns = [
     {
         title: '文件名',
@@ -21,20 +21,20 @@ const rowSelection = {
         render: text => <a>{text}</a>,
     },
     {
-        title: '章节',
-        dataIndex: 'age',
-    },
-    {
         title: '课程介绍',
-        dataIndex: 'address',
+        dataIndex: 'introduce',
+        render:text =><Select defaultValue="lucy" style={{ width: 120 }} >
+                  <Option value="jack">Jack</Option>
+                  <Option value="lucy">Lucy</Option>
+                  <Option value="Yiminghe">yiminghe</Option>
+                  </Select>
     },
     ];
     const data = [
     {
         key: '1',
         name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
+        introduce: 'New York No. 1 Lake Park'
     }
     ];
 
@@ -47,9 +47,14 @@ export default class CourseDocument extends React.Component {
       value: 0,
       courseName:"",
       courseChapter:"",
-      courseSection:""
+      courseSection:"",
+      values:undefined
     };
   }
+
+  // handleChange01(value) {
+  //     console.log(`selected ${value}`);
+  //   }
 
   onChange = e => {
     console.log('radio checked', e.target.value);
@@ -65,15 +70,16 @@ export default class CourseDocument extends React.Component {
     console.log(fileName,introduce);
     //获得文件的数据
     let fileList = this.state.fileList;
-
+    //章节id
+    let chapterId = 1;
+    // 章节顺序
+    let order = 0
     net.uploadFile(
-      "courses/add",
+      "addVideo",
       {
         name: fileName,
-        introduce: introduce,
-        state: 1,
-        teacherId: 0,
-        ctype: 1,
+        order: order,
+        chapterId:chapterId,
         files: fileList
       },
       function(ob) {
@@ -136,6 +142,11 @@ export default class CourseDocument extends React.Component {
     }
 };
 
+onChangeCourse = value => {
+    console.log(value);
+    this.setState({ values: value});
+  };
+
   render() {
     return (
       <div className = "coursesAdd-1">
@@ -164,21 +175,26 @@ export default class CourseDocument extends React.Component {
             <div className = "addCourseFilesName">
                 <label>选择课程类型</label>
                 <div className = "selectFilesType">
-                <Select defaultValue="C++课程" style={{ width: 120 }} onChange={this.handleChangeName}>
-                    <Option value="C++课程">C++课程</Option>
-                    <Option value="数据结构">数据结构</Option>
-                    <Option value="算法课程">算法课程</Option>
-                </Select>
-                <Select defaultValue="第一章" style={{ width: 120 }} onChange={this.handleChangeChapter}>
-                    <Option value="第一章">第一章</Option>
-                    <Option value="第二章">第二章</Option>
-                    <Option value="第三章">第三章</Option>
-                </Select>
-                <Select defaultValue="基本语法" style={{ width: 120 }} onChange={this.handleChangeSection}>
-                    <Option value="基本语法">基本语法</Option>
-                    <Option value="注释">注释</Option>
-                    <Option value="变量声明">变量声明</Option>
-                </Select>
+                 <TreeSelect
+                    showSearch
+                    style={{ width: 300 }}
+                    value={this.state.values}
+                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    placeholder="c语言"
+                    allowClear
+                    treeDefaultExpandAll
+                    onChange={this.onChangeCourse}
+                  >
+                  <TreeNode value="c语言" title="c语言" key="0-1">
+                    <TreeNode value="第一章" title="第一章" key="0-1-1">
+                      <TreeNode value="第一小节" title="第一小节" key="random" />
+                      <TreeNode value="第二小节" title="第二小节" key="random1" />
+                    </TreeNode>
+                    <TreeNode value="第二章" title="第二章" key="random2">
+                      <TreeNode value="第一小节" title="第一小节" key="random3" />
+                    </TreeNode>
+                  </TreeNode>
+                </TreeSelect>
             </div>
             </div>
             <div className = "addCourseFilesName">
@@ -210,10 +226,7 @@ export default class CourseDocument extends React.Component {
         <Button  type="primary" onClick={this.upload} style={{ marginTop: 16,background:"red"}}>
           删除文件
         </Button>
-        </div>
-        
-        
-
+         </div>
         </div>
       </div>
     );

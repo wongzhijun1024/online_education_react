@@ -3,14 +3,7 @@ import "./CourseInformation.css";
 import { Upload, Input, Icon, Button,Radio,Select } from "antd";
 import net from "../../../../utils/net";
 const { Option } = Select;
-const  arr = [
-  { id:1,
-    name:"hmc"},
-  {
-    id:2,name:"mac"},
-  {
-    id:3,name:"nihao"}
-];
+
 export default class CourseInformation extends React.Component {
   constructor() {
     super();
@@ -119,7 +112,7 @@ if(this.state.teachers.length<1)
     <div className = "addCourseList">
          <div className = "addCourseTitle">
            <span>课程信息</span>
-           <Button  type="primary" style = {{background:"#43BB60"}}>发布课程</Button>
+           <Button  type="primary" style = {{background:"#43BB60"}}>保存</Button>
          </div>
 
          <div className = "addCourseBox">
@@ -162,11 +155,6 @@ if(this.state.teachers.length<1)
            <label for = "title02">课程简介</label>
            <Input ref = "instroduce" placeholder="" id = "title02" />
          </div>
-
-        <Button  type="primary" onClick={this.upload} style={{ marginTop: 16,background:"#43BB60"}}>
-          保存
-        </Button>
-
         </div>
       </div>
     );
