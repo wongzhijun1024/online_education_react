@@ -17,23 +17,23 @@ const columns = [
   },
   {
     title: '状态',
-    dataIndex: 'age',
+    dataIndex: 'state',
   },
   {
     title: '题目统计',
-    dataIndex: 'address',
+    dataIndex: 'subject',
   },
   {
     title: '时间限制',
-    dataIndex: 'address',
+    dataIndex: 'time',
   },
   {
     title: '更新人/时间',
-    dataIndex: 'address',
+    dataIndex: 'adminTime',
   },
   {
     title: '操作',
-    dataIndex: 'address',
+    dataIndex: 'action',
   }
 ];
 const data = [
@@ -93,12 +93,12 @@ export default class CourseInformation extends React.Component {
         <div className="testHeader">
           <h1 className="testTitle">课程试卷</h1>
           <div className="btnBox">
-            <Button
+            {/* <Button
               onClick={this.showImportBox.bind(this)}
               style={{ backgroundColor: "#278BF5", color: 'white', width: 100, fontSize: "12px", marginRight: "5px" }}>
               <Icon type="plus" />
               <span>导入试卷</span>
-            </Button>
+            </Button> */}
             <Link
               to={`${this.props.match.path}/created`}
               style={{ color: "white" }}>
