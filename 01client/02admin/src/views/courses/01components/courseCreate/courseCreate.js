@@ -14,11 +14,6 @@ export default class MyCourseCreate extends React.Component {
     };
   };
 
-  showProps() { 
-    // <Link to={`${this.props.match.path}`}>
-    console.log(this.props.match.path);
-    
-  }
   componentDidMount() {
     const elemMenu = this.refs.editorElemMenu;
     const elemBody = this.refs.editorElemBody;
@@ -170,8 +165,8 @@ export default class MyCourseCreate extends React.Component {
           </div>
           <div className="keepBtn">
             <Button style={{ backgroundColor: "#43BC60", width: "120px", textAlign: "center", color: "white" }}>保存，下一步</Button>
-            <Link to={"/home/courses/add"}>
-              <Button onClick={this.showProps.bind(this)}>返回</Button>
+            <Link to={"/home/courses/add/list"}>
+              <Button>返回</Button>
             </Link>
           </div>
         </div>
