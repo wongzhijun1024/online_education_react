@@ -17,6 +17,7 @@
     "react-scripts": "3.0.0",
     "redux": "^4.0.4",
     "reqwest": "^2.0.5",
+    "video-react": "^0.14.1",
     "wangeditor": "^3.1.1"
   },
   "scripts": {

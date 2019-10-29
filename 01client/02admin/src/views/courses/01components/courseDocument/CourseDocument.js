@@ -1,52 +1,70 @@
 import React from "react";
 import "./CourseDocument.css";
-import {Icon, Button,Table,Select,Input,Upload,TreeSelect} from "antd";
+import {Icon, Button,Table,Select,Input,Upload,TreeSelect, Badge, Menu, Dropdown} from "antd";
 import net from "../../../../utils/net";
+import { Player } from "video-react";
 const { Option } = Select;
 const { TreeNode } = TreeSelect;
-
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  getCheckboxProps: record => ({
-    disabled: record.name === 'Disabled User', // Column configuration not to be checked
-    name: record.name,
-  }),
-};
+const menu = (
+  <Menu>
+    <Menu.Item>Action 1</Menu.Item>
+    <Menu.Item>Action 2</Menu.Item>
+  </Menu>
+);
+  function handleChange(value) {
+  console.log(`selected ${value}`);
+}
+  const expandedRowRender = () => {
     const columns = [
-    {
-        title: '文件名',
-        dataIndex: 'name',
-        render: text =>text,
-    },
-    {
-        title: '章节',
-        dataIndex: 'chapters',
-        render:chapters =>{
-          if(chapters.length<1){
-              return;
-          }
-          let firstName = chapters[0].name
-          return(
-              <Select defaultValue= {firstName} style={{ width: 120 }} >
+      { title: '视频名称', dataIndex: 'name', key: 'name' },
+      {
+        title: '视频链接',
+        key: 'state',
+        // render: () => (
+        //   <Player ref="player" videoId="video-1" style = {{width:"20px",height:"100%"}}>
+        //         <source src="https://chengd-1253990303.cos.ap-chengdu.myqcloud.com/noi/video/2019-2-28-17334c00-776b-4431-a913-061fd8c31f00.mp4" />
+        //   </Player>
+        // ),
+      }
+    ];
+
+    const data = [];
+    for (let i = 0; i < 3; ++i) {
+      data.push({
+        key: i,
+        date: '2014-12-24 23:12:00',
+        name: 'This is production name',
+        upgradeNum: 'Upgraded: 56',
+      });
+    }
+    return <Table columns={columns} dataSource={data} pagination={false} />;
+  };
+
+  const columns = [
+    { title: '课程名称', dataIndex: 'name', key: 'name' },
+    { title: '课程章节',
+     dataIndex: 'chapters', 
+     key: 'chapters' ,
+     render:(chapters)=>{
+        if(chapters.length<1){
+            return;
+        }
+        let temp = chapters[0].name
+        return(
+              <Select defaultValue={temp} style={{ width: 120 }} onChange={handleChange}>
                 {
                   chapters.map(function(item){
-                      return(
-                      <Option value={item.name}>{item.name}</Option>
-                      )
+                    return(
+                      <Option value={item.id}>{item.name}</Option>
+                    )
                   })
                 }
               </Select>
-          );
-        }
+        );
+     }
     },
-    {
-        title: '课程介绍',
-        dataIndex: 'introduce',
-        render: text =>text,
-    }
-    ];
+    { title: '课程介绍', dataIndex: 'introduce',key: 'introduce'}
+  ];
 
 export default class CourseDocument extends React.Component {
   constructor() {
@@ -68,6 +86,7 @@ export default class CourseDocument extends React.Component {
       net.get("courses/all/leaf",
         {},
         function(ob){
+          console.log(ob.data.object);
           that.setState({
             allLeaf:ob.data.object,
           }); 
@@ -164,13 +183,6 @@ onChangeCourse = (value) => {
           {item.chapters.map(function(item1){
             return(
               <TreeNode  value={item1.id} title={item1.name} key = {item1.id} > 
-                  {
-                    item1.videos.map(function(item2){
-                      return(
-                        <TreeNode value={item2.name} title={item2.name} key={item2.id} />
-                      )
-                    })
-                  }
               </TreeNode>
             );
           })}
@@ -191,13 +203,14 @@ onChangeCourse = (value) => {
          </div>
 
          <div className = "addCourseBox">
-           <Table className = "courseTable"
-            rowSelection={rowSelection} 
-            columns={columns} 
+            <Table
+            className="components-table-demo-nested courseTable"
+            columns={columns}
+            expandedRowRender={expandedRowRender}
             dataSource={this.state.allLeaf}
-           pagination={{ pageSize: 12, position: "right" }}
-           />
+          />
          </div>
+
          {/* 文件上传 */}
         <div className = "backgroundFiles" ref = "background"></div>
         <div className = "addCourseFiles" ref = "addFiles">

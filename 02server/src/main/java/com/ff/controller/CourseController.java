@@ -36,7 +36,7 @@ public class CourseController {
 	 */
 	@RequestMapping(value = "courses/all/leaf")
 	@ResponseBody
-	public Msg selectCourseAllLeaf() {
+	public Msg selectCourseAllLeaf(){
 		return courseService.selectCourseAllLeaf();
 	}
 
