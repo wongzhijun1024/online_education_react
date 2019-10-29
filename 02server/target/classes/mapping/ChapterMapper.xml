@@ -18,7 +18,8 @@
 			select="com.ff.dao.VideoMapper.selectVideosByChapterId">
 		</collection>
 	</resultMap>
-	<select id="getChaptersByCourseId" resultMap="ChapterMapLeaf">
+
+	<select id="getChaptersByCourseId" resultMap="chapterMap">
 		select *from
 		chapters
 		where coursesId = #{id} order by c_order

@@ -34,6 +34,13 @@ public interface CourseMapper {
 	List<Course> selectCourseAllLeaf();
 
 	/**
+	 * 查询课程和课程里面的章节
+	 * 
+	 * @return 课程
+	 */
+	List<Course> selectCourseAndChapters();
+
+	/**
 	 * 根据科目的id号查询对应课程
 	 * 
 	 * @param id 科目id
