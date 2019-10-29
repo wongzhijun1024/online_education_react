@@ -29,6 +29,23 @@
 
 	</resultMap>
 
+	<resultMap id="courseAndChaptersMap"
+		type="com.ff.pojo.Course">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="state" property="state" />
+		<result column="introduce" property="introduce" />
+		<result column="url" property="url" />
+		<result column="teacher_id" property="teacherId" />
+		<result column="ctype" property="ctype" />
+
+		<collection property="chapters" javaType="ArrayList"
+			ofType="com.ff.pojo.Chapter" column="id"
+			select="com.ff.dao.ChapterMapper.getChaptersByCourseId">
+		</collection>
+
+	</resultMap>
+
 	<resultMap id="courses" type="com.ff.pojo.Course">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
@@ -99,6 +116,14 @@
 		select * from
 		courses
 	</select>
+
+	<!-- 查询课程和课程里面的章节 -->
+	<select id="selectCourseAndChapters"
+		resultMap="courseAndChaptersMap">
+		select * from
+		courses
+	</select>
+
 
 
 	<!-- 查询所有课程 -->

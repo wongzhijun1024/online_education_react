@@ -1,8 +1,9 @@
 import React from "react";
 import "./CourseDocument.css";
-import {Icon, Button,Table,Select,Input,Upload} from "antd";
+import {Icon, Button,Table,Select,Input,Upload,TreeSelect} from "antd";
 import net from "../../../../utils/net";
 const { Option } = Select;
+const { TreeNode } = TreeSelect;
 
 const rowSelection = {
   onChange: (selectedRowKeys, selectedRows) => {
@@ -13,31 +14,39 @@ const rowSelection = {
     name: record.name,
   }),
 };
-
     const columns = [
     {
         title: '文件名',
         dataIndex: 'name',
-        render: text => <a>{text}</a>,
+        render: text =>text,
     },
     {
         title: '章节',
-        dataIndex: 'age',
+        dataIndex: 'chapters',
+        render:chapters =>{
+          if(chapters.length<1){
+              return;
+          }
+          let firstName = chapters[0].name
+          return(
+              <Select defaultValue= {firstName} style={{ width: 120 }} >
+                {
+                  chapters.map(function(item){
+                      return(
+                      <Option value={item.name}>{item.name}</Option>
+                      )
+                  })
+                }
+              </Select>
+          );
+        }
     },
     {
         title: '课程介绍',
-        dataIndex: 'address',
-    },
-    ];
-    const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
+        dataIndex: 'introduce',
+        render: text =>text,
     }
     ];
-
 
 export default class CourseDocument extends React.Component {
   constructor() {
@@ -47,12 +56,26 @@ export default class CourseDocument extends React.Component {
       value: 0,
       courseName:"",
       courseChapter:"",
-      courseSection:""
+      courseSection:"",
+      values:undefined,
+      allLeaf:[],
+      chapterId:null,
     };
   }
 
+  componentDidMount(){
+    let that = this;
+      net.get("courses/all/leaf",
+        {},
+        function(ob){
+          that.setState({
+            allLeaf:ob.data.object,
+          }); 
+        });
+  }
+
   onChange = e => {
-    console.log('radio checked', e.target.value);
+    // console.log('radio checked', e.target.value);
     this.setState({
       value: e.target.value,
     });
@@ -62,19 +85,19 @@ export default class CourseDocument extends React.Component {
     let fileName = this.refs.fileName.state.value;
     //获得介绍
     let introduce = this.refs.fileIntroduction.state.value;
-    console.log(fileName,introduce);
     //获得文件的数据
     let fileList = this.state.fileList;
-
-    net.uploadFile(
-      "courses/add",
+    //章节id
+    let chapterId = 13;
+    // 章节顺序
+    let order = 0
+    net.post(
+      "video/add",
       {
         name: fileName,
-        introduce: introduce,
-        state: 1,
-        teacherId: 0,
-        ctype: 1,
-        files: fileList
+        chapterId:chapterId,
+        files: fileList,
+        order: order
       },
       function(ob) {
         console.log(ob);
@@ -117,24 +140,39 @@ export default class CourseDocument extends React.Component {
       this.refs.addFiles.style.display = "none";
   }
 
-  handleChangeName=(value)=> {
-    let courseName = value;
-    this.setState = {
-        courseName:courseName,
+
+onChangeCourse = (value) => {
+    this.setState({ values: value});
+    if(isNaN(value)){
+      return;
     }
-};
-    handleChangeChapter=(value)=> {
-    let Chapter = value;
-    this.setState = {
-        courseChapter:Chapter,
+    this.setState({
+      chapterId:Number(value)
+    });
+    console.log(this.state.chapterId);
+  };
+
+ showTreeList=()=>{
+    let allLeaf = this.state.allLeaf;
+    let length = allLeaf.length;
+    if(length < 1){
+      return;
     }
-};
-    handleChangeSection=(value)=> {
-    let section = value;
-    this.setState = {
-        courseSection:section,
-    }
-};
+    let allLeafs = allLeaf.map(function(item){
+      return (
+        <TreeNode value={item.name} title={item.name} key={item.id}>
+          {item.chapters.map(function(item1){
+            return(
+              <TreeNode  value={item1.id} title={item1.name} key = {item1.id} > 
+                  
+              </TreeNode>
+            );
+          })}
+        </TreeNode>
+      );
+    });
+    return allLeafs;
+ }
 
   render() {
     return (
@@ -150,7 +188,7 @@ export default class CourseDocument extends React.Component {
            <Table className = "courseTable"
             rowSelection={rowSelection} 
             columns={columns} 
-            dataSource={data}
+            dataSource={this.state.allLeaf}
            pagination={{ pageSize: 12, position: "right" }}
            />
          </div>
@@ -164,21 +202,18 @@ export default class CourseDocument extends React.Component {
             <div className = "addCourseFilesName">
                 <label>选择课程类型</label>
                 <div className = "selectFilesType">
-                <Select defaultValue="C++课程" style={{ width: 120 }} onChange={this.handleChangeName}>
-                    <Option value="C++课程">C++课程</Option>
-                    <Option value="数据结构">数据结构</Option>
-                    <Option value="算法课程">算法课程</Option>
-                </Select>
-                <Select defaultValue="第一章" style={{ width: 120 }} onChange={this.handleChangeChapter}>
-                    <Option value="第一章">第一章</Option>
-                    <Option value="第二章">第二章</Option>
-                    <Option value="第三章">第三章</Option>
-                </Select>
-                <Select defaultValue="基本语法" style={{ width: 120 }} onChange={this.handleChangeSection}>
-                    <Option value="基本语法">基本语法</Option>
-                    <Option value="注释">注释</Option>
-                    <Option value="变量声明">变量声明</Option>
-                </Select>
+                 <TreeSelect
+                    showSearch
+                    style={{ width: 300 }}
+                    value={this.state.values}
+                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    placeholder="c语言"
+                    allowClear
+                    treeDefaultExpandAll
+                    onChange={this.onChangeCourse}
+                  >
+                    {this.showTreeList()}
+                </TreeSelect>
             </div>
             </div>
             <div className = "addCourseFilesName">
@@ -210,10 +245,7 @@ export default class CourseDocument extends React.Component {
         <Button  type="primary" onClick={this.upload} style={{ marginTop: 16,background:"red"}}>
           删除文件
         </Button>
-        </div>
-        
-        
-
+         </div>
         </div>
       </div>
     );
