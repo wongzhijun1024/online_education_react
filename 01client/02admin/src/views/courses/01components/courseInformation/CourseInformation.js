@@ -59,7 +59,6 @@ export default class CourseInformation extends React.Component {
                   teachers:ob.data.object,
                   firstName:firstName
               });
-         
             }); 
      };
 

@@ -9,7 +9,7 @@
     align-items: center;
 }
 .addExam{
-    width: 100%;
+    width: 99%;
     height: 80px;
     line-height: 80px;
     border-bottom: 1px solid gray;
@@ -44,7 +44,7 @@
     position: absolute;
     left: 25%;
     top: 30%;
-    background-color: #E6F7FF;
+    background-color: #F0F2F5;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,6 +52,8 @@
     font-weight: 600;
     font-size: 16px;
     z-index: 1000;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 .addType{
     width: 50%;

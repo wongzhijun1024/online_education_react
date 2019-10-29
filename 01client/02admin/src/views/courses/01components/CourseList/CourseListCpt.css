@@ -1,0 +1,27 @@
+.textMul{
+    width: 90%;
+    display: flex;
+    color: #999999;
+}
+.textMul>span{
+    margin: 20px 10px;
+}
+.mulNum{
+    color: #64B974;
+}
+.courseId{
+    color: #428BCA;
+    font-weight: 600;
+}
+.manageBox{
+    width: 200px;
+    height: 250px;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #C5C5C5;
+    position: absolute;
+    top: 32px;
+    left: -62px;
+    z-index: 999;
+    display: none;
+}
