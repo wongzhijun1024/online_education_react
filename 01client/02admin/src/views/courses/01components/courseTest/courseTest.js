@@ -37,30 +37,12 @@ const columns = [
   }
 ];
 const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    },
-  //   {
-  //     key: '2',
-  //     name: 'Jim Green',
-  //     age: 42,
-  //     address: 'London No. 1 Lake Park',
-  //   },
-  //   {
-  //     key: '3',
-  //     name: 'Joe Black',
-  //     age: 32,
-  //     address: 'Sidney No. 1 Lake Park',
-  //   },
-  //   {
-  //     key: '4',
-  //     name: 'Disabled User',
-  //     age: 99,
-  //     address: 'Sidney No. 1 Lake Park',
-  //   }
+  {
+    key: '1',
+    name: 'John Brown',
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+  }
 ];
 const props = {
   name: 'file',
@@ -96,9 +78,6 @@ export default class CourseInformation extends React.Component {
     this.refs.importBox.style.display = "none";
   }
 
-  onChange() {
-    // this.refs.CourseCreate.style.display = "block";
-  }
   render() {
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
@@ -124,12 +103,12 @@ export default class CourseInformation extends React.Component {
               to={`${this.props.match.path}/created`}
               style={{ color: "white" }}>
               <Button
-                onClick={this.onChange.bind(this)}
+                // onClick={this.onChange.bind(this)}
                 style={{ backgroundColor: "#278BF5", color: 'white', width: 100, fontSize: "12px" }}>
                 <Icon type="plus" />
                 <span>创建试卷</span>
               </Button>
-              </Link>
+            </Link>
             <div className="importBox" ref="importBox">
               <div className="importContent">
                 <div className="importTitle">

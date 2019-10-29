@@ -2,22 +2,22 @@ import React from "react";
 import { Table, Divider, Button, Select, Icon } from "antd";
 import "./CourseListCpt.css";
 import net from "../../../../utils/net";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default class MyUserAdd extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      courses: []
+      courses: [],
     }
+  };
+  showProps() {
+    console.log(this.props.match.path);
   };
   deletUser(courseId) {
     let data = this.state.data;
-    console.log(courseId);
     for (let i = 0; i < data.length; i++) {
-      console.log(data);
-
       if (data[i].courseId == courseId) {
         data.splice(i, 1);
         break;
@@ -26,19 +26,54 @@ export default class MyUserAdd extends React.Component {
 
     this.setState({ data: data });
   };
-  componentDidMount() { 
+  componentDidMount() {
     let that = this;
     net.get("courses/all",
-      {},
-      function (ob) { 
-        console.log(ob);
-        that.setState({
-          courses: ob.data.object
-        });
-      }
+    {},
+    function (ob) {
+      that.setState({
+        courses: ob.data.object
+      });
+    }
     )
   };
-
+  handle() { 
+    const w = window.open('about:blink');
+    w.location.href="../../add/CoursesAdd.js"
+  };
+  // 已发布个数
+  releasedNum(){ 
+    var releasedNum = 0;
+    var courses = this.state.courses
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].state==2) {
+        releasedNum++;
+      }
+    }
+    return releasedNum;
+  };
+  // 更新中个数
+  updatingNum() {
+    var updatingNum = 0;
+    var courses = this.state.courses
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].state == 1) {
+        updatingNum++;
+      }
+    }
+    return updatingNum;
+  };
+  // 未发布个数
+  unreleasedNum() {
+    var unreleasedNum = 0;
+    var courses = this.state.courses
+    for (let i = 0; i < courses.length; i++) {
+      if (courses[i].state == 0) {
+        unreleasedNum++;
+      }
+    }
+    return unreleasedNum;
+  };
   render() {
     const columns = [
       {
@@ -50,6 +85,15 @@ export default class MyUserAdd extends React.Component {
         title: '课程状态',
         dataIndex: 'state',
         key: 'state',
+        render: text => {
+          if (text==0) {
+            return "未发布"
+          } else if (text==1) {
+            return "更新中"
+          } else if (text==2){
+            return "已发布"
+          }
+        }
       },
       {
         title: '名称',
@@ -73,8 +117,7 @@ export default class MyUserAdd extends React.Component {
         render: text => {
           return (
             <div>
-              {/* <link to="../"> */}
-              <Button style={{ backgroundColor: "1px solid #CCCCCC" }}>管理</Button>
+              <Button style={{ backgroundColor: "1px solid #CCCCCC" }} onClick={this.handle}>管理</Button>
               <Divider type="vertical" />
               <Button>删除</Button>
             </div>
@@ -82,23 +125,24 @@ export default class MyUserAdd extends React.Component {
         }
       }
     ];
+
     return (
       <div>
         <div className="textMul">
           <span>课程：
-            <strong className="mulNum">19</strong>
+            <strong className="mulNum">{this.state.courses.length}</strong>
             个
           </span>
           <span>已发布：
-            <strong className="mulNum">18</strong>
+            <strong className="mulNum">{this.releasedNum()}</strong>
             个
           </span>
-          <span>已关闭：
-            <strong className="mulNum">0</strong>
+          <span>更新中：
+            <strong className="mulNum">{this.updatingNum()}</strong>
             个
           </span>
           <span>未发布：
-            <strong className="mulNum">1</strong>
+            <strong className="mulNum">{this.unreleasedNum()}</strong>
             个
           </span>
         </div>

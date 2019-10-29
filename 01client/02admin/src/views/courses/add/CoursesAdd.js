@@ -42,8 +42,6 @@ export default class CoursesAdd extends React.Component {
             <CourseDocument></CourseDocument>
           </TabPane>
           <TabPane tab="课程试卷" key="3">
-            {/* <CourseTest></CourseTest> */}
-            {/* <CourseCreate></CourseCreate> */}
             <Switch>
               <Route exact path={`${this.props.match.path}`} component={CourseTest}></Route>
               <Route exact path={`${this.props.match.path}/created`} component={CourseCreate}></Route>
