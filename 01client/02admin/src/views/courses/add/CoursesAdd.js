@@ -5,12 +5,12 @@ import net from "../../../utils/net";
 import CourseInformation from "../01components/courseInformation/CourseInformation.js";
 import CourseTest from "../01components/courseTest/courseTest";
 import CourseCreate from "../01components/courseCreate/courseCreate";
+import CourseDocument  from "../01components/courseDocument/CourseDocument.js"
 import {
   BrowserRouter as Router,
   Route,
   Switch
 } from 'react-router-dom'
-import CourseDocument  from "../01components/courseDocument/CourseDocument.js"
 const { TabPane } = Tabs;
 
 export default class CoursesAdd extends React.Component {
@@ -35,11 +35,11 @@ export default class CoursesAdd extends React.Component {
     return (
       <div className = "coursesAdd">
         <Tabs className = "tabs" defaultActiveKey="1" onChange={this.callback.bind(this)}>
-          <TabPane className = "courseTabs" tab="课程信息" key="1">
-            <CourseInformation></CourseInformation>
+          <TabPane className = "courseTabs" tab="课程文件" key="1">
+             <CourseDocument></CourseDocument>
           </TabPane>
-          <TabPane tab="课程文件" key="2">
-            <CourseDocument></CourseDocument>
+          <TabPane tab="课程信息" key="2">
+            <CourseInformation></CourseInformation>
           </TabPane>
           <TabPane tab="课程试卷" key="3">
             {/* <CourseTest></CourseTest> */}
