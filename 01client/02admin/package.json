@@ -10,11 +10,13 @@
     "qs": "^6.8.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-infinite-scroller": "^1.2.4",
     "react-redux": "^7.1.1",
     "react-request": "^3.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.0.0",
     "redux": "^4.0.4",
+    "reqwest": "^2.0.5",
     "wangeditor": "^3.1.1"
   },
   "scripts": {

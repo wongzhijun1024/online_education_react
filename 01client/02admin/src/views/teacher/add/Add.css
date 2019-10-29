@@ -1,73 +1,128 @@
-.addView {
-    position: absolute;
-    margin: 0;
-    padding: 0px;
-    /* width: 89.5%;
-    height: 90%; */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+*{
+  padding: 0px;
+  margin: 0px;
 }
+.addView{
+  width: 100%;
+  height: 100%;
 
-.flex{
+  
+}
+.opacity{
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.6;
+  display: none;
+  z-index: 2;
+  position: absolute;
+}
+.box{
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin: 10px 0;
-  font-size: 20px;
-  font-weight: 400;
+  background: #e8e8e8;
+  
 }
-.teacher-title{
-  width: 100%;
-  height: 80px;
-  font-weight: 700;
-  font-size: 24px;
-  border-bottom: 1px solid #ccc;
+.pageHeader{
+  width: 90%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-bottom: 2px solid gainsboro;
+  margin:20px 0px 30px 0px;
 }
-.teacher-title>img{
-  height: 100%;   
-  width: 80px;  
+.header_left{
+  font-size: 18px;
+}
+.header_right{
+  height: 32px;
+  border-radius: 3px;
+  background-color: transparent;
+  position: absolute;
+  right: 10px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 90px;
+  background: green;
 }
 
-.avatar-uploader > .ant-upload {
-  width: 128px;
-  height: 128px;
+
+.demo-infinite-container {
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 8px 24px;
+  height: 500px;
+  width: 90%;
+  
 }
-.teacher-name{
+.intro_title{
+  display: flex;
+  justify-content: space-between;
+}
+.demo-loading-container {
+  position: absolute;
+  bottom: 40px;
   width: 100%;
-  height: 50px;
-}
-.input-name{
-  width: 70%;
-}
-.teacher-list{
-  width: 100%;
-  background: white;
-}
-.select{
-  width: 100%;
+  text-align: center;
 }
 
 .addForm{
-  width: 50%;
-  height: 50%;
-  background-color:#98BEF6;
-  position: absolute;
+  width: 40%;
+  height: 70%;
+  background-color: white;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
-  text-align: center;
-  padding: 10px 20px;
+  opacity: 1 !important;
+  padding: 10px 20px 5px 20px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   display: none;
+  
+
+  border-radius: 4px;
 }
+.addForm h1{
+  font-size: 20px;
+  text-align: left;
+  border-bottom: 1px solid #e8e8e8;
+  
+}
+
 .cancleBox{
   width: 100%;
   text-align: right;
 }
 .ant-list-split .ant-list-item {
-    border-bottom: none;
+  border-bottom: none;
+}
+.flex{
+  display: flex;
+  
+}
+
+.input{
+  width: 70%;
+}
+.uploadImg{
+  display: flex;
+  padding-top: 10px;
+  
+}
+.button{
+  display: flex;
+  justify-content: center;
+ 
+}
+.button Button{
+margin-left: 10px;
 }
