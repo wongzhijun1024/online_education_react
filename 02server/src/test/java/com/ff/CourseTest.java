@@ -16,7 +16,15 @@ public class CourseTest {
 	private CourseService courseService;
 
 	@Test
-	public void ChapterTest() {
+	public void coursesAndall() {
+
+		Msg msg = courseService.selectCourseAll();
+
+		System.out.print(msg);
+	}
+
+	@Test
+	public void coursesAndallAndleaf() {
 
 		Msg msg = courseService.selectCourseAllLeaf();
 
@@ -24,9 +32,9 @@ public class CourseTest {
 	}
 
 	@Test
-	public void selectCourseLeafTest() {
+	public void coursesAndChapters() {
 
-		Msg msg = courseService.selectCourseAllLeaf();
+		Msg msg = courseService.selectCourseAndChapters();
 
 		System.out.print(msg);
 	}

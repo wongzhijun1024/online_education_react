@@ -2,7 +2,7 @@ package com.ff.pojo;
 
 import java.util.List;
 
-public class Chapter {
+public class Section {
 
 	/**
 	 * 章节id
@@ -25,21 +25,22 @@ public class Chapter {
 	private int order;
 
 	/**
-	 * 视频列表
+	 * 章列表
 	 */
-	private List<Video> videos;
+	private List<Chapter> chapters;
 
-	public Chapter() {
+	public Section() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Chapter(int id, String name, int courseId, int order, List<Video> videos) {
+	public Section(int id, String name, int courseId, int order, List<Chapter> chapters) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.courseId = courseId;
 		this.order = order;
-		this.videos = videos;
+		this.chapters = chapters;
 	}
 
 	public int getId() {
@@ -74,18 +75,18 @@ public class Chapter {
 		this.order = order;
 	}
 
-	public List<Video> getVideos() {
-		return videos;
+	public List<Chapter> getChapters() {
+		return chapters;
 	}
 
-	public void setVideos(List<Video> videos) {
-		this.videos = videos;
+	public void setChapters(List<Chapter> chapters) {
+		this.chapters = chapters;
 	}
 
 	@Override
 	public String toString() {
-		return "Chapter [id=" + id + ", name=" + name + ", courseId=" + courseId + ", order=" + order + ", videos="
-				+ videos + "]";
+		return "Section [id=" + id + ", name=" + name + ", courseId=" + courseId + ", order=" + order + ", chapters="
+				+ chapters + "]";
 	}
 
 }
