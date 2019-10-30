@@ -9,7 +9,6 @@
 		<result column="url" property="url" />
 		<result column="teacher_id" property="teacherId" />
 		<result column="ctype" property="ctype" />
-
 	</resultMap>
 
 
