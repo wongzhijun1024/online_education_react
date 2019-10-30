@@ -134,7 +134,7 @@ export default class ExaminationQuery extends React.Component {
       <div className="coursesBankBox">
         {/* 头部 */}
         <div className="coursesBankHead">
-          <div className="coursesBankTitle">题库添加</div>
+          <div className="coursesBankTitle">题库查询</div>
           {/* <Link
           to="/home/examination/bank"> */}
           <Button
