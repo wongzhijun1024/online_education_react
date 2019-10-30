@@ -98,3 +98,35 @@
     box-sizing: border-box;
     padding-left: 10%;
 }
+.coursePlayVideo{
+    width: 150%;
+    height: 100%;
+    background: black;
+    position: fixed;
+    top: 0;
+    opacity: 0.8;
+    z-index: 18;
+    display: none;
+}
+.coursePlayVideoBox{
+    width: 800px;
+    height: 700px;
+    background: pink;
+    z-index: 20;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+.closeVideo{
+    position: absolute;
+    top: 5px;
+    right:5px;
+    z-index: 30;
+    color: white;
+    font-size: 30px;
+}
+
+
+

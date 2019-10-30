@@ -1,7 +1,5 @@
 package com.ff.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ public class ChapterController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "chapters/all")
+	@RequestMapping(value = "chapters/all")
 	@ResponseBody
 	public Msg selectAllChapter() {
 		return chapterService.selectAllChapter();

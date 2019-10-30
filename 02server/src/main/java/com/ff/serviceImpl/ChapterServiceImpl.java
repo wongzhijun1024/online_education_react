@@ -17,7 +17,7 @@ public class ChapterServiceImpl implements ChapterService {
 
 	@Override
 	public Msg selectAllChapter() {
-		List<Chapter> list = chapterMapper.getAllChapter();
+		List<Chapter> list = chapterMapper.selectChapters();
 		Msg msg = new Msg();
 		msg.setCode(1);
 		msg.setObject(list);

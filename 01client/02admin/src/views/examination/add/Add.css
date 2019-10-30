@@ -1,76 +1,53 @@
-.addView {
-    position: absolute;
-    margin: 0px;
-    padding: 0px;
-    width: 89.5%;
-    /* height: 90%; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.coursesBankBox{
+    width: 95%;
+   height: 100%;
+   background: #FFFFFF;
+   margin: 20px auto;
+
+   
 }
-.addExam{
-    width: 99%;
-    height: 80px;
-    line-height: 80px;
-    border-bottom: 1px solid gray;
+.coursesBankHead{
+    width: 90%;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
 }
-.addTitle{
+.coursesBankTitle{
+    width: 117px;
+    margin: 20px 80px 10px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 25px;
     font-weight: 700;
-    font-size: 30px;
 }
-.btnBox{
+.BankSeletBox{
+    width: 85%;
+    height: 60px;
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    flex-direction: row;
+    align-items:center;
+    margin-left: 5%;
+    /* background: #FAFAFA;
+    border-top: 2px solid #F0F0F0; */
+    border-bottom: 2px solid #F0F0F0;
 }
-.addBtn{
-    margin-right: 20px;
+.left-Select{
+    width: 17%;
+    margin-left: 20px;
 }
-.examBox{
-    width: 96%;
-    /* height: 96%; */
-    margin-top: 20px;
-    border: 1px solid gray;
-    border-top:3px solid #2F333E;
+.table-Bank{
+    width: 85%;
+    margin-left: 5%;
 }
-.addBox{
-    display: none;
-}
-.add{
-    width: 50%;
-    height: 300px;
-    position: absolute;
-    left: 25%;
-    top: 30%;
-    background-color: #F0F2F5;
+.bank-button{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-    font-size: 16px;
-    z-index: 1000;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
-.addType{
-    width: 50%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.typeBtn{
-    width: 300px;
-    height: 31px;
-}
-.savaBtn{
-    position: absolute;
-    bottom: 10%;
-}
-.listContent{
-    font-size: 16px;
-    font-weight: 600;
-    margin:10px 0px 10px 20px;
-}
+    flex-direction: row;
+    width: 40%;
+    justify-items: flex-start;
+    margin-left: 2%;
+    margin-top: 10px;
+  }
+  .bk-butten{
+    margin-top: 5px;
+  }

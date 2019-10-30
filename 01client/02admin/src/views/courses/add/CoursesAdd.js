@@ -6,6 +6,7 @@ import CourseInformation from "../01components/courseInformation/CourseInformati
 import CourseTest from "../01components/courseTest/courseTest";
 import CourseCreate from "../01components/courseCreate/courseCreate";
 import CourseDocument from "../01components/courseDocument/CourseDocument.js";
+import CourseBank from "../01components/courseBank/CourseBank.js"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const { TabPane } = Tabs;
 
@@ -13,28 +14,29 @@ export default class CoursesAdd extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeKey: "1",
       fileList: [],
       value: 0
     };
   }
-  onTabsChange = activeKey => {
-    this.setState({ activeKey });
-    switch (activeKey) {
-      case "3":
-        this.props.history.push(`${this.props.match.path}/list`);
-        break;
-    }
-  };
+  callback(key) {
+    console.log(key);
+  }
+onChange = e => {
+  console.log('radio checked', e.target.value);
+  this.setState({
+    value: e.target.value,
+  });
+};
 
   render() {
     return (
       <div className="coursesAdd">
         <Tabs
-          className="tabs"
-          activeKey={this.state.activeKey}
-          defaultActiveKey="1"
-          onChange={this.onTabsChange.bind(this)}
+          // className="tabs"
+          // activeKey={this.state.activeKey}
+          // defaultActiveKey="1"
+          // onChange={this.onTabsChange.bind(this)}
+          className = "tabs" defaultActiveKey="1" onChange={this.callback.bind(this)}
         >
           <TabPane className="courseTabs" tab="课程文件" key="1">
             <CourseDocument></CourseDocument>
@@ -47,7 +49,7 @@ export default class CoursesAdd extends React.Component {
             <Switch>
               <Route
                 exact
-                path={`${this.props.match.path}/list`}
+                path={`${this.props.match.path}`}
                 component={CourseTest}
               ></Route>
               <Route
@@ -58,7 +60,7 @@ export default class CoursesAdd extends React.Component {
             </Switch>
           </TabPane>
           <TabPane tab="课程题库" key="4">
-            Content of Tab Pane 3
+           <CourseBank></CourseBank>
           </TabPane>
         </Tabs>
       </div>
