@@ -36,6 +36,7 @@ public class VideoServiceImpl implements VideoService {
 			cosTool.destroy();
 			cosTool = null;
 			msg.setCode(1);
+			msg.setMsg("查询视频成功！");
 			msg.setObject(videos);
 		}
 		return msg;
