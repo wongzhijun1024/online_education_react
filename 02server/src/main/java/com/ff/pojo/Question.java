@@ -1,162 +1,127 @@
 package com.ff.pojo;
 
-import java.util.List;
-
 public class Question {
-    private Integer qId;
 
-    private String question;
+	/**
+	 * 主键
+	 */
+	private int id;
 
-    private String qCourse;
+	/**
+	 * 标题
+	 */
+	private String title;
 
-    private String qType;
+	/**
+	 * 所属
+	 */
+	private int chapterId;
 
-    private String qHard;
+	/**
+	 * 第一个选项
+	 */
+	private String textA;
 
-    private String a;
+	/**
+	 * 第二个选项
+	 */
+	private String textB;
 
-    private String b;
+	/**
+	 * 第三个选项
+	 */
+	private String textC;
 
-    private String c;
+	/**
+	 * 第四个选项
+	 */
+	private String textD;
 
-    private String d;
+	/**
+	 * 答案
+	 */
+	private String answer;
 
-    private Integer qScore;
-
-    private String answer;
-    
-    private Integer row;
-    
-    private Integer page;
-    
-    private ExampaperInfo exampaperInfo;
-    
-    public ExampaperInfo getExampaperInfo() {
-		return exampaperInfo;
+	public Question() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setExampaperInfo(ExampaperInfo exampaperInfo) {
-		this.exampaperInfo = exampaperInfo;
+	public Question(int id, String title, int chapterId, String textA, String textB, String textC, String textD,
+			String answer) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.chapterId = chapterId;
+		this.textA = textA;
+		this.textB = textB;
+		this.textC = textC;
+		this.textD = textD;
+		this.answer = answer;
 	}
 
-	private List<Exampaper> exampaper;
-
-    public List<Exampaper> getExampaper() {
-		return exampaper;
+	public int getId() {
+		return id;
 	}
 
-	public void setExampaper(List<Exampaper> exampaper) {
-		this.exampaper = exampaper;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "Question [qId=" + qId + ", question=" + question + ", qCourse=" + qCourse + ", qType=" + qType
-				+ ", qHard=" + qHard + ", a=" + a + ", b=" + b + ", c=" + c + ", d=" + d + ", qScore=" + qScore
-				+ ", answer=" + answer + ", row=" + row + ", page=" + page + "]";
+	public String getTitle() {
+		return title;
 	}
 
-	public Integer getRow() {
-		return row;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public void setRow(Integer row) {
-		this.row = row;
+	public int getChapterId() {
+		return chapterId;
 	}
 
-	public Integer getPage() {
-		return page;
+	public void setChapterId(int chapterId) {
+		this.chapterId = chapterId;
 	}
 
-	public void setPage(Integer page) {
-		this.page = page;
+	public String getTextA() {
+		return textA;
 	}
 
-	public Integer getqId() {
-        return qId;
-    }
+	public void setTextA(String textA) {
+		this.textA = textA;
+	}
 
-    public void setqId(Integer qId) {
-        this.qId = qId;
-    }
+	public String getTextB() {
+		return textB;
+	}
 
-    public String getQuestion() {
-        return question;
-    }
+	public void setTextB(String textB) {
+		this.textB = textB;
+	}
 
-    public void setQuestion(String question) {
-        this.question = question;
-    }
+	public String getTextC() {
+		return textC;
+	}
 
-    public String getqCourse() {
-        return qCourse;
-    }
+	public void setTextC(String textC) {
+		this.textC = textC;
+	}
 
-    public void setqCourse(String qCourse) {
-        this.qCourse = qCourse;
-    }
+	public String getTextD() {
+		return textD;
+	}
 
-    public String getqType() {
-        return qType;
-    }
+	public void setTextD(String textD) {
+		this.textD = textD;
+	}
 
-    public void setqType(String qType) {
-        this.qType = qType;
-    }
+	public String getAnswer() {
+		return answer;
+	}
 
-    public String getqHard() {
-        return qHard;
-    }
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 
-    public void setqHard(String qHard) {
-        this.qHard = qHard;
-    }
-
-    public String getA() {
-        return a;
-    }
-
-    public void setA(String a) {
-        this.a = a;
-    }
-
-    public String getB() {
-        return b;
-    }
-
-    public void setB(String b) {
-        this.b = b;
-    }
-
-    public String getC() {
-        return c;
-    }
-
-    public void setC(String c) {
-        this.c = c;
-    }
-
-    public String getD() {
-        return d;
-    }
-
-    public void setD(String d) {
-        this.d = d;
-    }
-
-    public Integer getqScore() {
-        return qScore;
-    }
-
-    public void setqScore(Integer qScore) {
-        this.qScore = qScore;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
 }

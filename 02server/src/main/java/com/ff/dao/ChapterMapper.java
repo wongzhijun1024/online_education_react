@@ -20,7 +20,7 @@ public interface ChapterMapper {
 	 * 
 	 * @return 章节列表
 	 */
-	List<Chapter> getAllChapter();
+	List<Chapter> selectChapters();
 
 	/**
 	 * 

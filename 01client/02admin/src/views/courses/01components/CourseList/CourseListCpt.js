@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React from "react";
 import { Table, Divider, Button, Select, Icon } from "antd";
 import "./CourseListCpt.css";
