@@ -28,9 +28,9 @@ export default class MyContent extends React.Component {
           <Route exact path={"/home/examination/add"} component={ExaminationAdd} />
           <Route exact path={"/home/courses/list"} component={CoursesList} />
           <Route exact path={"/home/test"} component={Test} />
-          <Route exact path={"/home/courses/add"} component={CoursesAdd} />
+          <Route path={"/home/courses/add"} component={CoursesAdd} />
           <Route exact path={"/home/teacher/query"} component={TeacherQuery} />
-          <Route exact  path={"/home/teacher/add"} component={TeacherAdd} />
+          <Route exact path={"/home/teacher/add"} component={TeacherAdd} />
           <Route exact path={"/home/user/query"} component={UserQuery} />
           <Route exact path={"/home/user/infor"} component={User} />
           <Route exact path={"/home/examination/bank"} component={ExaminationBank} />

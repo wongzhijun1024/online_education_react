@@ -32,29 +32,29 @@ const VideoTreeData = [
   {
     title: 'C++',
     value: 'C++',
-    key: 'C++',
+    key: '视频/C++',
     children: [
       {
         title: '第一章',
         value: '第一章',
-        key: '第一章',
+        key: '视频/C++/第一章',
         children: [
           {
             title: '视频1',
-            value: '视频2',
-            key: '视频3'
+            value: '视频1',
+            key: '视频/C++/第一章/视频1'
           }
         ]
       },
       {
         title: '第二章',
         value: '第二章',
-        key: '第二章',
+        key: '视频/C++/第二章',
         children: [
           {
-            title: '视频1',
+            title: '视频2',
             value: '视频2',
-            key: '视频3'
+            key: '视频/C++/第二章/视频2'
           }
         ]
       },
@@ -63,29 +63,29 @@ const VideoTreeData = [
   {
     title: '数据结构',
     value: '数据结构',
-    key: '数据结构',
+    key: '视频/数据结构',
     children: [
       {
         title: '第一章',
         value: '第一章',
-        key: '第一章',
+        key: '视频/数据结构/第一章',
         children: [
           {
             title: '视频1',
-            value: '视频2',
-            key: '视频3'
+            value: '视频1',
+            key: '视频/数据结构/第一章/视频1'
           }
         ]
       },
       {
         title: '第二章',
         value: '第二章',
-        key: '第二章',
+        key: '视频/数据结构/第二章',
         children: [
           {
             title: '视频1',
-            value: '视频2',
-            key: '视频3'
+            value: '视频1',
+            key: '视频/数据结构/第二章/视频1'
           }
         ]
       },
@@ -94,29 +94,29 @@ const VideoTreeData = [
   {
     title: 'Java',
     value: 'Java',
-    key: 'Java',
+    key: '视频/Java',
     children: [
       {
         title: '第一章',
         value: '第一章',
-        key: '第一章',
+        key: '视频/Java/第一章',
         children: [
           {
             title: '视频1',
-            value: '视频2',
-            key: '视频3'
+            value: '视频1',
+            key: '视频/Java/第一章/视频1'
           }
         ]
       },
       {
         title: '第二章',
         value: '第二章',
-        key: '第二章',
+        key: '视频/Java/第二章',
         children: [
           {
             title: '视频1',
-            value: '视频2',
-            key: '视频3'
+            value: '视频1',
+            key: '视频/Java/第二章/视频1'
           }
         ]
       },
@@ -127,39 +127,29 @@ const TestTreeData = [
   {
     title: 'C++',
     value: 'C++',
-    key: 'C++',
+    key: '试题/C++',
     children: [
       {
         title: '第一章',
         value: '第一章',
-        key: '第一章',
+        key: '试题/C++/第一章',
         children: [
           {
-            title: '第一题',
-            value: '第一题',
-            key: '第一题'
-          },
-          {
-            title: '第二题',
-            value: '第二题',
-            key: '第二题'
-          },
+            title: '试题1',
+            value: '试题1',
+            key: '试题/C++/第一章/试题1'
+          }
         ]
       },
       {
         title: '第二章',
         value: '第二章',
-        key: '第二章',
+        key: '试题/C++/第二章',
         children: [
           {
-            title: '第一题',
-            value: '第一题',
-            key: '第一题'
-          },
-          {
-            title: '第二题',
-            value: '第二题',
-            key: '第二题'
+            title: '试题1',
+            value: '试题1',
+            key: '试题/C++/第二章/试题1'
           }
         ]
       },
@@ -168,34 +158,29 @@ const TestTreeData = [
   {
     title: '数据结构',
     value: '数据结构',
-    key: '数据结构',
+    key: '试题/数据结构',
     children: [
       {
         title: '第一章',
         value: '第一章',
-        key: '第一章',
+        key: '试题/数据结构/第一章',
         children: [
           {
-            title: '第一题',
-            value: '第一题',
-            key: '第一题'
+            title: '试题1',
+            value: '试题1',
+            key: '试题/数据结构/第一章/试题1'
           }
         ]
       },
       {
         title: '第二章',
         value: '第二章',
-        key: '第二章',
+        key: '试题/数据结构/第二章',
         children: [
           {
-            title: '第一题',
-            value: '第一题',
-            key: '第一题'
-          },
-          {
-            title: '第二题',
-            value: '第二题',
-            key: '第二题'
+            title: '试题1',
+            value: '试题1',
+            key: '试题/数据结构/第二章/试题1'
           }
         ]
       },
@@ -204,29 +189,29 @@ const TestTreeData = [
   {
     title: 'Java',
     value: 'Java',
-    key: 'Java',
+    key: '试题/Java',
     children: [
       {
         title: '第一章',
         value: '第一章',
-        key: '第一章',
+        key: '试题/Java/第一章',
         children: [
           {
-            title: '视频1',
-            value: '视频2',
-            key: '视频3'
+            title: '试题1',
+            value: '试题1',
+            key: '试题/Java/第一章/试题1'
           }
         ]
       },
       {
         title: '第二章',
         value: '第二章',
-        key: '第二章',
+        key: '试题/Java/第二章',
         children: [
           {
-            title: '视频1',
-            value: '视频2',
-            key: '视频3'
+            title: '试题1',
+            value: '试题1',
+            key: '试题/Java/第二章/试题1'
           }
         ]
       },
@@ -284,6 +269,7 @@ export default class MyCourseCreate extends React.Component {
                 placeholder="请选择相应视频"
                 // treeDefaultExpandAll
                 onChange={this.videoOnChange}
+                key="video"
               />
             </div>
             <div className="createHeaderRight">
@@ -296,6 +282,7 @@ export default class MyCourseCreate extends React.Component {
                 placeholder="请选择相应试题"
                 // treeDefaultExpandAll
                 onChange={this.testOnChange}
+                key="test"
               />
             </div>
           </div>
@@ -308,7 +295,7 @@ export default class MyCourseCreate extends React.Component {
           />
           <div className="keepBtn">
             <Button style={{ backgroundColor: "#43BC60", width: "120px", textAlign: "center", color: "white" }}>保存，下一步</Button>
-            <Link to={"/home/courses/add/list"}>
+            <Link to={"/home/courses/add"}>
               <Button>返回</Button>
             </Link>
           </div>

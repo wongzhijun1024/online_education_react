@@ -21,12 +21,15 @@ export default class CoursesAdd extends React.Component {
   callback(key) {
     console.log(key);
   }
-onChange = e => {
-  console.log('radio checked', e.target.value);
-  this.setState({
-    value: e.target.value,
-  });
-};
+  onChange = e => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value: e.target.value,
+    });
+  };
+  showPath() { 
+    console.log(this.props.match.path);
+  }
 
   render() {
     return (
@@ -36,7 +39,7 @@ onChange = e => {
           // activeKey={this.state.activeKey}
           // defaultActiveKey="1"
           // onChange={this.onTabsChange.bind(this)}
-          className = "tabs" defaultActiveKey="1" onChange={this.callback.bind(this)}
+          className="tabs" defaultActiveKey="1" onChange={this.callback.bind(this)}
         >
           <TabPane className="courseTabs" tab="课程文件" key="1">
             <CourseDocument></CourseDocument>
@@ -49,18 +52,17 @@ onChange = e => {
             <Switch>
               <Route
                 exact
-                path={`${this.props.match.path}`}
+                path={`/home/courses/add`}
                 component={CourseTest}
-              ></Route>
+              >{
+                  this.showPath()
+              }</Route>
               <Route
                 exact
-                path={`${this.props.match.path}/created`}
+                path={`/home/courses/add/created`}
                 component={CourseCreate}
               ></Route>
             </Switch>
-          </TabPane>
-          <TabPane tab="课程题库" key="4">
-           <CourseBank></CourseBank>
           </TabPane>
         </Tabs>
       </div>
