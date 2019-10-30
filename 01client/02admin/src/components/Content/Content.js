@@ -6,9 +6,8 @@ import User from "../../views/user/infor/User";
 import UserQuery from "../../views/user/query/Query";
 import TeacherQuery from "../../views/teacher/query/Query";
 import TeacherAdd from "../../views/teacher/add/Add";
-import ExaminationQuery from "../../views/examination/query/Query";
-import ExaminationAdd from "../../views/examination/add/Add";
-import ExaminationBank from "../../views/examination/bank/bank.js"
+import ExaminationQuery from "../../views/examination/query/Query.js";
+import ExaminationAdd from "../../views/examination/add/Add.js";
 import CoursesList from "../../views/courses/list/CoursesList";
 import CoursesAdd from "../../views/courses/add/CoursesAdd";
 import Test from "../../views/test/Test";
@@ -33,7 +32,6 @@ export default class MyContent extends React.Component {
           <Route exact path={"/home/teacher/add"} component={TeacherAdd} />
           <Route exact path={"/home/user/query"} component={UserQuery} />
           <Route exact path={"/home/user/infor"} component={User} />
-          <Route exact path={"/home/examination/bank"} component={ExaminationBank} />
         </Switch>
       </Content>
     );
