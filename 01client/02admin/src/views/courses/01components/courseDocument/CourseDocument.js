@@ -261,7 +261,7 @@ export default class CourseDocument extends React.Component {
               ref="player"
               videoId="video-1"
             >
-              <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+              <source src="http://chengd-1253990303.cos.ap-chengdu.myqcloud.com/noi/video/2019-9-30-01react%E4%BB%8B%E7%BB%8D.mp4?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKID8A1hUmP2wfDc2HBDwTp0OejeOyNdHbJq%26q-sign-time%3D1572420835%3B1572424435%26q-key-time%3D1572420835%3B1572424435%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D4783ac68229954c3c51c7799d563bbb53ea9171e" />
             </Player>
           </div>
           {/* 文件上传 */}

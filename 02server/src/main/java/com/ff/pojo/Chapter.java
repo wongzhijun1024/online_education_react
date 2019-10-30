@@ -29,17 +29,23 @@ public class Chapter {
 	 */
 	private List<Video> videos;
 
+	/**
+	 * 题库
+	 */
+	private List<Question> questions;
+
 	public Chapter() {
 		super();
 	}
 
-	public Chapter(int id, String name, int courseId, int order, List<Video> videos) {
+	public Chapter(int id, String name, int courseId, int order, List<Video> videos, List<Question> questions) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.courseId = courseId;
 		this.order = order;
 		this.videos = videos;
+		this.questions = questions;
 	}
 
 	public int getId() {
@@ -82,10 +88,18 @@ public class Chapter {
 		this.videos = videos;
 	}
 
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
 	@Override
 	public String toString() {
 		return "Chapter [id=" + id + ", name=" + name + ", courseId=" + courseId + ", order=" + order + ", videos="
-				+ videos + "]";
+				+ videos + ", questions=" + questions + "]";
 	}
 
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.ff.pojo.Msg;
 import com.ff.pojo.Question;
 import com.ff.service.QuestionService;
 
@@ -20,7 +21,7 @@ public class QuestionTest {
 
 		Question question = new Question();
 
-		question.setTitle("第一个选择题");
+		question.setTitle("第4个选择题");
 		question.setTextA("第一个选项");
 		question.setTextB("第二个选项");
 		question.setTextC("第三个选项");
@@ -29,6 +30,14 @@ public class QuestionTest {
 		question.setAnswer("textA");
 
 		System.out.println(questionService.insert(question));
+	}
+
+	@Test
+	public void selectQuestionsAll() {
+
+		Msg msg = questionService.selectQuestionsAll();
+
+		System.out.println(msg);
 	}
 
 }

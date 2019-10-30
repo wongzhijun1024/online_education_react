@@ -36,7 +36,7 @@ public class CourseController {
 	 */
 	@RequestMapping(value = "courses/all/leaf")
 	@ResponseBody
-	public Msg selectCourseAllLeaf(){
+	public Msg selectCourseAllLeaf() {
 		return courseService.selectCourseAllLeaf();
 	}
 
@@ -56,6 +56,13 @@ public class CourseController {
 	public Msg addCourses(Course course, HttpServletResponse resp, HttpServletRequest req) {
 
 		return courseService.insertCourses(course, req);
+	}
+
+	@RequestMapping(value = "questions/all")
+	@ResponseBody
+	public Msg selectAllQuestionsOfCourses(Course course, HttpServletResponse resp, HttpServletRequest req) {
+
+		return courseService.selectAllQuestionsOfCourses();
 	}
 
 }
