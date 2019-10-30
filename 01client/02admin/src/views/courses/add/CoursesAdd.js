@@ -19,7 +19,7 @@ export default class CoursesAdd extends React.Component {
     };
   }
   callback(key) {
-
+    console.log(key);
   }
 onChange = e => {
   console.log('radio checked', e.target.value);
