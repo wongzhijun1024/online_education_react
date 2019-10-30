@@ -164,13 +164,6 @@ export default class ExaminationAdd extends React.Component {
           >
             搜索
           </Button>
-          <Button
-            value="small"
-            type="primary"
-            style={{ background: "#43BB60" }}
-          >
-            导出题目
-          </Button>
         </div>
         {/* 题库表单 */}
         <div className="table-Bank">
