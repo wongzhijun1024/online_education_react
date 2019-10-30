@@ -43,6 +43,7 @@ export default class CoursesAdd extends React.Component {
             <CourseInformation></CourseInformation>
           </TabPane>
           <TabPane tab="课程试卷" key="3">
+            {/* <CourseCreate></CourseCreate> */}
             <Switch>
               <Route
                 exact

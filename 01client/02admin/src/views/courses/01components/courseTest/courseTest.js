@@ -28,14 +28,7 @@ const columns = [
     dataIndex: 'action',
   }
 ];
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park"
-  }
-];
+const data = [];
 const props = {
   name: "file",
   action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
@@ -53,22 +46,19 @@ const props = {
     }
   }
 };
-export default class CourseInformation extends React.Component {
+export default class MyCourseTest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       flag: true
     };
   }
-  // componentDidMount() {
-  //   console.log(this.props.match.path)
-  // };
   showImportBox() {
     this.refs.importBox.style.display = "block";
-  }
+  };
   closeImportBox() {
     this.refs.importBox.style.display = "none";
-  }
+  };
 
   render() {
     const rowSelection = {
