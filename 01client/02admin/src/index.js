@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "../node_modules/video-react/dist/video-react.css";
 import "antd/dist/antd.css";
 import { createStore } from "redux";
 import { Provider } from "react-redux";

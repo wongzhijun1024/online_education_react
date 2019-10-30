@@ -5,41 +5,12 @@ import net from "../../../../utils/net";
 import { Player } from "video-react";
 const { Option } = Select;
 const { TreeNode } = TreeSelect;
-const menu = (
-  <Menu>
-    <Menu.Item>Action 1</Menu.Item>
-    <Menu.Item>Action 2</Menu.Item>
-  </Menu>
-);
+
   function handleChange(value) {
+    console.log(this);
   console.log(`selected ${value}`);
 }
-  const expandedRowRender = () => {
-    const columns = [
-      { title: '视频名称', dataIndex: 'name', key: 'name' },
-      {
-        title: '视频链接',
-        key: 'state',
-        // render: () => (
-        //   <Player ref="player" videoId="video-1" style = {{width:"20px",height:"100%"}}>
-        //         <source src="https://chengd-1253990303.cos.ap-chengdu.myqcloud.com/noi/video/2019-2-28-17334c00-776b-4431-a913-061fd8c31f00.mp4" />
-        //   </Player>
-        // ),
-      }
-    ];
-
-    const data = [];
-    for (let i = 0; i < 3; ++i) {
-      data.push({
-        key: i,
-        date: '2014-12-24 23:12:00',
-        name: 'This is production name',
-        upgradeNum: 'Upgraded: 56',
-      });
-    }
-    return <Table columns={columns} dataSource={data} pagination={false} />;
-  };
-
+ 
   const columns = [
     { title: '课程名称', dataIndex: 'name', key: 'name' },
     { title: '课程章节',
@@ -65,7 +36,15 @@ const menu = (
     },
     { title: '课程介绍', dataIndex: 'introduce',key: 'introduce'}
   ];
-
+const data01 = [{
+  name:"hmc",
+  chapters:[],
+  introduce:"这个课程很好"
+},
+{name:"hmc",
+  chapters:[],
+  introduce:"这个课程很好"
+}]
 export default class CourseDocument extends React.Component {
   constructor() {
     super();
@@ -83,7 +62,7 @@ export default class CourseDocument extends React.Component {
 
   componentDidMount(){
     let that = this;
-      net.get("courses/all/leaf",
+      net.get("courses/and/chapters",
         {},
         function(ob){
           console.log(ob.data.object);
@@ -93,6 +72,39 @@ export default class CourseDocument extends React.Component {
         });
   }
 
+ expandedRowRender = () => {
+    const columns = [
+      { title: '视频名称', dataIndex: 'name', key: 'name' },
+      {
+        title: '视频链接',
+        key: 'state',
+        render: () => (
+          <Button onClick = {this.playVideo}><Icon type="play-circle" /></Button>
+        ),
+      }
+    ];
+
+    const data = [];
+    for (let i = 0; i < 3; ++i) {
+      data.push({
+        key: i,
+        date: '2014-12-24 23:12:00',
+        name: 'This is production name',
+        upgradeNum: 'Upgraded: 56',
+      });
+    }
+    return <Table columns={columns} dataSource={data} pagination={false} />;
+  };
+  playVideo = ()=>{
+
+   let coursePlayVideo = this.refs.coursePlayVideo;
+   let coursePlayVideoBox = this.refs.coursePlayVideoBox;
+   let player = this.refs.player;
+   coursePlayVideo.style.display = "block";
+   coursePlayVideoBox.style.display = "block";
+   player.play();
+
+  }
   onChange = e => {
     // console.log('radio checked', e.target.value);
     this.setState({
@@ -192,6 +204,16 @@ onChangeCourse = (value) => {
     return allLeafs;
  }
 
+ closeVideo = ()=>{
+   let coursePlayVideo = this.refs.coursePlayVideo;
+   let coursePlayVideoBox = this.refs.coursePlayVideoBox;
+   let player = this.refs.player;
+   coursePlayVideo.style.display = "none";
+   coursePlayVideoBox.style.display = "none";
+   player.pause();
+
+ }
+
   render() {
     return (
       <div className = "coursesAdd-1">
@@ -206,11 +228,23 @@ onChangeCourse = (value) => {
             <Table
             className="components-table-demo-nested courseTable"
             columns={columns}
-            expandedRowRender={expandedRowRender}
+            expandedRowRender={this.expandedRowRender}
             dataSource={this.state.allLeaf}
           />
          </div>
-
+         {/* 视频播放 */}
+            <div className = "coursePlayVideo" ref = "coursePlayVideo">
+            </div>
+            <div className = "coursePlayVideoBox" ref = "coursePlayVideoBox">
+              <Icon className = "closeVideo" type="close-circle"  onClick = {this.closeVideo}/>
+              <Player
+              fluid = {false}
+              width={800}
+              height={700}
+              ref="player" videoId="video-1">
+                <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+              </Player>
+            </div>
          {/* 文件上传 */}
         <div className = "backgroundFiles" ref = "background"></div>
         <div className = "addCourseFiles" ref = "addFiles">
