@@ -23,7 +23,7 @@ public class VideoController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "videosByChapterId")
+	@RequestMapping(value = "videosByChapterId")
 	@ResponseBody
 	public Msg selectVideosByChapterId(Chapter chapter, HttpServletResponse resp, HttpServletRequest req) {
 		return videoService.selectVideosByChapterId(chapter);

@@ -1,10 +1,12 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import "./Add.css";
 import net from "../../../utils/net";
-import { Button, Cascader, Table,Radio } from "antd";
+import { Form, Select, Input, Button, Radio,Cascader } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-
+const { Option } = Select;
+const { TextArea } = Input;
 const options = [
   {
     value: "C++",
@@ -71,27 +73,7 @@ const options = [
     ]
   }
 ];
-const columns = [
-  {
-    title: '题干',
-    dataIndex: 'name',
-    render: text => <a>{text}</a>,
-  },
-  {
-    title: '类型',
-    dataIndex: 'age',
-  },
-  {
-    title: '最后更新',
-    dataIndex: 'address',
-  },
-  {
-    title: '操作',
-    dataIndex: 'action',
-  },
 
-];
-const data = [];
 function onChange(value) {
   console.log(value);
 }
@@ -100,94 +82,145 @@ function onChange(value) {
 function displayRender(label) {
   return label[label.length - 1];
 }
-
-// rowSelection object indicates the need for row selection
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(
-      `selectedRowKeys: ${selectedRowKeys}`,
-      "selectedRows: ",
-      selectedRows
-    );
-  },
-  getCheckboxProps: record => ({
-    disabled: record.name === "Disabled User", // Column configuration not to be checked
-    name: record.name
-  })
-};
-
-export default class ExaminationAdd extends React.Component {
+class ExaminationAdd extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props);
     this.state = {
-      data: [],
+      data: []
     };
-
+    console.log(props);
   }
-  tobank(){
-    this.props.history.push(`/home/examination/bank`);
-  }
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log("Received values of form: ", values);
+      }
+    });
+  };
 
+  handleSelectChange = value => {
+    console.log(value);
+    this.props.form.setFieldsValue({
+      note: `Hi, ${value === "本课程" ? "其他课程" : "本课程"}!`
+    });
+  };
+  toQuery() {
+    this.props.history.push(`/home/examination/query`);
+  }
+ 
   render() {
+    const { getFieldDecorator } = this.props.form;
     return (
-      <div className="coursesBankBox">
-        {/* 头部 */}
-        <div className="coursesBankHead">
-          <div className="coursesBankTitle">题库添加</div>
-          {/* <Link
-          to="/home/examination/bank"> */}
-          <Button
-            type="primary"
-            style={{ background: "#278BF5" }}
-            onClick={this.tobank.bind(this)}
-          >
-            +单选题
-          </Button>
-          {/* </Link> */}
-         
+      <div className="coursesBankBox-2">
+        <div className="banktitle-2">题库添加</div>
+        <div className="bankheader">
+          <p>试题添加 / 添加题目 / 单选框</p>
         </div>
-        {/* 选择器 */}
-        <div className="BankSeletBox">
-          <div className="left-Select">
-            <Cascader
+
+        <div className="bank-content">
+          <Form
+            labelCol={{ span: 5 }}
+            wrapperCol={{ span: 12 }}
+            onSubmit={this.handleSubmit}
+          >
+            <Form.Item label="从属">
+              {/* <Select
+                style={{ width: "200px" }}
+                placeholder="请选择课程"
+                onChange={this.handleSelectChange}
+              >
+                <Option value="male">本课程</Option>
+                <Option value="female">其他课程</Option>
+              </Select> */}
+              <Cascader
               options={options}
               expandTrigger="hover"
               displayRender={displayRender}
               onChange={onChange}
+              style={{ width: "200px" }}
+              placeholder="请选择课程"
             />
-          </div>
-          <Button
-            value="small"
-            type="primary"
-            style={{ background: "#43BB60", margin: "0px 8px 0px 0px" }}
-          >
-            搜索
+            </Form.Item>
+
+            <Form.Item label="难度">
+              <Radio.Group>
+                <Radio value="a">简单</Radio>
+                <Radio value="b">一般</Radio>
+                <Radio value="c">困难</Radio>
+              </Radio.Group>
+            </Form.Item>
+
+            <Form.Item label="题干" >
+              {getFieldDecorator("stem", {
+                rules: [{ required: true }]
+              })(<TextArea rows={4} />)}
+            </Form.Item>
+
+<Radio.Group name="radiogroup" defaultValue={1} className="bankSelectcontent">
+            <Form.Item label="选项A">
+              {getFieldDecorator("selectA", {
+                rules: [{ required: true }]
+              })(<TextArea rows={4} />)}
+            </Form.Item>
+            <div className="readySelect">
+            <Radio value={11}>正确答案</Radio>
+            </div>
+            <Form.Item label="选项B">
+              {getFieldDecorator("selectB", {
+                rules: [{ required: true }]
+              })(<TextArea rows={4} />)}
+            </Form.Item>
+            <div className="readySelect">
+            <Radio value={22}>正确答案</Radio>
+            </div>
+            <Form.Item label="选项C">
+              {getFieldDecorator("selectC", {
+                rules: [{ required: true }]
+              })(<TextArea rows={4} />)}
+            </Form.Item>
+            <div className="readySelect">
+            <Radio value={33}>正确答案</Radio>
+            </div>
+            <Form.Item label="选项D">
+              {getFieldDecorator("selectD", {
+                rules: [{ required: true }]
+              })(<TextArea rows={4} />)}
+            </Form.Item>
+            <div className="readySelect">
+            <Radio value={44}>正确答案</Radio>
+            </div>
+            </Radio.Group>
+
+            
+            
+            
+          </Form>
+        </div>
+
+        <div className="bank2-buttom">
+          <Button type="primary" style={{ background: "#43BB60" }} onClick={this.toQuery.bind(this)}>
+            保存并继续添加
           </Button>
           <Button
-            value="small"
             type="primary"
             style={{ background: "#43BB60" }}
+            className="Bank2ButtonCenter"
+            onClick={this.toQuery.bind(this)}
           >
-            导出题目
+            保存
           </Button>
-        </div>
-        {/* 题库表单 */}
-        <div className="table-Bank">
-          <Table
-            rowSelection={rowSelection}
-            columns={columns}
-            dataSource={data}
-          />
-          {/* 删除按键 */}
-          
-          <div className="bank-button">
-          <Radio className="bk-butten">全选</Radio>
-          <Button type="primary" style={{ background: "#ECECEC",color:"black" }}>删除</Button>
-          </div>
-         
+          <Button
+            type="link"
+            onClick={this.toQuery.bind(this)}
+            style={{ color: "black" }}
+          >
+            返回
+          </Button>
         </div>
       </div>
     );
   }
 }
+export default Form.create()(ExaminationAdd);

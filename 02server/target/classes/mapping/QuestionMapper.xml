@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ff.dao.QuestionMapper">
-	<resultMap id="videoMap" type="com.ff.pojo.Question">
+	<resultMap id="questionMap" type="com.ff.pojo.Question">
 		<id column="id" property="id" />
-		<result column="name" property="name" />
+		<result column="title" property="title" />
 		<result column="chapter_id" property="chapterId" />
-		<result column="v_order" property="order" />
-		<result column="url" property="url" />
+		<result column="textA" property="textA" />
+		<result column="textB" property="textB" />
+		<result column="textC" property="textC" />
+		<result column="textD" property="textD" />
+		<result column="answer" property="answer" />
 	</resultMap>
 
 
@@ -15,9 +18,18 @@
 	<insert id="insert" parameterType="com.ff.pojo.Question"
 		keyProperty="id" useGeneratedKeys="true">
 		insert into questions
-		(title,video_id,textA,textB,textC,textD,answer)
+		(title,chapter_id,textA,textB,textC,textD,answer)
 		values (#{title},
 		#{chapterId},#{textA},#{textB},#{textC},#{textD},#{answer})
 	</insert>
+
+	<select id="selectQuestionsByChapterId" resultMap="questionMap">
+		select *
+		from
+		questions
+		where chapter_id = #{id}
+	</select>
+
+
 
 </mapper>

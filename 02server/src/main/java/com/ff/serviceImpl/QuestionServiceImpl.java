@@ -1,9 +1,12 @@
 package com.ff.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ff.dao.QuestionMapper;
+import com.ff.pojo.Course;
 import com.ff.pojo.Msg;
 import com.ff.pojo.Question;
 import com.ff.service.QuestionService;
@@ -22,6 +25,18 @@ public class QuestionServiceImpl implements QuestionService {
 			msg.setMsg("添加成功");
 			msg.setCode(1);
 		}
+		return msg;
+	}
+
+	@Override
+	public Msg selectQuestionsAll() {
+
+		CourseServiceImpl courseServiceImpl = new CourseServiceImpl();
+
+		Msg msg = courseServiceImpl.selectAllQuestionsOfCourses();
+
+		courseServiceImpl = null;
+
 		return msg;
 	}
 
