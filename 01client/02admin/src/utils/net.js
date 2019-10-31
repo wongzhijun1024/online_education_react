@@ -45,8 +45,6 @@ net.uploadFile = function(api, object, call) {
   //封装请求地址
   let url = serverUrl + api;
 
-  console.log(url);
-
   //创建form对象
   let param = new FormData();
   //装载数据
@@ -61,7 +59,6 @@ net.uploadFile = function(api, object, call) {
     }
   }
 
-  console.log(param);
   //添加请求头
   let config = {
     headers: {
