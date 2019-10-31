@@ -23,11 +23,19 @@ export default class MyContent extends React.Component {
     return (
       <Content className="contentBox">
         <Switch>
-          <Route exact path={"/home/examination/query"} component={ExaminationQuery} />
-          <Route exact path={"/home/examination/add"} component={ExaminationAdd} />
+          <Route
+            exact
+            path={"/home/examination/query"}
+            component={ExaminationQuery}
+          />
+          <Route
+            exact
+            path={"/home/examination/add"}
+            component={ExaminationAdd}
+          />
           <Route exact path={"/home/courses/list"} component={CoursesList} />
           <Route exact path={"/home/test"} component={Test} />
-          <Route path={"/home/courses/add"} component={CoursesAdd} />
+          <Route exact path={"/home/courses/add"} component={CoursesAdd} />
           <Route exact path={"/home/teacher/query"} component={TeacherQuery} />
           <Route exact path={"/home/teacher/add"} component={TeacherAdd} />
           <Route exact path={"/home/user/query"} component={UserQuery} />

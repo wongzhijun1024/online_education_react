@@ -1,16 +1,26 @@
 import React from "react";
 import "./CourseDocument.css";
-import {Icon,Button,Table,Select,Input, Upload, TreeSelect, Badge, Menu, Dropdown} from "antd";
+import {
+  Icon,
+  Button,
+  Table,
+  Select,
+  Input,
+  Upload,
+  TreeSelect,
+  Badge,
+  Menu,
+  Dropdown
+} from "antd";
 import net from "../../../../utils/net";
 import { Player } from "video-react";
 const { Option } = Select;
 const { TreeNode } = TreeSelect;
 const dataTest = [
-        {id:1,name:"hmc",chapters:[],introduce:"introduce00"},
-        {id:2,name:"hmc",chapters:[],introduce:"introduce01"},
-        {id:3,name:"hmc",chapters:[],introduce:"introduce02"}
-]
-
+  { id: 1, name: "hmc", chapters: [], introduce: "introduce00" },
+  { id: 2, name: "hmc", chapters: [], introduce: "introduce01" },
+  { id: 3, name: "hmc", chapters: [], introduce: "introduce02" }
+];
 
 export default class CourseDocument extends React.Component {
   constructor() {
@@ -18,61 +28,62 @@ export default class CourseDocument extends React.Component {
     this.state = {
       fileList: [],
       value: 0,
-      courseName:"",
-      courseChapter:"",
-      courseSection:"",
-      values:undefined,
-      allLeaf:[],
-      columns:[
-    { title: '课程名称', dataIndex: 'name', key: 'name' },
-    { title: '课程章节',
-     dataIndex: 'chapters', 
-     key: 'chapters' ,
-     render:(chapters)=>{
-        if(chapters.length<1){
-            return;
-        }
-        let temp = chapters[0].name
-        return(
-              <Select defaultValue={temp} style={{ width: 120 }} onChange={this.handleChange}>
-                {
-                  chapters.map(function(item){
-                    return(
-                      <Option value={item.id}>{item.name}</Option>
-                    )
-                  })
-                }
+      courseName: "",
+      courseChapter: "",
+      courseSection: "",
+      values: undefined,
+      allLeaf: [],
+      columns: [
+        { title: "课程名称", dataIndex: "name", key: "name" },
+        {
+          title: "课程章节",
+          dataIndex: "chapters",
+          key: "chapters",
+          render: chapters => {
+            if (chapters.length < 1) {
+              return;
+            }
+            let temp = chapters[0].name;
+            return (
+              <Select
+                defaultValue={temp}
+                style={{ width: 120 }}
+                onChange={this.handleChange}
+              >
+                {chapters.map(function(item) {
+                  return <Option value={item.id}>{item.name}</Option>;
+                })}
               </Select>
-        );
-     }
-    },
-    { title: '课程介绍', dataIndex: 'introduce',key: 'introduce'}
-              ],
-      videoData:[],
-      chapterId:13,
-      src:""
- 
-  };
+            );
+          }
+        },
+        { title: "课程介绍", dataIndex: "introduce", key: "introduce" }
+      ],
+      videoData: [],
+      chapterId: 13,
+      src: ""
+    };
   }
 
-handleChange=(value)=> {
-  let that = this;
-   this.setState({
-     chapterId:value
-   });
-    let chapterId  = this.state.chapterId;
-   net.get("videosByChapterId",
-            {
-              id:chapterId
-            },
-            function(ob){
-              that.setState({
-                videoData:ob.data.object
-              });
-              console.log(that.state.videoData);
-            }
+  handleChange = value => {
+    let that = this;
+    this.setState({
+      chapterId: value
+    });
+    let chapterId = this.state.chapterId;
+    net.get(
+      "videosByChapterId",
+      {
+        id: chapterId
+      },
+      function(ob) {
+        that.setState({
+          videoData: ob.data.object
+        });
+        console.log(that.state.videoData);
+      }
     );
-}
+  };
 
   componentDidMount() {
     let that = this;
@@ -84,19 +95,21 @@ handleChange=(value)=> {
     });
   }
 
- expandedRowRender = (record) => {
-   console.log(record.id);
+  expandedRowRender = record => {
+    console.log(record.id);
     const columns = [
       { title: "视频名称", dataIndex: "name", key: "name" },
       {
-        title: '视频链接',
-        key: 'url',
-        render: (ob) => {
+        title: "视频链接",
+        key: "url",
+        render: ob => {
           let url = ob.url;
-          return(
-             <Button onClick = {this.playVideo.bind(this,url)}><Icon type="play-circle" /></Button>
+          return (
+            <Button onClick={this.playVideo.bind(this, url)}>
+              <Icon type="play-circle" />
+            </Button>
           );
-        },
+        }
       }
     ];
 
@@ -111,42 +124,54 @@ handleChange=(value)=> {
     }
     let allLeaf = this.state.allLeaf;
     let dataBuffer = [];
-    let buffer =  this.state.videoData;
+    let buffer = this.state.videoData;
     let length = allLeaf.length;
-      for(let i = 0; i<length; i++){
-        if(record.id===i+1){
-          return <Table key = {i} columns={columns} dataSource={buffer} pagination={false} />
-        }else{
-          return <Table key = {i} columns={columns} dataSource={buffer} pagination={false} />
-        }
-      } 
+    for (let i = 0; i < length; i++) {
+      if (record.id === i + 1) {
+        return (
+          <Table
+            key={i}
+            columns={columns}
+            dataSource={buffer}
+            pagination={false}
+          />
+        );
+      } else {
+        return (
+          <Table
+            key={i}
+            columns={columns}
+            dataSource={buffer}
+            pagination={false}
+          />
+        );
+      }
+    }
   };
 
-  clearState = ()=>{
-    this.setState(
-      {
-        videoData:[]
-      }
-    );
-  }
+  clearState = () => {
+    this.setState({
+      videoData: []
+    });
+  };
 
-  playVideo = (url)=>{
-        if(url == 0){
-            alert("视频无效，请上传视频");
-            this.refs.coursePlayVideo.style.display = "block";
-            this.refs.uploadVideo.style.display = "block";
-            return;
-        }
-        this.setState({
-          src:url
-        });
-        let coursePlayVideo = this.refs.coursePlayVideo;
-        let coursePlayVideoBox = this.refs.coursePlayVideoBox;
-        let player = this.refs.player;
-        coursePlayVideo.style.display = "block";
-        coursePlayVideoBox.style.display = "block";
-        player.play();
-  }
+  playVideo = url => {
+    if (url == 0) {
+      alert("视频无效，请上传视频");
+      this.refs.coursePlayVideo.style.display = "block";
+      this.refs.uploadVideo.style.display = "block";
+      return;
+    }
+    this.setState({
+      src: url
+    });
+    let coursePlayVideo = this.refs.coursePlayVideo;
+    let coursePlayVideoBox = this.refs.coursePlayVideoBox;
+    let player = this.refs.player;
+    coursePlayVideo.style.display = "block";
+    coursePlayVideoBox.style.display = "block";
+    player.play();
+  };
   onChange = e => {
     this.setState({
       value: e.target.value
@@ -162,7 +187,7 @@ handleChange=(value)=> {
     //章节id
     let chapterId = 13;
     // 章节顺序
-    let order = 0
+    let order = 0;
     net.uploadFile(
       "video/add",
       {
@@ -246,10 +271,10 @@ handleChange=(value)=> {
     return allLeafs;
   };
 
- closeUplodeVideo=()=>{
-   this.refs.coursePlayVideo.style.display = "none"
-   this.refs.uploadVideo.style.display = "none";
- }
+  closeUplodeVideo = () => {
+    this.refs.coursePlayVideo.style.display = "none";
+    this.refs.uploadVideo.style.display = "none";
+  };
 
   closeVideo = () => {
     let coursePlayVideo = this.refs.coursePlayVideo;
@@ -259,7 +284,6 @@ handleChange=(value)=> {
     coursePlayVideoBox.style.display = "none";
     player.pause();
   };
-
 
   render() {
     return (
@@ -278,41 +302,55 @@ handleChange=(value)=> {
 
           <div className="addCourseBox">
             <Table
-            className="components-table-demo-nested courseTable"
-            columns={this.state.columns}
-            expandedRowRender={this.expandedRowRender}
-            dataSource={this.state.allLeaf}
-          />
-         </div>
-         {/* 视频播放 */}
-            <div className = "coursePlayVideo" ref = "coursePlayVideo">
-            </div>
-            <div className = "coursePlayVideoBox" ref = "coursePlayVideoBox">
-              <Icon className = "closeVideo" type="close-circle"  onClick = {this.closeVideo}/>
-              <Player
-              fluid = {false}
+              className="components-table-demo-nested courseTable"
+              columns={this.state.columns}
+              expandedRowRender={this.expandedRowRender}
+              dataSource={this.state.allLeaf}
+            />
+          </div>
+          {/* 视频播放 */}
+          <div className="coursePlayVideo" ref="coursePlayVideo"></div>
+          <div className="coursePlayVideoBox" ref="coursePlayVideoBox">
+            <Icon
+              className="closeVideo"
+              type="close-circle"
+              onClick={this.closeVideo}
+            />
+            <Player
+              fluid={false}
               width={800}
               height={700}
-              ref="player" videoId="video-1">
-                <source src={this.state.src} />
-              </Player>
-            </div>
-         {/* 当没有视频文件的时候，上传视频 */}
-         <div className = "uploadVideo" ref = "uploadVideo">
-           <div>
-             <div><Icon type="close"  onClick = {this.closeUplodeVideo}/></div>
-             <div className = "uploadVideoBox">
-                <Upload onRemove={this.removeFile} beforeUpload={this.beforeUpload}>
-                        <Button>
-                        <Icon type="upload" /> 选择视频文件
-                        </Button>
+              ref="player"
+              videoId="video-1"
+            >
+              <source src={this.state.src} />
+            </Player>
+          </div>
+          {/* 当没有视频文件的时候，上传视频 */}
+          <div className="uploadVideo" ref="uploadVideo">
+            <div>
+              <div>
+                <Icon type="close" onClick={this.closeUplodeVideo} />
+              </div>
+              <div className="uploadVideoBox">
+                <Upload
+                  onRemove={this.removeFile}
+                  beforeUpload={this.beforeUpload}
+                >
+                  <Button>
+                    <Icon type="upload" /> 选择视频文件
+                  </Button>
                 </Upload>
-              <Button  type="primary" onClick={this.uploadVideoById} style={{ marginTop: "16px",background:"#43BB60"}}>
-                上传视频文件
-              </Button>
-             </div>
-           </div>
-         </div>
+                <Button
+                  type="primary"
+                  onClick={this.uploadVideoById}
+                  style={{ marginTop: "16px", background: "#43BB60" }}
+                >
+                  上传视频文件
+                </Button>
+              </div>
+            </div>
+          </div>
           {/* 文件上传 */}
           <div className="backgroundFiles" ref="background"></div>
           <div className="addCourseFiles" ref="addFiles">
@@ -342,16 +380,16 @@ handleChange=(value)=> {
               </div>
             </div>
             <div className="addCourseFilesName">
-              <label for="file01">添加课程文件名</label>
+              <label htmlFor="file01">添加课程文件名</label>
               <Input ref="fileName" id="file01" placeholder="" />
             </div>
             <div className="addCourseFilesName">
-              <label for="file02">课程文件介绍</label>
+              <label htmlFor="file02">课程文件介绍</label>
               <Input ref="fileIntroduction" id="file02" placeholder="" />
             </div>
 
             <div className="addCourseFilesName">
-              <label for="file02">选择视频文件</label>
+              <label htmlFor="file02">选择视频文件</label>
               <div className="selectFilesType">
                 <Upload
                   onRemove={this.removeFile}
