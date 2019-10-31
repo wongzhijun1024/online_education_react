@@ -29,6 +29,6 @@ public interface VideoService {
 	 * @param video
 	 * @return
 	 */
-	Msg updateById(Video video);
+	Msg updateVideoById(Video video, HttpServletRequest multipartRequest);
 
 }

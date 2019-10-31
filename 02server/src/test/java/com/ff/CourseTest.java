@@ -39,4 +39,12 @@ public class CourseTest {
 		System.out.print(msg);
 	}
 
+	@Test
+	public void selectAllQuestionsOfCourses() {
+
+		Msg msg = courseService.selectAllQuestionsOfCourses();
+
+		System.out.print(msg);
+	}
+
 }

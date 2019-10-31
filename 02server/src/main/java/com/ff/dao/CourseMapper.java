@@ -55,4 +55,11 @@ public interface CourseMapper {
 	 * @return 返回对应的课程
 	 */
 	Course getCourseByName(String name);
+
+	/**
+	 * 查询所有课程里面的题
+	 * 
+	 * @return
+	 */
+	List<Course> selectAllQuestionsOfCourses();
 }

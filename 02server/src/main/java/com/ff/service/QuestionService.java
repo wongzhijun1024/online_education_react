@@ -13,4 +13,11 @@ public interface QuestionService {
 	 */
 	Msg insert(Question question);
 
+	/**
+	 * 查询所有的题库
+	 * 
+	 * @return
+	 */
+	Msg selectQuestionsAll();
+
 }

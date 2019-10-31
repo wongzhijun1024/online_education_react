@@ -11,17 +11,21 @@ export default class CourseInformation extends React.Component {
       fileList: [],
       value: 0,
       teachers:[],
-      teacherId:""
+      teacherId:0,
+      uplodeState:false
     };
   }
 
   onChange = e => {
-    console.log('radio checked', e.target.value);
     this.setState({
       value: e.target.value,
     });
   };
-  upload = e => {
+  upload = () => {
+    this.setState({
+      uplodeState:true,
+    });
+    let that = this;
     //获得姓名
     let name = this.refs.courseName.state.value;
     //获得介绍
@@ -44,7 +48,19 @@ export default class CourseInformation extends React.Component {
         firstName:""
       },
       function(ob) {
-        console.log(ob);
+        console.log(ob.code);
+        if(ob.code==-1){
+          alert("文件上传失败");
+          that.setState({
+             uplodeState:false,
+         });
+        }
+        if(ob.code==1){
+          alert("文件上传成功");
+          that.setState({
+             uplodeState:false,
+         });
+        }
       }
     );
   };
@@ -111,7 +127,9 @@ if(this.state.teachers.length<1)
     <div className = "addCourseList">
          <div className = "addCourseTitle">
            <span>课程信息</span>
-           <Button  type="primary" style = {{background:"#43BB60"}}>保存</Button>
+           <Button  type="primary"  style = {{background:"#43BB60"}} onClick = {this.upload}>
+           {this.state.uplodeState?(<span>文件上传中<Icon type="loading" /></span>):"保存"}
+           </Button>
          </div>
 
          <div className = "addCourseBox">

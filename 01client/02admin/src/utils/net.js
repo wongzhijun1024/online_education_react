@@ -29,7 +29,7 @@ net.get = function(api, object, call) {
 net.post = function(api, object, call) {
   //1,封装请求地址
   let url = serverUrl + api;
-  console.log("请求地址："+url);
+  console.log("请求地址：" + url);
   axios
     .post(url, qs.stringify(object))
     .then(function(response) {
@@ -45,6 +45,8 @@ net.uploadFile = function(api, object, call) {
   //封装请求地址
   let url = serverUrl + api;
 
+  console.log(url);
+
   //创建form对象
   let param = new FormData();
   //装载数据
@@ -59,6 +61,7 @@ net.uploadFile = function(api, object, call) {
     }
   }
 
+  console.log(param);
   //添加请求头
   let config = {
     headers: {
