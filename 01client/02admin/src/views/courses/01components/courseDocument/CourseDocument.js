@@ -16,6 +16,44 @@ import net from "../../../../utils/net";
 import { Player } from "video-react";
 const { Option } = Select;
 const { TreeNode } = TreeSelect;
+function handleChange(value) {
+  console.log(this);
+  console.log(`selected ${value}`);
+}
+
+const columns = [
+  { title: "课程名称", dataIndex: "name", key: "name" },
+  {
+    title: "课程章节",
+    dataIndex: "chapters",
+    key: "chapters",
+    render: chapters => {
+      if (chapters.length < 1) {
+        return;
+      }
+      let temp = chapters[0].name;
+      return (
+        <Select
+          defaultValue={temp}
+          style={{ width: 120 }}
+          onChange={handleChange}
+        >
+          {chapters.map(function (item) {
+            return <Option value={item.id}>{item.name}</Option>;
+          })}
+        </Select>
+      );
+    }
+  },
+  { title: "课程介绍", dataIndex: "introduce", key: "introduce" }
+];
+const data01 = [
+  {
+    name: "hmc",
+    chapters: [],
+    introduce: "这个课程很好"
+  },
+  { name: "hmc", chapters: [], introduce: "这个课程很好" }];
 const dataTest = [
   { id: 1, name: "hmc", chapters: [], introduce: "introduce00" },
   { id: 2, name: "hmc", chapters: [], introduce: "introduce01" },
@@ -50,7 +88,7 @@ export default class CourseDocument extends React.Component {
                 style={{ width: 120 }}
                 onChange={this.handleChange}
               >
-                {chapters.map(function(item) {
+                {chapters.map(function (item) {
                   return <Option value={item.id}>{item.name}</Option>;
                 })}
               </Select>
@@ -76,7 +114,7 @@ export default class CourseDocument extends React.Component {
       {
         id: chapterId
       },
-      function(ob) {
+      function (ob) {
         that.setState({
           videoData: ob.data.object
         });
@@ -87,7 +125,7 @@ export default class CourseDocument extends React.Component {
 
   componentDidMount() {
     let that = this;
-    net.get("courses/and/chapters", {}, function(ob) {
+    net.get("courses/and/chapters", {}, function (ob) {
       console.log(ob.data.object);
       that.setState({
         allLeaf: ob.data.object
@@ -196,7 +234,7 @@ export default class CourseDocument extends React.Component {
         files: fileList,
         order: order
       },
-      function(ob) {
+      function (ob) {
         console.log(ob);
       }
     );
@@ -253,10 +291,10 @@ export default class CourseDocument extends React.Component {
     if (length < 1) {
       return;
     }
-    let allLeafs = allLeaf.map(function(item) {
+    let allLeafs = allLeaf.map(function (item) {
       return (
         <TreeNode value={item.name} title={item.name} key={item.id}>
-          {item.chapters.map(function(item1) {
+          {item.chapters.map(function (item1) {
             return (
               <TreeNode
                 value={item1.id}
