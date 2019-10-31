@@ -17,7 +17,7 @@ public class Video {
 	/**
 	 * 章节id
 	 */
-	private int chapterId;
+	private int chapterId = -1;
 
 	/**
 	 * 节

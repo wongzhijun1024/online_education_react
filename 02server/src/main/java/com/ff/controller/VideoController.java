@@ -36,4 +36,11 @@ public class VideoController {
 		return videoService.insertVideo(video, request);
 	}
 
+	@RequestMapping(value = "video/update")
+	@ResponseBody
+	public Msg updateVideo(Video video, HttpServletResponse resp, HttpServletRequest request) {
+
+		return videoService.updateVideoById(video, request);
+	}
+
 }

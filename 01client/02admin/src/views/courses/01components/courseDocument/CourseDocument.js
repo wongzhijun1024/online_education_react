@@ -16,7 +16,6 @@ import net from "../../../../utils/net";
 import { Player } from "video-react";
 const { Option } = Select;
 const { TreeNode } = TreeSelect;
-
 function handleChange(value) {
   console.log(this);
   console.log(`selected ${value}`);
@@ -54,8 +53,13 @@ const data01 = [
     chapters: [],
     introduce: "这个课程很好"
   },
-  { name: "hmc", chapters: [], introduce: "这个课程很好" }
+  { name: "hmc", chapters: [], introduce: "这个课程很好" }];
+const dataTest = [
+  { id: 1, name: "hmc", chapters: [], introduce: "introduce00" },
+  { id: 2, name: "hmc", chapters: [], introduce: "introduce01" },
+  { id: 3, name: "hmc", chapters: [], introduce: "introduce02" }
 ];
+
 export default class CourseDocument extends React.Component {
   constructor() {
     super();
@@ -67,9 +71,57 @@ export default class CourseDocument extends React.Component {
       courseSection: "",
       values: undefined,
       allLeaf: [],
-      chapterId: null
+      columns: [
+        { title: "课程名称", dataIndex: "name", key: "name" },
+        {
+          title: "课程章节",
+          dataIndex: "chapters",
+          key: "chapters",
+          render: chapters => {
+            if (chapters.length < 1) {
+              return;
+            }
+            let temp = chapters[0].name;
+            return (
+              <Select
+                defaultValue={temp}
+                style={{ width: 120 }}
+                onChange={this.handleChange}
+              >
+                {chapters.map(function (item) {
+                  return <Option value={item.id}>{item.name}</Option>;
+                })}
+              </Select>
+            );
+          }
+        },
+        { title: "课程介绍", dataIndex: "introduce", key: "introduce" }
+      ],
+      videoData: [],
+      chapterId: 13,
+      src: ""
     };
   }
+
+  handleChange = value => {
+    let that = this;
+    this.setState({
+      chapterId: value
+    });
+    let chapterId = this.state.chapterId;
+    net.get(
+      "videosByChapterId",
+      {
+        id: chapterId
+      },
+      function (ob) {
+        that.setState({
+          videoData: ob.data.object
+        });
+        console.log(that.state.videoData);
+      }
+    );
+  };
 
   componentDidMount() {
     let that = this;
@@ -81,17 +133,21 @@ export default class CourseDocument extends React.Component {
     });
   }
 
-  expandedRowRender = () => {
+  expandedRowRender = record => {
+    console.log(record.id);
     const columns = [
       { title: "视频名称", dataIndex: "name", key: "name" },
       {
         title: "视频链接",
-        key: "state",
-        render: () => (
-          <Button onClick={this.playVideo}>
-            <Icon type="play-circle" />
-          </Button>
-        )
+        key: "url",
+        render: ob => {
+          let url = ob.url;
+          return (
+            <Button onClick={this.playVideo.bind(this, url)}>
+              <Icon type="play-circle" />
+            </Button>
+          );
+        }
       }
     ];
 
@@ -104,9 +160,49 @@ export default class CourseDocument extends React.Component {
         upgradeNum: "Upgraded: 56"
       });
     }
-    return <Table columns={columns} dataSource={data} pagination={false} />;
+    let allLeaf = this.state.allLeaf;
+    let dataBuffer = [];
+    let buffer = this.state.videoData;
+    let length = allLeaf.length;
+    for (let i = 0; i < length; i++) {
+      if (record.id === i + 1) {
+        return (
+          <Table
+            key={i}
+            columns={columns}
+            dataSource={buffer}
+            pagination={false}
+          />
+        );
+      } else {
+        return (
+          <Table
+            key={i}
+            columns={columns}
+            dataSource={buffer}
+            pagination={false}
+          />
+        );
+      }
+    }
   };
-  playVideo = () => {
+
+  clearState = () => {
+    this.setState({
+      videoData: []
+    });
+  };
+
+  playVideo = url => {
+    if (url == 0) {
+      alert("视频无效，请上传视频");
+      this.refs.coursePlayVideo.style.display = "block";
+      this.refs.uploadVideo.style.display = "block";
+      return;
+    }
+    this.setState({
+      src: url
+    });
     let coursePlayVideo = this.refs.coursePlayVideo;
     let coursePlayVideoBox = this.refs.coursePlayVideoBox;
     let player = this.refs.player;
@@ -115,7 +211,6 @@ export default class CourseDocument extends React.Component {
     player.play();
   };
   onChange = e => {
-    // console.log('radio checked', e.target.value);
     this.setState({
       value: e.target.value
     });
@@ -214,6 +309,11 @@ export default class CourseDocument extends React.Component {
     return allLeafs;
   };
 
+  closeUplodeVideo = () => {
+    this.refs.coursePlayVideo.style.display = "none";
+    this.refs.uploadVideo.style.display = "none";
+  };
+
   closeVideo = () => {
     let coursePlayVideo = this.refs.coursePlayVideo;
     let coursePlayVideoBox = this.refs.coursePlayVideoBox;
@@ -241,7 +341,7 @@ export default class CourseDocument extends React.Component {
           <div className="addCourseBox">
             <Table
               className="components-table-demo-nested courseTable"
-              columns={columns}
+              columns={this.state.columns}
               expandedRowRender={this.expandedRowRender}
               dataSource={this.state.allLeaf}
             />
@@ -261,8 +361,33 @@ export default class CourseDocument extends React.Component {
               ref="player"
               videoId="video-1"
             >
-              <source src="http://chengd-1253990303.cos.ap-chengdu.myqcloud.com/noi/video/2019-9-30-01react%E4%BB%8B%E7%BB%8D.mp4?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKID8A1hUmP2wfDc2HBDwTp0OejeOyNdHbJq%26q-sign-time%3D1572420835%3B1572424435%26q-key-time%3D1572420835%3B1572424435%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D4783ac68229954c3c51c7799d563bbb53ea9171e" />
+              <source src={this.state.src} />
             </Player>
+          </div>
+          {/* 当没有视频文件的时候，上传视频 */}
+          <div className="uploadVideo" ref="uploadVideo">
+            <div>
+              <div>
+                <Icon type="close" onClick={this.closeUplodeVideo} />
+              </div>
+              <div className="uploadVideoBox">
+                <Upload
+                  onRemove={this.removeFile}
+                  beforeUpload={this.beforeUpload}
+                >
+                  <Button>
+                    <Icon type="upload" /> 选择视频文件
+                  </Button>
+                </Upload>
+                <Button
+                  type="primary"
+                  onClick={this.uploadVideoById}
+                  style={{ marginTop: "16px", background: "#43BB60" }}
+                >
+                  上传视频文件
+                </Button>
+              </div>
+            </div>
           </div>
           {/* 文件上传 */}
           <div className="backgroundFiles" ref="background"></div>
@@ -293,16 +418,16 @@ export default class CourseDocument extends React.Component {
               </div>
             </div>
             <div className="addCourseFilesName">
-              <label for="file01">添加课程文件名</label>
+              <label htmlFor="file01">添加课程文件名</label>
               <Input ref="fileName" id="file01" placeholder="" />
             </div>
             <div className="addCourseFilesName">
-              <label for="file02">课程文件介绍</label>
+              <label htmlFor="file02">课程文件介绍</label>
               <Input ref="fileIntroduction" id="file02" placeholder="" />
             </div>
 
             <div className="addCourseFilesName">
-              <label for="file02">选择视频文件</label>
+              <label htmlFor="file02">选择视频文件</label>
               <div className="selectFilesType">
                 <Upload
                   onRemove={this.removeFile}
