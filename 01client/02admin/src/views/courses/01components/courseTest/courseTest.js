@@ -5,33 +5,7 @@ import net from "../../../../utils/net";
 import CourseCreate from "../courseCreate/courseCreate";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 const { Option } = Select;
-const newColumns = [
-  { title: '课程名称', dataIndex: 'name', key: 'name' },
-  {
-    title: '课程章节',
-    dataIndex: 'chapters',
-    key: 'chapters',
-    render: chapters => { 
-      if (chapters.length<1) {
-        return;
-      }
-      // let temp = chapters[0].name;
-      return (
-        <Select
-          // defaultValue={temp}
-          style={{ width: 120 }}
-          // onChange={handleChange}
-        >
-          {/* {chapters.map(function (item) { 
-            return <Option value={item.id}>{item.testName}</Option>
-          }
-          )} */}
-        </Select>
-      )
-    }
-  },
-  { title: '课程介绍', dataIndex: 'introduce', key: 'introduce' }
-];
+// 课程信息测试数据
 const newData = [
   {
     key: 1,
@@ -57,37 +31,80 @@ export default class MyCourseTest extends React.Component {
     super(props);
     this.state = {
       allLeaf: [],
-      chapterId:null
+      chapterId:null,
+      questionData:[],
+      newColumns:[
+        { title: '课程名称', dataIndex: 'name', key: 'name' },
+        {
+          title: '课程章节',
+          dataIndex: 'chapters',
+          key: 'chapters',
+          //通过课程的ID获取对应的章节
+          render: chapters => {
+            if (chapters.length<1) {
+                return;
+              }
+              //获取第一个章节为默认值
+            let temp = chapters[0].name;
+            console.log(chapters[0].questions);
+            return (
+              <Select
+                defaultValue={temp}
+                style={{ width: 120 }}
+                onChange={this.changeQuestionByChapter}
+              >
+                {chapters.map(function(item) { 
+                  return <Option value={item.id}>{item.name}</Option>
+                }
+              )}
+              </Select>
+            )
+          }
+        },
+        { title: '课程介绍', dataIndex: 'introduce', key: 'introduce' }
+      ]
     };
+   };
+
+  changeQuestionByChapter=value=>{
+    let that=this;
+    this.setState({
+      chapterId:value
+    });
+    let chapterId = this.state.chapterId;
   }
   componentDidMount() {
     let that = this;
-    net.get("courses/and/chapters", {}, function (ob) {
-      console.log(ob.data.object);
+    net.get("questions/all", {}, function (ob) {
       that.setState({
         allLeaf: ob.data.object
       });
     });
   }
 
-  expandedRowRender = () => {
+  expandedRowRender = (record, index, indent, expanded) => {
+    console.log(record, index, indent, expanded);
+    console.log(record.id);
+    
     const columns = [
-      { title: "试题题目", dataIndex: "testName", key: "testName" },
-      {
-        title: "操作",
-        key: "action",
-        render: () => (
-          <span>预览</span>
-        )
-      }
+      { title: "试题题目", dataIndex: "name", key: "name" },
+      { title: "A", dataIndex: "textA", key: "textA" },
+      { title: "B", dataIndex: "textB", key: "textB" },
+      { title: "C", dataIndex: "textC", key: "textC" },
+      { title: "D", dataIndex: "textD", key: "textD" },
+      { title: "正确答案", dataIndex: "answer", key: "answer" }
     ];
-    const testData = [
-      {
-        key: 1,
-        testName:"这是第一个题",
+    let allLeaf=this.state.allLeaf;
+    console.log(allLeaf);
+    let dataBuffer=[];
+    let buffer=this.state.questionData;
+    console.log(buffer);
+    for (let i = 0; i < allLeaf.length; i++) {
+      if (record.id) {
+        
       }
-    ];
-    return <Table columns={columns} dataSource={testData} pagination={false} />;
+    }
+    // return <Table columns={columns} dataSource={testData} pagination={false} />;
   };
   render() {
     return (
@@ -112,8 +129,9 @@ export default class MyCourseTest extends React.Component {
           </div>
         </div>
         <Table
-          columns={newColumns}
+          columns={this.state.newColumns}
           style={{ width: "98.5%", margin: "0 auto", margin: "10px"}}
+          //额外的展开行Function(record, index, indent, expanded):ReactNode
           expandedRowRender={this.expandedRowRender}
           dataSource={this.state.allLeaf}
           pagination={{ pageSize: 12, position: "right" }}

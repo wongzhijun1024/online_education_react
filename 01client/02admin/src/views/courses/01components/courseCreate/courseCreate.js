@@ -294,9 +294,9 @@ export default class MyCourseCreate extends React.Component {
             pagination={{ pageSize: 12, position: "right" }}
           />
           <div className="keepBtn">
-            <Button style={{ backgroundColor: "#43BC60", width: "120px", textAlign: "center", color: "white" }}>保存，下一步</Button>
+            <Button style={{ backgroundColor: "#43BC60", width: "120px", textAlign: "center", color: "white" }}>保存</Button>
             <Link to={"/home/courses/add"}>
-              <Button>返回</Button>
+              <Button className="backToCreate">返回</Button>
             </Link>
           </div>
         </div>
