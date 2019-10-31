@@ -1,62 +1,95 @@
 import React from "react";
 import "./courseTest.css";
-import { Icon, Button, Radio, Table, Upload, message } from "antd";
+import { Icon, Button, Radio, Table, Upload, message, Select } from "antd";
 import net from "../../../../utils/net";
 import CourseCreate from "../courseCreate/courseCreate";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-const columns = [
+const { Option } = Select;
+const newColumns = [
+  { title: '课程名称', dataIndex: 'name', key: 'name' },
   {
-    title: "名称",
-    dataIndex: "name",
-    render: text => <a>{text}</a>
+    title: '课程章节',
+    dataIndex: 'chapters',
+    key: 'chapters',
+    render: chapters => { 
+      if (chapters.length<1) {
+        return;
+      }
+      // let temp = chapters[0].name;
+      return (
+        <Select
+          // defaultValue={temp}
+          style={{ width: 120 }}
+          // onChange={handleChange}
+        >
+          {/* {chapters.map(function (item) { 
+            return <Option value={item.id}>{item.testName}</Option>
+          }
+          )} */}
+        </Select>
+      )
+    }
   },
-  {
-    title: '状态',
-    dataIndex: 'state',
-  },
-  {
-    title: '题目统计',
-    dataIndex: 'subject',
-  },
-  {
-    title: '更新人/时间',
-    dataIndex: 'adminTime',
-  },
-  {
-    title: '操作',
-    dataIndex: 'action',
-  }
+  { title: '课程介绍', dataIndex: 'introduce', key: 'introduce' }
 ];
-const data = [];
+const newData = [
+  {
+    key: 1,
+    name: 'John Brown',
+    chapters: 32,
+    introduce: 'New York No. 1 Lake Park',
+  },
+  {
+    key: 2,
+    name: 'John Brown',
+    chapters: 32,
+    introduce: 'New York No. 1 Lake Park',
+  },
+  {
+    key: 3,
+    name: 'John Brown',
+    chapters: 32,
+    introduce: 'New York No. 1 Lake Park'
+  },
+];
 export default class MyCourseTest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      flag: true
+      allLeaf: [],
+      chapterId:null
     };
   }
-  showImportBox() {
-    this.refs.importBox.style.display = "block";
-  };
-  closeImportBox() {
-    this.refs.importBox.style.display = "none";
-  };
+  componentDidMount() {
+    let that = this;
+    net.get("courses/and/chapters", {}, function (ob) {
+      console.log(ob.data.object);
+      that.setState({
+        allLeaf: ob.data.object
+      });
+    });
+  }
 
+  expandedRowRender = () => {
+    const columns = [
+      { title: "试题题目", dataIndex: "testName", key: "testName" },
+      {
+        title: "操作",
+        key: "action",
+        render: () => (
+          <span>预览</span>
+        )
+      }
+    ];
+    const testData = [
+      {
+        key: 1,
+        testName:"这是第一个题",
+      }
+    ];
+    return <Table columns={columns} dataSource={testData} pagination={false} />;
+  };
   render() {
-    const rowSelection = {
-      onChange: (selectedRowKeys, selectedRows) => {
-        console.log(
-          `selectedRowKeys: ${selectedRowKeys}`,
-          "selectedRows: ",
-          selectedRows
-        );
-      },
-      getCheckboxProps: record => ({
-        disabled: record.name === "Disabled User", // Column configuration not to be checked
-        name: record.name
-      })
-    };
     return (
       <div className="courseTestBox">
         <div className="testHeader">
@@ -79,13 +112,13 @@ export default class MyCourseTest extends React.Component {
           </div>
         </div>
         <Table
-          rowSelection={rowSelection}
-          columns={columns}
-          dataSource={data}
-          style={{ width: "98.5%", margin: "0 auto", margin: "10px" }}
+          columns={newColumns}
+          style={{ width: "98.5%", margin: "0 auto", margin: "10px"}}
+          expandedRowRender={this.expandedRowRender}
+          dataSource={this.state.allLeaf}
           pagination={{ pageSize: 12, position: "right" }}
         />
-        <Button style={{ backgroundColor: "#ECECEC" }}>删除</Button>
+        {/* <Button style={{ backgroundColor: "#ECECEC" }}>删除</Button> */}
       </div>
     );
   }
