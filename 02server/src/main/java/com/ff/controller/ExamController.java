@@ -19,7 +19,7 @@ import com.ff.service.ExamService;
 @RequestMapping("/noi")
 public class ExamController {
 	@Autowired
-	private ExamService examService;
+	private ExamService examService;//to-lay-down
 
 	@RequestMapping(value = "insert/exam/chapter")
 	@ResponseBody

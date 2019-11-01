@@ -13,7 +13,7 @@ net.get = function(api, object, call) {
   let url = serverUrl + api;
   //2,根据请求地址和请求数据发出请求
 
-  console.log(url);
+  // console.log(url);
   axios
     .get(url, {
       params: object

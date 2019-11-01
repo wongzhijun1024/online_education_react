@@ -67,8 +67,8 @@
 	</update>
 
 	<!-- 根据chapterId更新视频 -->
-	<update id="updateBychapterId" parameterType="com.ff.pojo.Video">
-		update video
+	<update id="updateByVideoId" parameterType="com.ff.pojo.Video">
+		update videos
 		<set>
 			<if test="url != null">
 				url = #{url},
@@ -80,7 +80,7 @@
 				v_order = #{order},
 			</if>
 		</set>
-		where chapter_id = #{chapterId}
+		where id = #{id}
 	</update>
 
 
