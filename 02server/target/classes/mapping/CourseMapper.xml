@@ -40,7 +40,7 @@
 
 		<collection property="chapters" javaType="ArrayList"
 			ofType="com.ff.pojo.Chapter" column="id"
-			select="com.ff.dao.ChapterMapper.getChaptersByCourseId">
+			select="com.ff.dao.ChapterMapper.selectAllQuestionsOfChaptersByCoursesId">
 		</collection>
 
 	</resultMap>
