@@ -97,7 +97,9 @@ export default class CourseDocument extends React.Component {
           let url = ob.url;
           let id = ob.id;
           return(
-             <Button onClick = {this.playVideo.bind(null,url,id)}><Icon type="play-circle" /></Button>
+             <Button 
+             onClick = {this.playVideo.bind(null,url,id)} 
+             style={{ background: "#43BB60",color:"white"}}>上传视频</Button>
           );
         }
       }
@@ -120,7 +122,7 @@ export default class CourseDocument extends React.Component {
     // return <Table  columns={columns} dataSource={data} pagination={false} />
       for(let i = 0; i<length; i++){
         if(record.id===i+1){
-          return <Table key = {i} columns={columns} dataSource={this.state.videoData} pagination={false} />
+          return <Table key = {i} columns={columns} dataSource={buffer} pagination={false} />
         }
       }
       // return <Table  columns={columns} dataSource={dataBuffer} pagination={false} />
