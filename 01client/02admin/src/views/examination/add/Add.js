@@ -2,81 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./Add.css";
 import net from "../../../utils/net";
-import { Form, Select, Input, Button, Radio, Cascader } from "antd";
+import StringUtil from "../../../utils/StringUtil";
+import { Form, Select, Input, Button, Radio, Cascader, message } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-const { Option } = Select;
 const { TextArea } = Input;
-const options = [
-  {
-    value: "C++",
-    label: "C++",
-    children: [
-      {
-        value: "hangzhou",
-        label: "Hangzhou",
-        children: [
-          {
-            value: "xihu",
-            label: "West Lake"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    value: "数据结构",
-    label: "数据结构",
-    children: [
-      {
-        value: "nanjing",
-        label: "Nanjing",
-        children: [
-          {
-            value: "zhonghuamen",
-            label: "Zhong Hua Men"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    value: "Python",
-    label: "Python",
-    children: [
-      {
-        value: "nanjing",
-        label: "Nanjing",
-        children: [
-          {
-            value: "zhonghuamen",
-            label: "Zhong Hua Men"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    value: "Java",
-    label: "Java",
-    children: [
-      {
-        value: "nanjing",
-        label: "Nanjing",
-        children: [
-          {
-            value: "zhonghuamen",
-            label: "Zhong Hua Men"
-          }
-        ]
-      }
-    ]
-  }
-];
-
-function onChange(value) {
-  console.log(value);
-}
 
 // Just show the latest item.
 function displayRender(label) {
@@ -85,19 +15,29 @@ function displayRender(label) {
 class ExaminationAdd extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
-      data: []
+      data: [],
+      chapterId: -1,
+      courses: []
     };
-    console.log(props);
   }
+
+  componentDidMount = e => {
+    let that = this;
+    net.post("courses/and/chapters", {}, function(ob) {
+      let courses = StringUtil.CascaderData(ob.object);
+      console.log(courses);
+      that.setState({
+        courses: courses
+      });
+    });
+  };
   handleSubmit = e => {
-    console.log(e)
+    console.log(e);
   };
   upload = e => {
-
     let form = this.refs.form;
-    console.log(form.props.children)
+    console.log(form.props.children);
     return;
     //获得题干
     let title = this.refs.title.state.value;
@@ -131,7 +71,7 @@ class ExaminationAdd extends React.Component {
         files: fileList,
         order: order
       },
-      function (ob) {
+      function(ob) {
         console.log(ob);
       }
     );
@@ -148,13 +88,21 @@ class ExaminationAdd extends React.Component {
     });
   };
   handleSelectChange = value => {
-    console.log(value);
     this.props.form.setFieldsValue({
       note: `Hi, ${value === "本课程" ? "其他课程" : "本课程"}!`
     });
   };
   toQuery() {
     this.props.history.push(`/home/examination/query`);
+  }
+
+  onCascaderChange(value) {
+    if (value.length <= 1) {
+      message.error("请选择章节！");
+    }
+    this.setState({
+      chapterId: value[1]
+    });
   }
 
   render() {
@@ -167,32 +115,17 @@ class ExaminationAdd extends React.Component {
         </div>
 
         <div className="bank-content">
-          <Form
-            labelCol={{ span: 5 }}
-            wrapperCol={{ span: 12 }}
-            ref="form"
-          >
+          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} ref="form">
             <Form.Item label="从属">
-              {/* <Select
-                style={{ width: "200px" }}
-                placeholder="请选择课程"
-                onChange={this.handleSelectChange}
-              >
-                <Option value="male">本课程</Option>
-                <Option value="female">其他课程</Option>
-              </Select> */}
               <Cascader
-                options={options}
+                options={this.state.courses}
                 expandTrigger="hover"
                 displayRender={displayRender}
-                onChange={onChange}
+                onChange={this.onCascaderChange.bind(this)}
                 style={{ width: "200px" }}
                 placeholder="请选择课程"
-
               />
             </Form.Item>
-
-
 
             <Form.Item label="题干" ref="title">
               {getFieldDecorator("stem", {
@@ -200,7 +133,11 @@ class ExaminationAdd extends React.Component {
               })(<TextArea rows={4} />)}
             </Form.Item>
 
-            <Radio.Group name="radiogroup" defaultValue={1} className="bankSelectcontent">
+            <Radio.Group
+              name="radiogroup"
+              defaultValue={1}
+              className="bankSelectcontent"
+            >
               <Form.Item label="选项A" ref="textA">
                 {getFieldDecorator("selectA", {
                   rules: [{ required: true }]
@@ -234,15 +171,15 @@ class ExaminationAdd extends React.Component {
                 <Radio value={44}>正确答案</Radio>
               </div>
             </Radio.Group>
-
-
-
-
           </Form>
         </div>
 
         <div className="bank2-buttom">
-          <Button type="primary" style={{ background: "#43BB60" }} onClick={this.toQuery.bind(this)}>
+          <Button
+            type="primary"
+            style={{ background: "#43BB60" }}
+            onClick={this.toQuery.bind(this)}
+          >
             保存并继续添加
           </Button>
           <Button
@@ -258,7 +195,6 @@ class ExaminationAdd extends React.Component {
             type="link"
             onClick={this.toQuery.bind(this)}
             style={{ color: "black" }}
-
           >
             返回
           </Button>

@@ -86,7 +86,7 @@ public class VideoServiceImpl implements VideoService {
 	public Msg updateVideoById(Video video, HttpServletRequest request) {
 		Msg msg = new Msg();
 		msg.setMsg("更新失败!");
-		if (video.getChapterId() != -1) {
+		if (video.getId() != -1) {
 
 			CosTool cosTool = new CosTool();
 			List<String> keyList = cosTool.uploadFile(CosTool.VIDEO_FOLDER, request);
@@ -96,7 +96,7 @@ public class VideoServiceImpl implements VideoService {
 				return msg;
 			}
 			video.setUrl(keyList.get(0));
-			if (videoMapper.updateBychapterId(video) == 1) {
+			if (videoMapper.updateByVideoId(video) == 1) {
 				msg.setMsg("更新成功！");
 				// 根据key值到腾讯服务器换视频地址
 				video.setUrl(cosTool.getUrl(video.getUrl()));
