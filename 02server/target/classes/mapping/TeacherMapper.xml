@@ -19,10 +19,10 @@
 	</select>
 
 	<select id="selectTeacher" resultMap="BaseResultMap">
-		select * from
-		teachers
+		sel		teachers
 		where
 		name = #{name}
-	</select>
+	</select>ect * from
+
 
 </mapper>

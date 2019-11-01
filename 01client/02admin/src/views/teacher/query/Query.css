@@ -1,37 +1,128 @@
-.teacherQueryView {
-    position: absolute;
-    margin: 0px;
-    padding: 0px;
-    width: 89.5%;
-    height: 90%;
+.box{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
-h1{
-    font-size: 24px;
+.title1{
+    width: 90%;
+    height: 40px;
+    font-size: 18px;
+    color: rgb(17, 17, 16);
+    border-bottom: 2px solid gainsboro;
+    margin:20px 0px 10px 0px;
 }
-.teacherShow{
-    width: 100%;
+.tab{
+    width: 90%;
+}
+.tab1{
     font-size: 20px;
+    
 }
-.showQuery{
+.line{
     width: 100%;
-    height: 50px;
-    background: white;
-    margin: 10px 0;
+    height: 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-radius: 5px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    
 }
-.showQuery>img{
-    width: 50px;
-    height: 50px;
-    border-radius:25px;
-    margin-right: 40px;
+.line_left{
+    width: 43%;
+    
+    border-bottom: 2px dashed rgb(146, 136, 136);
+    
 }
-.showQuery>img+div{
-    margin-right: 40px;
+.mid{
+    width: 130px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: unset;;
+   
+}
+.line_right{
+    width: 43%;
+    
+    border-bottom: 2px dashed rgb(146, 136, 136);
+    
+}
+.f{
+    height: 100px;
+    background-color:rgb(231, 225, 225);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    
+}
+.item1{
+    width: 240px;
+    height: 80px;
+    margin-left: -80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.item1 div{
+      width: 235px;
+      height: 25px;
+      display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    /* background: rgb(189, 196, 183); */
+     
+}
+.span1{
+    width: 18%;
+    height: 25px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 25px;
+}
+.span2{
+    width: 80%;
+    text-align: center;
+    line-height: 25px;
+    font-weight: 700;
+    
+}
+.item2{
+    width: 500px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.introduce{
+    width: 10%;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 80px;
+    font-weight: 600;
+    text-align: center;
+    background: rgb(196, 201, 192);
+}
+.content{
+    width: 70%;
+    height: 80px;
+    font-weight: 600;
+    border-radius: 5%;
+    background: rgb(196, 201, 192);
 }

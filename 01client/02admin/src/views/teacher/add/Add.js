@@ -98,7 +98,7 @@ export default class Add extends React.Component {
     console.log("上传数据");
     net.uploadFile(
       "teacherAdd",
-      { name: name, introduce: introduce, fileList: fileList[0] },
+      { name: name, introduce: introduce, files: fileList[0] },
       function(ob) {
         console.log(ob);
       }
@@ -123,6 +123,7 @@ export default class Add extends React.Component {
 
   displayAddForm() {
     this.refs.addform.style.display = "block";
+    console.log(this.refs.addform)
   }
   addFormNone() {
     this.refs.addform.style.display = "none";
