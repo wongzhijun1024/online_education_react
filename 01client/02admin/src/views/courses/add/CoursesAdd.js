@@ -2,10 +2,10 @@ import React from "react";
 import "./CoursesAdd.css";
 import { Tabs } from "antd";
 import net from "../../../utils/net";
-import CourseInformation from "../01components/courseInformation/CourseInformation.js";
+import CourseInformation from "../../../components/courseInformation/CourseInformation";
 import CourseTest from "../01components/courseTest/courseTest";
 import CourseCreate from "../01components/courseCreate/courseCreate";
-import CourseDocument from "../01components/courseDocument/CourseDocument.js";
+import CourseDocument from "../../../components/courseDocument/CourseDocument";
 import CourseBank from "../01components/courseBank/CourseBank.js"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const { TabPane } = Tabs;

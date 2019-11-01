@@ -1,7 +1,7 @@
 import React from "react";
 import "./CourseInformation.css";
 import { Upload, Input, Icon, Button,Radio,Select } from "antd";
-import net from "../../../../utils/net";
+import net from "../../utils/net";
 const { Option } = Select;
 
 export default class CourseInformation extends React.Component {
