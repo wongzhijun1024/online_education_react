@@ -224,20 +224,34 @@ export default class MyCourseCreate extends React.Component {
     super(props);
     this.state = {
       editorContent: '',
+      courseByChapter: [],
       value1: undefined,
       value2: undefined,
     };
   };
 
-  videoOnChange = value1 => {
-    console.log(value1);
-    this.setState({ value1 });
-  };
   testOnChange = value2 => {
     console.log(value2);
     this.setState({ value2 });
   };
 
+
+  componentDidMount() {
+    let that = this;
+    net.get("courses/and/chapters", {}, function (ob) {
+      console.log(ob.data.object);
+      that.setState({
+        courseByChapter: ob.data.object
+      });
+      let children = that.state.courseByChapter[0].chapters;
+      console.log(children);
+    });
+  };
+  videoOnChange = value1 => {
+    console.log(value1);
+    this.setState({ value1 });
+    console.log(this.state.courseByChapter);
+  };
   render() {
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
@@ -265,7 +279,7 @@ export default class MyCourseCreate extends React.Component {
                 style={{ width: 300 }}
                 value={this.state.value1}
                 dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                treeData={VideoTreeData}
+                treeData={this.state.courseByChapter}
                 placeholder="请选择相应视频"
                 // treeDefaultExpandAll
                 onChange={this.videoOnChange}
