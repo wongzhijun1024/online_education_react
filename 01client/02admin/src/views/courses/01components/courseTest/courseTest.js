@@ -82,10 +82,7 @@ export default class MyCourseTest extends React.Component {
     });
   }
 
-  expandedRowRender = (record, index, indent, expanded) => {
-    console.log(record, index, indent, expanded);
-    console.log(record.id);
-    
+  expandedRowRender = record => {
     const columns = [
       { title: "试题题目", dataIndex: "name", key: "name" },
       { title: "A", dataIndex: "textA", key: "textA" },
@@ -95,10 +92,8 @@ export default class MyCourseTest extends React.Component {
       { title: "正确答案", dataIndex: "answer", key: "answer" }
     ];
     let allLeaf=this.state.allLeaf;
-    console.log(allLeaf);
     let dataBuffer=[];
     let buffer=this.state.questionData;
-    console.log(buffer);
     for (let i = 0; i < allLeaf.length; i++) {
       if (record.id) {
         
