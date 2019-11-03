@@ -107,13 +107,7 @@ class ExaminationAdd extends React.Component {
     })
   }
 
-  // getValue1 = (event) => {
-  //   //获取单选框选中的值
-  //   console.log(event.target.value);
-  //   this.setState({
-  //     deep: event.target.value
-  //   })
-  // }
+
 
   onCascaderChange(value) {
     if (value.length <= 1) {
