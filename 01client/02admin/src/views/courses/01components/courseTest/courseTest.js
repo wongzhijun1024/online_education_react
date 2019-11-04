@@ -45,7 +45,7 @@ export default class MyCourseTest extends React.Component {
               }
               //获取第一个章节为默认值
             let temp = chapters[0].name;
-            console.log(chapters[0].questions);
+            // console.log(chapters[0].questions);
             return (
               <Select
                 defaultValue={temp}
