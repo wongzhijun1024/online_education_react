@@ -239,7 +239,7 @@ export default class Add extends React.Component {
             <Button onClick={this.upload}>提交</Button>
             <Button
               type="primary"
-              style={{ background: "red" }}
+             
               onClick={this.addFormNone.bind(this)}
             >
               取消
