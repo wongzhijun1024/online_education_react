@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ff.pojo.Chapter;
 import com.ff.pojo.Msg;
 import com.ff.pojo.Question;
 import com.ff.service.QuestionService;
@@ -22,12 +24,12 @@ public class QuestionController {
 
 		return questionService.insert(question);
 	}
-	
+
 	@RequestMapping(value = "question/and/chapterid")
 	@ResponseBody
-	public Msg selectQuestionbyid(Question question, HttpServletResponse resp, HttpServletRequest request) {
+	public Msg selectQuestionbyid(Chapter chapter, HttpServletResponse resp, HttpServletRequest request) {
 
-		return questionService.selectQuestionsByChapterid(question);
+		return questionService.selectQuestionsByChapterid(chapter);
 	}
-	
+
 }

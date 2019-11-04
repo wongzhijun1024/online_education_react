@@ -44,7 +44,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 		CosTool cosTool = new CosTool();
 		List<String> keyList = cosTool.uploadFile(CosTool.IMAGE_FOLDER, request);
-		System.out.print(keyList);
+
 		if (keyList.size() == 0) {
 			msg.setMsg("图片添加失败!");
 			return msg;

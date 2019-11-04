@@ -25,9 +25,10 @@
 		<result column="name" property="name" />
 		<result column="c_order" property="order" />
 		<collection property="questions" javaType="ArrayList"
-	ofType="com.ff.pojo.Question" column="id"
-	select="com.ff.dao.QuestionMapper.selectQuestionsByChapterId">
+			ofType="com.ff.pojo.Question" column="id"
+			select="com.ff.dao.QuestionMapper.selectQuestionsByChapterId">
 		</collection>
+
 	</resultMap>
 
 
@@ -48,7 +49,7 @@
 
 	<select id="selectChaptersByCourseIdLeaf"
 		resultMap="ChapterMapLeaf">
-		select *from
+		select * from
 		chapters
 		where course_id = #{id} order by
 		c_order
@@ -57,10 +58,8 @@
 
 	<select id="selectAllQuestionsOfChaptersByCoursesId"
 		resultMap="ChaptersAndQuestionsMap">
-		select *from
-		chapters
-		where course_id = #{id} order by
-		c_order
+		select * from chapters
+		where course_id = #{id}
 	</select>
 
 
