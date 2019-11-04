@@ -61,9 +61,8 @@
   width: 90%;
   
 }
-.intro_title{
-  display: flex;
-  justify-content: space-between;
+.table{
+  width: 90%;
 }
 .demo-loading-container {
   position: absolute;

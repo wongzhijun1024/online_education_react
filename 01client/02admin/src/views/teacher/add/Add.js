@@ -1,6 +1,6 @@
 import React from "react";
 import "./Add.css";
-import { Upload, Input, Icon, Button, message, List, Avatar, Spin, Radio, Select } from "antd";
+import { Upload, Input, Icon, Button, message,Table, Radio, Select } from "antd";
 import net from "../../../utils/net";
 import reqwest from 'reqwest';
 
@@ -9,63 +9,19 @@ import InfiniteScroll from 'react-infinite-scroller';
 const { Option } = Select;
 const { TextArea } = Input;
 const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
-const data = [
+const columns = [
   {
-    id: 1,
-    name: "张老师",
-    src:
-      "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3800569146,487832050&fm=26&gp=0.jpg",
-    introduce: "教c的老师"
+    title: '姓名',
+    dataIndex: 'name',
   },
   {
-    id: 2,
-    name: "李老师",
-    src:
-      "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1916592768,2636827218&fm=26&gp=0.jpg",
-    introduce: "教java的老师"
+    title: '照片',
+    dataIndex: 'tkey',
   },
   {
-    id: 3,
-    name: "王老师",
-    src:
-      "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3064439120,2247550694&fm=26&gp=0.jpg",
-    introduce: "教JavaScript的老师"
+    title: '介绍',
+    dataIndex: 'introduce',
   },
-  {
-    id: 4,
-    name: "黄老师",
-    src:
-      "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3021031590,4288971877&fm=26&gp=0.jpg",
-    introduce: "教PHP的老师"
-  },
-  {
-    id: 5,
-    name: "张老师",
-    src:
-      "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3800569146,487832050&fm=26&gp=0.jpg",
-    introduce: "教c的老师"
-  },
-  {
-    id: 6,
-    name: "李老师",
-    src:
-      "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1916592768,2636827218&fm=26&gp=0.jpg",
-    introduce: "教java的老师"
-  },
-  {
-    id: 7,
-    name: "王老师",
-    src:
-      "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3064439120,2247550694&fm=26&gp=0.jpg",
-    introduce: "教JavaScript的老师"
-  },
-  {
-    id: 8,
-    name: "黄老师",
-    src:
-      "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3021031590,4288971877&fm=26&gp=0.jpg",
-    introduce: "教PHP的老师"
-  }
 ];
 function getBase64(img, callback) {
   const reader = new FileReader();
@@ -82,7 +38,7 @@ export default class Add extends React.Component {
       loading: false,
       subject: '',
       introduceText: '',
-      teacherData:[],
+      teacherData: [],
     };
   }
 
@@ -116,11 +72,12 @@ export default class Add extends React.Component {
   upload = e => {
     //获得姓名
 
-    console.log(this.refs.inputIntroduce)
+    console.log(this.refs.inputIntroduce);
+    console.log(this.refs.inputIntroduce.props.value);
     let name = this.refs.inputName.state.value;//姓名
     let sexValue = this.refs.inputSex.state.value;//性别
     let subject = this.state.subject;//科目
-    let introduce = this.state.introduceText;//介绍
+    let introduce = this.refs.inputIntroduce.props.value;//介绍
 
     if (sexValue == 1) {
       let sex = "男";
@@ -135,20 +92,23 @@ export default class Add extends React.Component {
     console.log("上传数据");
     net.uploadFile(
       "teacherAdd",
-      { name: name, introduce: introduce, fileList: fileList[0] },
-      function(ob) {
+      { name: name, introduce: introduce, files: fileList },
+      function (ob) {
         console.log(ob);
       }
     );
   };
   componentDidMount() {
+    let that=this;
     this.fetchData(res => {
       this.setState({
         data: res.results,
       });
     });
-    net.get("teachers",{},function(ob){
-      console.log(ob.data);
+    net.get("teachers", {}, function (ob) {
+      let teacherdata = ob.data.object;
+      console.log(teacherdata);
+      that.setState({ teacherData: teacherdata });
     })
   }
 
@@ -229,38 +189,11 @@ export default class Add extends React.Component {
               添加老师
           </div>
           </div>
-      <div className="intro_title"></div>
-          <div className="demo-infinite-container">
-            <InfiniteScroll
-              initialLoad={false}
-              pageStart={0}
-              loadMore={this.handleInfiniteOnLoad}
-              hasMore={!this.state.loading && this.state.hasMore}
-              useWindow={false}
-            >
-              <List
-                dataSource={data}
-                renderItem={item => (
-                  <List.Item key={item.id}>
-                    <List.Item.Meta
-                      avatar={
-                        <Avatar src={item.src} />
-                      }
-                      title={<a href="https://ant.design">{item.name}</a>}
-                      description={item.introduce}
-                    />
-                    <div><button>删除</button></div>
-                  </List.Item>
-                )}
-              >
-                {this.state.loading && this.state.hasMore && (
-                  <div className="demo-loading-container">
-                    <Spin />
-                  </div>
-                )}
-              </List>
-            </InfiniteScroll>
-          </div>
+          {/* <div className="intro_title">
+        <div>老师信息</div><div className="right">修改</div>
+      </div> */}
+
+          <Table columns={columns} dataSource={this.state.teacherData} size="middle" className="table"/>
 
 
 
