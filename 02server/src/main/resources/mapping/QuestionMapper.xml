@@ -23,7 +23,7 @@
 		#{chapterId},#{textA},#{textB},#{textC},#{textD},#{answer})
 	</insert>
 
-	<select id="selectQuestionsByChapterId" resultMap="questionMap">
+	<select id="selectQuestionsBychapterId" resultMap="questionMap">
 		select *
 		from
 		questions

@@ -25,6 +25,7 @@ public interface QuestionMapper {
 	 * @param chapter
 	 * @return
 	 */
-	List<Question> selectQuestionsBychapterId(Chapter chapter);
+	List<Question> selectQuestionsBychapterId(int id);
+
 
 }

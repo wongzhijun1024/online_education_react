@@ -19,5 +19,13 @@ public interface QuestionService {
 	 * @return
 	 */
 	Msg selectQuestionsAll();
+	
+	/**
+	 * 通过章节id查询题
+	 * 
+	 * @return
+	 */
+	
+	Msg selectQuestionsByChapterid(Question question);
 
 }

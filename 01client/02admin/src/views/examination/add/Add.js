@@ -6,7 +6,7 @@ import StringUtil from "../../../utils/StringUtil";
 import { Form, Select, Input, Button, Radio, Cascader, message } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-const { TextArea } = Input;
+// const { TextArea } = Input;
 
 // Just show the latest item.
 function displayRender(label) {
@@ -15,16 +15,19 @@ function displayRender(label) {
 class ExaminationAdd extends React.Component {
   constructor(props) {
     super(props);
+    // this.handleTextareaChange = this.handleTextareaChange.bind(this);
     this.state = {
       data: [],
       chapterId: -1,
-      courses: []
+      courses: [],
+      answer: "0",
+      deep: "a"
     };
   }
 
   componentDidMount = e => {
     let that = this;
-    net.post("courses/and/chapters", {}, function(ob) {
+    net.post("courses/and/chapters", {}, function (ob) {
       let courses = StringUtil.CascaderData(ob.object);
       console.log(courses);
       that.setState({
@@ -35,29 +38,35 @@ class ExaminationAdd extends React.Component {
   handleSubmit = e => {
     console.log(e);
   };
+  // upload = e => {
+  //   let form = this.refs.form;
+  //   console.log(form.props.children);
+  //   let that = this;
+  //   //获得题干
+  //   let title = this.refs.title.state.value;
+
+  // };
   upload = e => {
     let form = this.refs.form;
     console.log(form.props.children);
-    return;
     //获得题干
+    // console.log(title);
     let title = this.refs.title.state.value;
+    console.log(title);
     //获得选项A
     let textA = this.refs.textA.state.value;
-    console.log(textA);
     //获得选项B
     let textB = this.refs.textB.state.value;
     //获得选项C
     let textC = this.refs.textC.state.value;
     //获得选项D
     let textD = this.refs.textD.state.value;
-    //获得文件的数据
-    let fileList = this.state.fileList;
+    //获得答案
+    // let answer = this.refs.answer.state.value;
+    // console.log(answer);y
     //章节id
-    let chapterId = 2;
-    // 答案
-    let answer = "textA";
-    // 章节顺序
-    let order = 0;
+    let chapterId = this.state.chapterId;
+
     net.uploadFile(
       "question/add",
       {
@@ -66,27 +75,21 @@ class ExaminationAdd extends React.Component {
         textB: textB,
         textC: textC,
         textD: textD,
-        answer: answer,
-        chapterId: chapterId,
-        files: fileList,
-        order: order
+        // answer: answer,
+        chapterId: chapterId
       },
-      function(ob) {
+      function (ob) {
         console.log(ob);
+        if (ob.code === -1) {
+          alert("保存失败");
+        } else {
+          alert("保存成功");
+        }
+
       }
     );
   };
-  beforeUpload = file => {
-    console.log(file);
-    //获得文件的数据
-    let fileList = this.state.fileList;
-    //添加文件
-    fileList.push(file);
-    //覆盖数据
-    this.setState({
-      fileList: fileList
-    });
-  };
+
   handleSelectChange = value => {
     this.props.form.setFieldsValue({
       note: `Hi, ${value === "本课程" ? "其他课程" : "本课程"}!`
@@ -95,6 +98,16 @@ class ExaminationAdd extends React.Component {
   toQuery() {
     this.props.history.push(`/home/examination/query`);
   }
+  getValue = (event) => {
+    //获取单选框选中的值
+    console.log(event.target.value);
+    this.setState({
+      answer: event.target.value,
+      deep: event.target.value
+    })
+  }
+
+
 
   onCascaderChange(value) {
     if (value.length <= 1) {
@@ -104,9 +117,17 @@ class ExaminationAdd extends React.Component {
       chapterId: value[1]
     });
   }
+  // handleTextareaChange(e) {
+  //   console.log(e);
+  //   this.setState({
+  //     textareaValue: e.target.value
+  //   })
 
+  // }
   render() {
-    const { getFieldDecorator } = this.props.form;
+    // const { getFieldDecorator } = this.props.form;
+    // const { textareaValue } = this.state;
+
     return (
       <div className="coursesBankBox-2">
         <div className="banktitle-2">题库添加</div>
@@ -115,7 +136,7 @@ class ExaminationAdd extends React.Component {
         </div>
 
         <div className="bank-content">
-          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} ref="form">
+          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} ref="form" >
             <Form.Item label="从属">
               <Cascader
                 options={this.state.courses}
@@ -126,11 +147,17 @@ class ExaminationAdd extends React.Component {
                 placeholder="请选择课程"
               />
             </Form.Item>
+            <Form.Item label="难度">
+              <Radio.Group>
+                <Radio value="a" onChange={(e) => this.getValue(e)}>简单</Radio>
+                <Radio value="b" onChange={(e) => this.getValue(e)}>一般</Radio>
+                <Radio value="c" onChange={(e) => this.getValue(e)}>困难</Radio>
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item label="题干">
 
-            <Form.Item label="题干" ref="title">
-              {getFieldDecorator("stem", {
-                rules: [{ required: true }]
-              })(<TextArea rows={4} />)}
+              <Input ref="title" placeholder="" />
+
             </Form.Item>
 
             <Radio.Group
@@ -138,37 +165,31 @@ class ExaminationAdd extends React.Component {
               defaultValue={1}
               className="bankSelectcontent"
             >
-              <Form.Item label="选项A" ref="textA">
-                {getFieldDecorator("selectA", {
-                  rules: [{ required: true }]
-                })(<TextArea rows={4} />)}
+              <Form.Item label="选项A" >
+
+                <Input ref="textA" placeholder="" />
+
               </Form.Item>
               <div className="readySelect">
-                <Radio value={11}>正确答案</Radio>
+                <Radio value="0" onChange={(e) => this.getValue(e)}>正确答案</Radio>
               </div>
-              <Form.Item label="选项B" ref="textB">
-                {getFieldDecorator("selectB", {
-                  rules: [{ required: true }]
-                })(<TextArea rows={4} />)}
+              <Form.Item label="选项B" >
+                <Input ref="textB" placeholder="" />
               </Form.Item>
               <div className="readySelect">
-                <Radio value={22}>正确答案</Radio>
+                <Radio value="1" onChange={(e) => this.getValue(e)}>正确答案</Radio>
               </div>
-              <Form.Item label="选项C" ref="textC">
-                {getFieldDecorator("selectC", {
-                  rules: [{ required: true }]
-                })(<TextArea rows={4} />)}
+              <Form.Item label="选项C" >
+                <Input ref="textC" placeholder="" />
               </Form.Item>
               <div className="readySelect">
-                <Radio value={33}>正确答案</Radio>
+                <Radio value="2" onChange={(e) => this.getValue(e)}>正确答案</Radio>
               </div>
-              <Form.Item label="选项D" ref="textD">
-                {getFieldDecorator("selectD", {
-                  rules: [{ required: true }]
-                })(<TextArea rows={4} />)}
+              <Form.Item label="选项D" >
+                <Input ref="textD" placeholder="" />
               </Form.Item>
               <div className="readySelect">
-                <Radio value={44}>正确答案</Radio>
+                <Radio value="3" onChange={(e) => this.getValue(e)}>正确答案</Radio>
               </div>
             </Radio.Group>
           </Form>
