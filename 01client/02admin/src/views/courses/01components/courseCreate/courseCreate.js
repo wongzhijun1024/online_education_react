@@ -7,220 +7,6 @@ import {
   Link
 } from 'react-router-dom';
 const { TreeNode } = TreeSelect;
-const columns = [
-  {
-    title: "名称",
-    dataIndex: "name",
-    render: text => <a>{text}</a>
-  },
-  {
-    title: '状态',
-    dataIndex: 'state',
-  },
-  {
-    title: '题目统计',
-    dataIndex: 'subject',
-  },
-  {
-    title: '更新人/时间',
-    dataIndex: 'adminTime',
-  },
-  {
-    title: '操作',
-    dataIndex: 'action',
-  }
-];
-const VideoTreeData = [
-  {
-    title: 'C++',
-    value: 'C++',
-    key: '视频/C++',
-    children: [
-      {
-        title: '第一章',
-        value: '第一章',
-        key: '视频/C++/第一章',
-        children: [
-          {
-            title: '视频1',
-            value: '视频1',
-            key: '视频/C++/第一章/视频1'
-          }
-        ]
-      },
-      {
-        title: '第二章',
-        value: '第二章',
-        key: '视频/C++/第二章',
-        children: [
-          {
-            title: '视频2',
-            value: '视频2',
-            key: '视频/C++/第二章/视频2'
-          }
-        ]
-      },
-    ],
-  },
-  {
-    title: '数据结构',
-    value: '数据结构',
-    key: '视频/数据结构',
-    children: [
-      {
-        title: '第一章',
-        value: '第一章',
-        key: '视频/数据结构/第一章',
-        children: [
-          {
-            title: '视频1',
-            value: '视频1',
-            key: '视频/数据结构/第一章/视频1'
-          }
-        ]
-      },
-      {
-        title: '第二章',
-        value: '第二章',
-        key: '视频/数据结构/第二章',
-        children: [
-          {
-            title: '视频1',
-            value: '视频1',
-            key: '视频/数据结构/第二章/视频1'
-          }
-        ]
-      },
-    ],
-  },
-  {
-    title: 'Java',
-    value: 'Java',
-    key: '视频/Java',
-    children: [
-      {
-        title: '第一章',
-        value: '第一章',
-        key: '视频/Java/第一章',
-        children: [
-          {
-            title: '视频1',
-            value: '视频1',
-            key: '视频/Java/第一章/视频1'
-          }
-        ]
-      },
-      {
-        title: '第二章',
-        value: '第二章',
-        key: '视频/Java/第二章',
-        children: [
-          {
-            title: '视频1',
-            value: '视频1',
-            key: '视频/Java/第二章/视频1'
-          }
-        ]
-      },
-    ],
-  }
-];
-const TestTreeData = [
-  {
-    title: 'C++',
-    value: 'C++',
-    key: '试题/C++',
-    children: [
-      {
-        title: '第一章',
-        value: '第一章',
-        key: '试题/C++/第一章',
-        children: [
-          {
-            title: '试题1',
-            value: '试题1',
-            key: '试题/C++/第一章/试题1'
-          }
-        ]
-      },
-      {
-        title: '第二章',
-        value: '第二章',
-        key: '试题/C++/第二章',
-        children: [
-          {
-            title: '试题1',
-            value: '试题1',
-            key: '试题/C++/第二章/试题1'
-          }
-        ]
-      },
-    ],
-  },
-  {
-    title: '数据结构',
-    value: '数据结构',
-    key: '试题/数据结构',
-    children: [
-      {
-        title: '第一章',
-        value: '第一章',
-        key: '试题/数据结构/第一章',
-        children: [
-          {
-            title: '试题1',
-            value: '试题1',
-            key: '试题/数据结构/第一章/试题1'
-          }
-        ]
-      },
-      {
-        title: '第二章',
-        value: '第二章',
-        key: '试题/数据结构/第二章',
-        children: [
-          {
-            title: '试题1',
-            value: '试题1',
-            key: '试题/数据结构/第二章/试题1'
-          }
-        ]
-      },
-    ],
-  },
-  {
-    title: 'Java',
-    value: 'Java',
-    key: '试题/Java',
-    children: [
-      {
-        title: '第一章',
-        value: '第一章',
-        key: '试题/Java/第一章',
-        children: [
-          {
-            title: '试题1',
-            value: '试题1',
-            key: '试题/Java/第一章/试题1'
-          }
-        ]
-      },
-      {
-        title: '第二章',
-        value: '第二章',
-        key: '试题/Java/第二章',
-        children: [
-          {
-            title: '试题1',
-            value: '试题1',
-            key: '试题/Java/第二章/试题1'
-          }
-        ]
-      },
-    ],
-  }
-];
-const data = [];
 export default class MyCourseCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -229,7 +15,39 @@ export default class MyCourseCreate extends React.Component {
       courseByChapter: [],
       allQuestions: [],
       value1: null,
-      value2: null
+      value2: null,
+      questionData: [],
+      value: undefined,
+      fileList:[],
+      columns: [
+        {
+          title: "题目",
+          dataIndex: "title",
+          render: text => <a>{text}</a>
+        },
+        {
+          title: '选项A',
+          dataIndex: 'textA',
+        },
+        {
+          title: '选项B',
+          dataIndex: 'textB',
+        },
+        {
+          title: '选项C',
+          dataIndex: 'textC',
+        },
+        {
+          title: '选项D',
+          dataIndex: 'textD',
+        },
+        {
+          title: '正确答案',
+          dataIndex: 'answer',
+        }
+      ],
+      chapterId: 1,
+      questionIds: []
     };
   };
 
@@ -239,19 +57,20 @@ export default class MyCourseCreate extends React.Component {
       let courseByChapters = StringUtil.CascaderData(ob.object);
       that.setState({
         courseByChapter: courseByChapters
+        // courseByChapter:ob.object
       });
     });
     net.post("questions/all", {}, function (ob) {
       // let allQuestions = StringUtil.CascaderData(ob.object);
       // console.log(allQuestions);
       that.setState({
-        allQuestions:ob.object
+        allQuestions: ob.object
         // allQuestions: allQuestions
       })
     })
   };
   showTreeList = () => {
-    let allQuestions = this.state.allQuestions;    
+    let allQuestions = this.state.allQuestions;
     let length = allQuestions.length;
     if (length < 1) {
       return;
@@ -260,20 +79,23 @@ export default class MyCourseCreate extends React.Component {
       return (
         <TreeNode
           value={item.name}
-          title={item.name} key={item.id}>
+          title={item.name}
+        // key={item.id}
+        >
           {item.chapters.map(function (item1) {
             return (
               <TreeNode
                 value={item1.id}
                 title={item1.name}
-                key={item1.id}
+              // onChange={this.handleChange}
+              // key={item1.id}
               >
                 {item1.questions.map(function (item2) {
                   return (
                     <TreeNode
                       value={item2.id}
                       title={item2.title}
-                      key={item2.id}
+                    // key={item2.id}
                     ></TreeNode>
                   );
                 })}
@@ -285,12 +107,35 @@ export default class MyCourseCreate extends React.Component {
     });
     return allQuestion;
   };
-  videoOnChange = value1 => {
-    this.setState({ value1 });
+  handleChange = value => {
+    let that = this;
+    net.get("question/and/chapterid", {
+      id: value,
+    },
+      function (ob) {
+        that.setState({
+          questionData: ob.data.object,
+          chapterId: value
+        })
+        console.log(ob.data.object);
+      }
+    )
   };
-  testOnChange = value2 => {
-    this.setState({ value2 });
-  }
+  upload =e=> {
+    let that = this;
+    let chapterId = this.state.chapterId;
+    console.log(chapterId);
+    
+    net.post(
+      "insert/exam/chapter",
+      {
+        chapterId: 0, questionIds: [1,2,3,4]
+      },
+      function (ob) {
+        console.log(ob);
+      }
+    )
+  };
   render() {
     const rowSelection = {
       onChange: (selectedRowKeys, selectedRows) => {
@@ -313,20 +158,20 @@ export default class MyCourseCreate extends React.Component {
         <div className="createBox">
           <div className="createHeader">
             <div className="createHeaderLeft">
-              <span className="leftVideo">课程章节视频</span>
+              <span className="leftVideo">课程章节</span>
               <TreeSelect
                 style={{ width: 300 }}
-                value={this.state.value1}
                 dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
                 treeData={this.state.courseByChapter}
                 placeholder="请选择相应章节"
                 treeDefaultExpandAll
-                onChange={this.videoOnChange}
+                onChange={this.handleChange}
                 key="chapter"
+                // ref={questionByChapter}
               >
               </TreeSelect>
             </div>
-            <div className="createHeaderRight">
+            {/* <div className="createHeaderRight">
               <span className="rightTest">课程章节试题</span>
               <TreeSelect
                 style={{ width: 300 }}
@@ -335,22 +180,25 @@ export default class MyCourseCreate extends React.Component {
                 // treeData={this.state.allQuestions}
                 placeholder="请选择相应试题"
                 treeDefaultExpandAll
-                onChange={this.testOnChange}
+                // onChange={this.testOnChange}
                 key="test"
               >
                 {this.showTreeList()}
               </TreeSelect>
-            </div>
+            </div> */}
           </div>
           <Table
             rowSelection={rowSelection}
-            columns={columns}
-            dataSource={data}
+            columns={this.state.columns}
+            dataSource={this.state.questionData}
             style={{ width: "100%", margin: "0 auto" }}
             pagination={{ pageSize: 12, position: "right" }}
           />
           <div className="keepBtn">
-            <Button style={{ backgroundColor: "#43BC60", width: "120px", textAlign: "center", color: "white" }}>保存</Button>
+            <Button
+              style={{ backgroundColor: "#43BC60", width: "120px", textAlign: "center", color: "white" }}
+              onClick={this.upload}
+            >保存</Button>
             <Link to={"/home/courses/add"}>
               <Button className="backToCreate">返回</Button>
             </Link>
