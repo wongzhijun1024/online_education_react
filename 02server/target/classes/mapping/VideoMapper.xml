@@ -66,4 +66,22 @@
 		where id = #{id}
 	</update>
 
+	<!-- 根据chapterId更新视频 -->
+	<update id="updateByVideoId" parameterType="com.ff.pojo.Video">
+		update videos
+		<set>
+			<if test="url != null">
+				url = #{url},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="order != null">
+				v_order = #{order},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+
 </mapper>

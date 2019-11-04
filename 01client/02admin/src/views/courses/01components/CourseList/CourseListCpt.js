@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React from "react";
 import { Table, Divider, Button, Select, Icon } from "antd";
 import "./CourseListCpt.css";
@@ -7,7 +8,6 @@ import { Link } from "react-router-dom";
 export default class MyUserAdd extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       courses: []
     };

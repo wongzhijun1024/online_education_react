@@ -13,7 +13,7 @@ net.get = function(api, object, call) {
   let url = serverUrl + api;
   //2,根据请求地址和请求数据发出请求
 
-  console.log(url);
+  // console.log(url);
   axios
     .get(url, {
       params: object
@@ -27,9 +27,9 @@ net.get = function(api, object, call) {
 };
 
 net.post = function(api, object, call) {
+  console.log(qs.stringify(object));
   //1,封装请求地址
   let url = serverUrl + api;
-  console.log("请求地址："+url);
   axios
     .post(url, qs.stringify(object))
     .then(function(response) {

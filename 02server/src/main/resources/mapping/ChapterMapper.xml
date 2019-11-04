@@ -4,8 +4,8 @@
 	<resultMap id="chapterMap" type="com.ff.pojo.Chapter">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
-		<result column="courseId" property="courseId" />
-		<result column="cOrder" property="cOrder" />
+		<result column="course_id" property="courseId" />
+		<result column="c_order" property="order" />
 	</resultMap>
 
 
@@ -19,26 +19,57 @@
 		</collection>
 	</resultMap>
 
+	<resultMap id="ChaptersAndQuestionsMap"
+		type="com.ff.pojo.Chapter">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="c_order" property="order" />
+		<collection property="questions" javaType="ArrayList"
+	ofType="com.ff.pojo.Question" column="id"
+	select="com.ff.dao.QuestionMapper.selectQuestionsByChapterId">
+		</collection>
+	</resultMap>
+
+
+
 	<select id="getChaptersByCourseId" resultMap="chapterMap">
 		select *from
 		chapters
-		where coursesId = #{id} order by c_order
+		where course_id = #{id} order by c_order
 	</select>
 
+
+	<select id="selectChapters" resultMap="chapterMap">
+		select * from
+		chapters
+		order by
+		c_order
+	</select>
 
 	<select id="selectChaptersByCourseIdLeaf"
 		resultMap="ChapterMapLeaf">
 		select *from
 		chapters
-		where coursesId = #{id} order by c_order
+		where course_id = #{id} order by
+		c_order
 	</select>
+
+
+	<select id="selectAllQuestionsOfChaptersByCoursesId"
+		resultMap="ChaptersAndQuestionsMap">
+		select *from
+		chapters
+		where course_id = #{id} order by
+		c_order
+	</select>
+
 
 
 
 	<insert id="insert" parameterType="com.ff.pojo.Chapter"
 		keyProperty="id" useGeneratedKeys="true">
 		insert into
-		chapters(name,coursesId,c_order)
+		chapters(name,course_id,c_order)
 		values(#{name},#{coursesId},#{order})
 	</insert>
 

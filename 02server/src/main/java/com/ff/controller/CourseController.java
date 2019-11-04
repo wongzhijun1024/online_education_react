@@ -5,11 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ff.pojo.Course;
 import com.ff.pojo.Msg;
-import com.ff.pojo.Topic;
 import com.ff.service.CourseService;
 
 @Controller
@@ -49,17 +47,6 @@ public class CourseController {
 	@ResponseBody
 	public Msg selectCourseAndChapters() {
 		return courseService.selectCourseAndChapters();
-	}
-
-	/**
-	 * 根据科目的ID查询对应的课程
-	 * 
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.GET, value = "coursesByTopicId")
-	@ResponseBody
-	public Msg selectCoursesByTopicId(Topic topic, HttpServletResponse resp, HttpServletRequest req) {
-		return courseService.selectCoursesByTopicId(topic);
 	}
 
 	@RequestMapping(value = "courses/add")

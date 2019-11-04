@@ -1,41 +1,31 @@
 package com.ff.service;
 
-import java.util.List;
-
+import com.ff.pojo.Msg;
 import com.ff.pojo.Question;
 
 public interface QuestionService {
-	Question selectByPrimaryKey(Integer qId);
 
-	List<Question> selectByTypeAndHard(Question question);
-
-	// 查询题目
-	List<Question> selectByTypeAndHard();
-
-	/*
-	 * 分页查询和显示
+	/**
+	 * 添加题
+	 * 
+	 * @param question 题
+	 * @return
 	 */
-	List<Question> selectQuestion(Question q);
+	Msg insert(Question question);
 
-	int selectCount(Question q);
-
-	int insertSelective(Question q);
-
-	int updateByPrimaryKeySelective(Question q);
-
-	int delBatchQuestion(List<String> list);
-
-	/*
-	 * 查询试卷
+	/**
+	 * 查询所有的题库
+	 * 
+	 * @return
 	 */
-	List<Question> selectExampaper();
-
-	List<Question> selectExampaperByTitle(String eTitle);
+	Msg selectQuestionsAll();
 	
-	//查询所有题目
-    List<Question> selectAllQuestion();
-    
-    //根据科目查询所有题
+	/**
+	 * 通过章节id查询题
+	 * 
+	 * @return
+	 */
+	
+	Msg selectQuestionsByChapterid(Question question);
 
-	List<Question> selectAllQuestionByQcourseAndQtypeAndQhard(Question q);
 }

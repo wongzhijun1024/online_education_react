@@ -29,72 +29,22 @@
     display: flex;
     flex-direction: column;
 }
-.testNameBox{
+.createHeader{
     width: 100%;
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    justify-content: space-between;
     align-items: center;
-    font-weight: 600;
+    margin: 20px 0px 20px 0px;
 }
-.testNameBox>span{
-    color: #FFA51F;
-    margin-right: 5px;
-}
-.testNameBox>Input{
-    width: 60%;
-    margin-left: 20px;
-}
-.testExplainBox{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-left: 5px;
-    font-weight: 600;
-}
-.shop{
-    width: 60%;
-    margin-left: 20px;
-}
-.testRangeBox{
-    width: 65%;
-    display: flex;
-    align-items: center;
-    margin: 20px auto;
-    font-weight: 600;
-}
-.testRangeBox>span{
-    margin-right: 20px;
-}
-.testSetUpBox{
-    width:67%;
-    font-weight: 600;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-}
-.testSetUpBox>span{
-    color: #FFA51F;
-    margin-right: 5px;
-}
-.setUpRight{
-    width: 80%;
-    margin-left: 20px;
-}
-.single{
-    margin-left: 20px;
+.createHeaderLeft>.leftVideo{
     margin-right: 30px;
 }
-.testScore{
-    margin-left: 30px;
+.createHeaderRight>.rightTest{
+    margin-right: 30px;
 }
 .keepBtn{
     display: flex;
     justify-content: center;
-    margin-top: 10%;
+    margin-top: 5%;
     align-items: center;
-}
-.keepBtn>span{
-    margin-left: 10px;
 }

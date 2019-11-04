@@ -23,7 +23,7 @@ public class VideoController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET, value = "videosByChapterId")
+	@RequestMapping(value = "videosByChapterId")
 	@ResponseBody
 	public Msg selectVideosByChapterId(Chapter chapter, HttpServletResponse resp, HttpServletRequest req) {
 		return videoService.selectVideosByChapterId(chapter);
@@ -34,6 +34,13 @@ public class VideoController {
 	public Msg addVideo(Video video, HttpServletResponse resp, HttpServletRequest request) {
 
 		return videoService.insertVideo(video, request);
+	}
+
+	@RequestMapping(value = "video/update")
+	@ResponseBody
+	public Msg updateVideo(Video video, HttpServletResponse resp, HttpServletRequest request) {
+
+		return videoService.updateVideoById(video, request);
 	}
 
 }

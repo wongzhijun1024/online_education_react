@@ -17,7 +17,7 @@ public class Chapter {
 	/**
 	 * 课程id
 	 */
-	private int coursesId;
+	private int courseId;
 
 	/**
 	 * 排列的顺序
@@ -29,17 +29,23 @@ public class Chapter {
 	 */
 	private List<Video> videos;
 
+	/**
+	 * 题库
+	 */
+	private List<Question> questions;
+
 	public Chapter() {
 		super();
 	}
 
-	public Chapter(int id, String name, int coursesId, int order, List<Video> videos) {
+	public Chapter(int id, String name, int courseId, int order, List<Video> videos, List<Question> questions) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.coursesId = coursesId;
+		this.courseId = courseId;
 		this.order = order;
 		this.videos = videos;
+		this.questions = questions;
 	}
 
 	public int getId() {
@@ -58,12 +64,12 @@ public class Chapter {
 		this.name = name;
 	}
 
-	public int getCoursesId() {
-		return coursesId;
+	public int getCourseId() {
+		return courseId;
 	}
 
-	public void setCoursesId(int coursesId) {
-		this.coursesId = coursesId;
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 
 	public int getOrder() {
@@ -82,10 +88,18 @@ public class Chapter {
 		this.videos = videos;
 	}
 
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
 	@Override
 	public String toString() {
-		return "Chapter [id=" + id + ", name=" + name + ", coursesId=" + coursesId + ", order=" + order + ", videos="
-				+ videos + "]";
+		return "Chapter [id=" + id + ", name=" + name + ", courseId=" + courseId + ", order=" + order + ", videos="
+				+ videos + ", questions=" + questions + "]";
 	}
 
 }

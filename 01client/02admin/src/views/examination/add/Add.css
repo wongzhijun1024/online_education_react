@@ -1,76 +1,47 @@
-.addView {
-    position: absolute;
-    margin: 0px;
-    padding: 0px;
-    width: 89.5%;
-    /* height: 90%; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.coursesBankBox-2{
+    width: 95%;
+   background: #FFFFFF;
+   margin: 20px auto;
 }
-.addExam{
-    width: 99%;
-    height: 80px;
-    line-height: 80px;
-    border-bottom: 1px solid gray;
-    display: flex;
-    justify-content: center;
+.banktitle-2{
+    width: 40%;
+    margin: 20px 20px 0px 20px;
+    font-size: 20px;
 }
-.addTitle{
-    font-weight: 700;
-    font-size: 30px;
+.bankheader{
+    width: 90%;
+    height: 40px;
+    background: #F5F5F5;
+    box-sizing: border-box;
+    padding: 0 20px;
+    line-height: 40px;
+    color: #ACA9A7;
+    margin: 18px auto;
 }
-.btnBox{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+.bank-content{
+    width: 80%;
+    /* background: coral; */
+    margin: 0 auto;
 }
-.addBtn{
-    margin-right: 20px;
+.bank2-buttom{
+    width: 40%;
+    margin: 10px auto;
+    
 }
-.examBox{
-    width: 96%;
-    /* height: 96%; */
-    margin-top: 20px;
-    border: 1px solid gray;
-    border-top:3px solid #2F333E;
+.Bank2ButtonCenter{
+    margin: 0px 15px;
 }
-.addBox{
-    display: none;
+.readySelect{
+    width: 57%;
+    height: 30px;
+    margin: 0 auto;
 }
-.add{
-    width: 50%;
-    height: 300px;
-    position: absolute;
-    left: 25%;
-    top: 30%;
-    background-color: #F0F2F5;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-    font-size: 16px;
-    z-index: 1000;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+#stem{
+    margin-bottom: 24px;
 }
-.addType{
-    width: 50%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+.ant-form-item {
+    margin-bottom: 5px;
 }
-.typeBtn{
-    width: 300px;
-    height: 31px;
-}
-.savaBtn{
-    position: absolute;
-    bottom: 10%;
-}
-.listContent{
-    font-size: 16px;
-    font-weight: 600;
-    margin:10px 0px 10px 20px;
+.bankSelectcontent{
+    width: 100%;
 }

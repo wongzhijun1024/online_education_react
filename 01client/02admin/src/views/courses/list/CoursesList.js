@@ -20,14 +20,14 @@ export default class CoursesList extends React.Component {
       <div className="courseBox">
         <div className="pageHeader">
           <h1 className="header_left">课程管理</h1>
-          <div className="header_right">
-            <Button
+          {/* <div className="header_right"> */}
+            {/* <Button
               className="headerBtn"
               style={{ backgroundColor: "#5CB85C", color: "white" }}
             >
               创建课程
-            </Button>
-          </div>
+            </Button> */}
+          {/* </div> */}
         </div>
         <div className="btnGroup">
           <Tabs defaultActiveKey="1" onChange={callback}>

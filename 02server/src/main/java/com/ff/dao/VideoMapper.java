@@ -32,6 +32,13 @@ public interface VideoMapper {
 
 	/**
 	 * 
+	 * @param Video 更新的视频
+	 * @return 是否更新成功的标志
+	 */
+	int updateByVideoId(Video video);
+
+	/**
+	 * 
 	 * @param id 视频的id
 	 * @return 视频列表
 	 */
