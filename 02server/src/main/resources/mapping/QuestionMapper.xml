@@ -13,7 +13,6 @@
 	</resultMap>
 
 
-
 	<!-- 增加新视频 -->
 	<insert id="insert" parameterType="com.ff.pojo.Question"
 		keyProperty="id" useGeneratedKeys="true">

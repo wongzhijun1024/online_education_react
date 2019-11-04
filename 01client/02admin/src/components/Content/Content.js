@@ -14,8 +14,8 @@ import Test from "../../views/test/Test";
 
 const { Content } = Layout;
 export default class MyContent extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
   }
 

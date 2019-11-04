@@ -58,7 +58,7 @@ public class CourseController {
 
 	@RequestMapping(value = "questions/all")
 	@ResponseBody
-	public Msg selectAllQuestionsOfCourses(Course course, HttpServletResponse resp, HttpServletRequest req) {
+	public Msg selectAllQuestionsOfCourses(HttpServletResponse resp, HttpServletRequest req) {
 
 		return courseService.selectAllQuestionsOfCourses();
 	}

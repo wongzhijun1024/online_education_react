@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ff.dao.QuestionMapper;
+import com.ff.pojo.Chapter;
 import com.ff.pojo.Course;
 import com.ff.pojo.Msg;
 import com.ff.pojo.Question;
@@ -38,6 +39,19 @@ public class QuestionServiceImpl implements QuestionService {
 		courseServiceImpl = null;
 
 		return msg;
+	}
+
+	@Override
+	public Msg selectQuestionsByChapterid(Chapter chapter) {
+		Msg msg = new Msg();
+		List<Question> list = questionMapper.selectQuestionsBychapterId(chapter);
+		if (list.size() >= 1) {
+			msg.setMsg("操作成功");
+			msg.setCode(1);
+			msg.setObject(list);
+		}
+		return msg;
+
 	}
 
 }

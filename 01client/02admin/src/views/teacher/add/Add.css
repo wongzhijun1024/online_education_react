@@ -61,9 +61,8 @@
   width: 90%;
   
 }
-.intro_title{
-  display: flex;
-  justify-content: space-between;
+.table{
+  width: 90%;
 }
 .demo-loading-container {
   position: absolute;
@@ -125,4 +124,6 @@
 }
 .button Button{
 margin-left: 10px;
+background: #1890FF;
+color: white;
 }
