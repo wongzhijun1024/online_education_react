@@ -56,4 +56,11 @@ public class CourseController {
 		return courseService.insertCourses(course, req);
 	}
 
+	@RequestMapping(value = "questions/all")
+	@ResponseBody
+	public Msg selectAllQuestionsOfCourses(HttpServletResponse resp, HttpServletRequest req) {
+
+		return courseService.selectAllQuestionsOfCourses();
+	}
+
 }
