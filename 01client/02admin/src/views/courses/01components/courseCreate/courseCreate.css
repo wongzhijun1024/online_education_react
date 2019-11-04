@@ -1,0 +1,50 @@
+.courseTestBox{
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 700px;
+    background-color: white;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.testHeader{
+    width: 97%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #F0F0F0;
+}
+.testTitle{
+    font-size: 20px;
+    color: #595959;
+}
+.createBox{
+    width: 80%;
+    height: 100%;
+    /* background: orange; */
+    display: flex;
+    flex-direction: column;
+}
+.createHeader{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0px 20px 0px;
+}
+.createHeaderLeft>.leftVideo{
+    margin-right: 30px;
+}
+.createHeaderRight>.rightTest{
+    margin-right: 30px;
+}
+.keepBtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    align-items: center;
+}

@@ -62,48 +62,6 @@ public class CosTool {
 
 	}
 
-//	public UploadMsg uploadFile(int type, MultipartFile file) {
-//		if (file == null) {
-//			return new UploadMsg(0, "文件为空", "", null);
-//		}
-//		String oldFileName = file.getOriginalFilename();
-//		String name = oldFileName.substring(0, oldFileName.lastIndexOf("."));
-//		Calendar cal = Calendar.getInstance();
-//		int year = cal.get(Calendar.YEAR);
-//		int month = cal.get(Calendar.MONTH);
-//		int day = cal.get(Calendar.DATE);
-//
-//		// 简单文件上传, 最大支持 5 GB, 适用于小文件上传, 建议 20 M 以下的文件使用该接口
-//		// 大文件上传请参照 API 文档高级 API 上传
-//		File localFile = null;
-//
-//		String fileType = "";
-//		switch (type) {
-//		case VIDEO_FOLDER:
-//			fileType = videoFolder;
-//			break;
-//		case IMAGE_FOLDER:
-//			fileType = imageFolder;
-//			break;
-//		}
-//
-//		try {
-//			localFile = File.createTempFile("temp", null);
-//			file.transferTo(localFile);
-//			// 指定要上传到 COS 上的路径
-//			String key = "/" + this.tengxun + "/" + fileType + "/" + year + "-" + month + "-" + day + "-" + oldFileName;
-//
-//			PutObjectRequest putObjectRequest = new PutObjectRequest(this.bucket, key, localFile);
-//			PutObjectResult putObjectResult = getCosclient().putObject(putObjectRequest);
-//			return new UploadMsg(1, "上传成功", name, putObjectRequest.getKey());
-//		} catch (IOException e) {
-//			return new UploadMsg(-1, e.getMessage(), "", null);
-//		} finally {
-//			// 关闭客户端(关闭后台线程)
-//			destroy();
-//		}
-//	}
-
 	public List<String> uploadFile(int type, HttpServletRequest request) {
 		List<String> keyList = new ArrayList<>();
 
@@ -184,12 +142,5 @@ public class CosTool {
 		}
 
 	}
-
-	// public URL picCOS(String key) throws Exception {
-	//
-	// Date expiration = new Date(new Date().getTime() + 5 * 60 * 10000);
-	// URL url = cosClient.generatePresignedUrl(this.bucket, key, expiration);
-	// return url;
-	// }
 
 }

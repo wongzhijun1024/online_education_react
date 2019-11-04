@@ -15,27 +15,37 @@ public class Chapter {
 	private String name;
 
 	/**
-	 * 章节对应的课程id号
+	 * 课程id
 	 */
-	private int course_id;
-	
+	private int courseId;
+
 	/**
-	 * 章节顺序
+	 * 排列的顺序
 	 */
 	private int order;
 
 	/**
-	 * 章节对应的视频
+	 * 视频列表
 	 */
-	private List<Video> list;
+	private List<Video> videos;
 
 	/**
-	 * 章节
+	 * 题库
 	 */
-	private String msg = "chapter";
+	private List<Question> questions;
 
 	public Chapter() {
 		super();
+	}
+
+	public Chapter(int id, String name, int courseId, int order, List<Video> videos, List<Question> questions) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.courseId = courseId;
+		this.order = order;
+		this.videos = videos;
+		this.questions = questions;
 	}
 
 	public int getId() {
@@ -54,28 +64,12 @@ public class Chapter {
 		this.name = name;
 	}
 
-	public int getCourse_id() {
-		return course_id;
+	public int getCourseId() {
+		return courseId;
 	}
 
-	public void setCourse_id(int course_id) {
-		this.course_id = course_id;
-	}
-
-	public List<Video> getList() {
-		return list;
-	}
-
-	public void setList(List<Video> list) {
-		this.list = list;
-	}
-
-	public String getMsg() {
-		return msg;
-	}
-
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
 	}
 
 	public int getOrder() {
@@ -85,7 +79,27 @@ public class Chapter {
 	public void setOrder(int order) {
 		this.order = order;
 	}
-	
-	
+
+	public List<Video> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
+	}
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
+	@Override
+	public String toString() {
+		return "Chapter [id=" + id + ", name=" + name + ", courseId=" + courseId + ", order=" + order + ", videos="
+				+ videos + ", questions=" + questions + "]";
+	}
 
 }

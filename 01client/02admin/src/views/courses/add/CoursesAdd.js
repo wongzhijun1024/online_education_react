@@ -1,75 +1,70 @@
 import React from "react";
 import "./CoursesAdd.css";
-import { Upload, Input, Icon, Button, Row, Col } from "antd";
+import { Tabs } from "antd";
 import net from "../../../utils/net";
+import CourseInformation from "../../../components/courseInformation/CourseInformation";
+import CourseTest from "../01components/courseTest/courseTest";
+import CourseCreate from "../01components/courseCreate/courseCreate";
+import CourseDocument from "../../../components/courseDocument/CourseDocument";
+import CourseBank from "../01components/courseBank/CourseBank.js"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+const { TabPane } = Tabs;
+
 export default class CoursesAdd extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      fileList: []
+      fileList: [],
+      value: 0
     };
   }
-
-  upload = e => {
-    //获得姓名
-    let name = "小明";
-    //获得介绍
-    let introduce = "获得介绍";
-    //获得文件的数据
-    let fileList = this.state.fileList;
-
-    net.uploadFile(
-      "teacherAdd",
-      {
-        name: name,
-        introduce: introduce,
-        files: fileList
-      },
-      function(ob) {
-        console.log(ob);
-      }
-    );
-  };
-
-  removeFile = file => {
-    //获得文件的数据
-    let fileList = this.state.fileList;
-    //获得文件的下标
-    const index = fileList.indexOf(file);
-    //删除文件
-    fileList.splice(index, 1);
-    //覆盖数据
+  callback(key) {
+    console.log(key);
+  }
+  onChange = e => {
+    console.log('radio checked', e.target.value);
     this.setState({
-      fileList: fileList
+      value: e.target.value,
     });
   };
-
-  beforeUpload = file => {
-    //获得文件的数据
-    let fileList = this.state.fileList;
-    //添加文件
-    fileList.push(file);
-    //覆盖数据
-    this.setState({
-      fileList: fileList
-    });
-  };
+  showPath() { 
+    console.log(this.props.match.path);
+  }
 
   render() {
     return (
-      <div>
-        <Row>
-          <Col span={12}>col-12</Col>
-          <Col span={12}>col-12</Col>
-        </Row>
-        <Upload onRemove={this.removeFile} beforeUpload={this.beforeUpload}>
-          <Button>
-            <Icon type="upload" /> Select File
-          </Button>
-        </Upload>
-        <Button type="primary" onClick={this.upload} style={{ marginTop: 16 }}>
-          上传文件
-        </Button>
+      <div className="coursesAdd">
+        <Tabs
+          // className="tabs"
+          // activeKey={this.state.activeKey}
+          // defaultActiveKey="1"
+          // onChange={this.onTabsChange.bind(this)}
+          className="tabs" defaultActiveKey="1" onChange={this.callback.bind(this)}
+        >
+          <TabPane className="courseTabs" tab="课程文件" key="1">
+            <CourseDocument></CourseDocument>
+          </TabPane>
+          <TabPane tab="课程信息" key="2">
+            <CourseInformation></CourseInformation>
+          </TabPane>
+          <TabPane tab="课程试卷" key="3">
+            {/* <CourseCreate></CourseCreate> */}
+            <Switch>
+              <Route
+                exact
+                path={`/home/courses/add`}
+                component={CourseTest}
+              >{
+                  this.showPath()
+              }</Route>
+              <Route
+                exact
+                path={`/home/courses/add/created`}
+                component={CourseCreate}
+              ></Route>
+            </Switch>
+          </TabPane>
+        </Tabs>
       </div>
     );
   }

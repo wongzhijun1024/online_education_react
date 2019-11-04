@@ -1,4 +1,5 @@
 .headBox {
+    /* width: 100%; */
     height: 10%;
     background-color: #2f333e;
     padding: 0px;
@@ -35,4 +36,28 @@
 .title2 {
     color: #ffffff;
     font-weight: bold;
+}
+.titleBoxRight{
+    height: 100%;
+    width: 15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.headImag{
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
+}
+.headImag img{
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
+    margin-top: -20px;
+}
+.eixtLogin{
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
 }

@@ -15,11 +15,18 @@ public interface CourseService {
 	Msg selectCourseAll();
 
 	/**
-	 * 根据科目的id号查询课程
+	 * 查询全部的课程，包含里面的子节点
 	 * 
-	 * @return
+	 * @return 数据
 	 */
-	Msg selectCoursesByTopicId(Topic topic);
+	Msg selectCourseAllLeaf();
+
+	/**
+	 * 查询课程和课程里面的章节
+	 * 
+	 * @return 课程和课程里面的章节
+	 */
+	Msg selectCourseAndChapters();
 
 	/**
 	 * 
@@ -28,5 +35,12 @@ public interface CourseService {
 	 * @return
 	 */
 	Msg insertCourses(Course course, HttpServletRequest request);
+
+	/**
+	 * 查询课程和课程里面的章节
+	 * 
+	 * @return 课程和课程里面的章节
+	 */
+	Msg selectAllQuestionsOfCourses();
 
 }

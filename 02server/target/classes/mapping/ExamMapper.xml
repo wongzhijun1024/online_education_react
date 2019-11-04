@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ff.dao.ExamMapper">
+
+
+
+	<!-- 批量新增的时候，注意接收的对象是一个列表，需要在动态拼接sql的时候遍历参数集合对象 -->
+	<insert id="insertExamForChapter" parameterType="java.util.List"
+		keyProperty="id" useGeneratedKeys="true">
+		Insert into exam_chapter (chapter_id,question_id) values
+		<!-- 注意foreach的语法,集合直接写list字符串，用item表示当前遍历的对象，结果集合通过使用逗号分隔使用separator属性 -->
+		<foreach collection="list" item="item" separator=",">
+			(#{item.chapterId},#{item.questionId})
+		</foreach>
+	</insert>
+
+
+
+</mapper>

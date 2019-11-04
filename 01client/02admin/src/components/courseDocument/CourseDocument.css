@@ -1,0 +1,162 @@
+.coursesAdd-1 {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.courseTable{
+    width: 100%;
+}
+
+.ant-btn{
+    border:none;
+}
+
+.ant-btn:hover{
+    border:none;
+}
+
+.addCourseBox{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+}
+
+.addCourseBox>input, .addCourseBox>div{
+    width: 100%;
+}
+
+.addCourseFiles{
+    width: 80%;
+    height: 500px;
+    background: #F8FBFD;
+    box-sizing: border-box;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 10;
+    display: none;
+}
+.addCourseFilesTitle{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #cccccc;
+    box-sizing: border-box;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.addCourseFilesTitle>span{
+    font-size: 24px;
+    font-weight: 400;
+}
+.selectFilesType{
+    width: 80%;
+    margin: 10px 0;
+}
+.addCourseFilesName{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+.addCourseFilesName>label{
+    width: 20%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    text-align: right;
+}
+.addCourseFilesName>input{
+    width: 80%;
+    box-sizing: border-box;
+}
+
+.backgroundFiles{
+    width: 200%;
+    height: 300%;
+    position: fixed;
+    background: black;
+    top: 0;
+    z-index: 5;
+    opacity: 0.6;
+    display: none;
+}
+.deleteFiles{
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 10%;
+}
+.coursePlayVideo{
+    width: 150%;
+    height: 100%;
+    background: black;
+    position: fixed;
+    top: 0;
+    opacity: 0.8;
+    z-index: 18;
+    display: none;
+}
+.coursePlayVideoBox{
+    width: 800px;
+    height: 700px;
+    background: pink;
+    z-index: 20;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+.closeVideo{
+    position: absolute;
+    top: 5px;
+    right:5px;
+    z-index: 30;
+    color: white;
+    font-size: 30px;
+}
+.uploadVideo{
+    height: 300px;
+    width: 400px;
+    position: fixed;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    background: white;
+    z-index: 30;
+    display: none;
+}
+.uploadVideo>div{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    
+}
+.uploadVideo>div>div{
+    width: 100%;
+    text-align: right;
+    box-sizing: border-box;
+    padding: 10px 10px;
+}
+.uploadVideoBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 47px;
+}
+
+
+

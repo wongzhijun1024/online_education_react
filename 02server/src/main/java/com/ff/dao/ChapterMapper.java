@@ -10,9 +10,8 @@ public interface ChapterMapper {
 	/**
 	 * 插入新的章节
 	 * 
-	 * @param chapter
-	 *            章节
-	 * @return 是否插入成功的标志
+	 * @param chapter 章节
+	 * @return 插入的数据
 	 */
 	int insert(Chapter chapter);
 
@@ -21,14 +20,27 @@ public interface ChapterMapper {
 	 * 
 	 * @return 章节列表
 	 */
-	List<Chapter> getAllChapter();
+	List<Chapter> selectChapters();
 
 	/**
 	 * 
-	 * @param id
-	 *            课程的id
+	 * @param id 课程的id
 	 * @return 课程列表
 	 */
-	List<Chapter> getChaptersByCourseId(int id);
+	List<Chapter> selectChaptersByCourseId(int id);
+
+	/**
+	 * 
+	 * @param id 课程的id
+	 * @return 课程列表包含子节点
+	 */
+	List<Chapter> selectChaptersByCourseIdLeaf(int id);
+
+	/**
+	 * 根据名字查询课程
+	 * 
+	 * @return 课程列表
+	 */
+	List<Chapter> selectByName(Chapter chapter);
 
 }

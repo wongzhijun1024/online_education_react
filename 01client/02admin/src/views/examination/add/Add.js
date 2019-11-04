@@ -1,268 +1,206 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import "./Add.css";
-import { Table,Upload, message,Icon, Button,Cascader } from "antd";
 import net from "../../../utils/net";
+import StringUtil from "../../../utils/StringUtil";
+import { Form, Select, Input, Button, Radio, Cascader, message } from "antd";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-// 添加数据
-const options = [
-  {
-    value: 'C++',
-    label: 'C++',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: '数据结构',
-    label: '数据结构',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'Python',
-    label: 'Python',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'Java',
-    label: 'Java',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
-const props = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-function onChange(value) {
-  console.log(value);
-};
+const { TextArea } = Input;
 
-const data = [];
-for (let i = 0; i < 46; i++) {
-  data.push({
-    key: i,
-    name: `Edward King ${i}`,
-    age: 32,
-    address: `London, Park Lane no. ${i}`,
-  });
+// Just show the latest item.
+function displayRender(label) {
+  return label[label.length - 1];
 }
-export default class Add extends React.Component {
-  constructor() {
-    super();
+class ExaminationAdd extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      fileList: [],
-      size: 'large',
-      selectedRowKeys: [],
-      loading: false
+      data: [],
+      chapterId: -1,
+      courses: []
     };
   }
 
-  newData() {
-    for (let i = 0; i < 46; i++) {
-      this.state.data.push({
-        key: i,
-        type: `Edward King ${i}`,
-        chapter: 'bdehbchde',
+  componentDidMount = e => {
+    let that = this;
+    net.post("courses/and/chapters", {}, function(ob) {
+      let courses = StringUtil.CascaderData(ob.object);
+      console.log(courses);
+      that.setState({
+        courses: courses
       });
-    }
-  }
-  start = () => {
-    this.setState({
-      loading: true
     });
-    // ajax request after empty completing
-    setTimeout(() => {
-      this.setState({
-        selectedRowKeys: [],
-        loading: false,
-      });
-    }, 1000);
   };
-
-
-  deletUser(id) {
-    let length = this.state.data.length;
-    let data = this.state.data;
-    for (let i = 0; i < length; i++) {
-      if (data[i].id == id) {
-        data.splice(i, 1);
-        data[i]=data[i-1];  
-        break;
+  handleSubmit = e => {
+    console.log(e);
+  };
+  upload = e => {
+    let form = this.refs.form;
+    console.log(form.props.children);
+    return;
+    //获得题干
+    let title = this.refs.title.state.value;
+    //获得选项A
+    let textA = this.refs.textA.state.value;
+    console.log(textA);
+    //获得选项B
+    let textB = this.refs.textB.state.value;
+    //获得选项C
+    let textC = this.refs.textC.state.value;
+    //获得选项D
+    let textD = this.refs.textD.state.value;
+    //获得文件的数据
+    let fileList = this.state.fileList;
+    //章节id
+    let chapterId = 2;
+    // 答案
+    let answer = "textA";
+    // 章节顺序
+    let order = 0;
+    net.uploadFile(
+      "question/add",
+      {
+        title: title,
+        textA: textA,
+        textB: textB,
+        textC: textC,
+        textD: textD,
+        answer: answer,
+        chapterId: chapterId,
+        files: fileList,
+        order: order
+      },
+      function(ob) {
+        console.log(ob);
       }
+    );
+  };
+  beforeUpload = file => {
+    console.log(file);
+    //获得文件的数据
+    let fileList = this.state.fileList;
+    //添加文件
+    fileList.push(file);
+    //覆盖数据
+    this.setState({
+      fileList: fileList
+    });
+  };
+  handleSelectChange = value => {
+    this.props.form.setFieldsValue({
+      note: `Hi, ${value === "本课程" ? "其他课程" : "本课程"}!`
+    });
+  };
+  toQuery() {
+    this.props.history.push(`/home/examination/query`);
+  }
+
+  onCascaderChange(value) {
+    if (value.length <= 1) {
+      message.error("请选择章节！");
     }
     this.setState({
-      data: data
+      chapterId: value[1]
     });
-  };
+  }
 
-
-  onSelectChange = selectedRowKeys => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
-    this.setState({
-      selectedRowKeys
-    });
-  };
-
-  
-  handleSizeChange = e => {
-    this.setState({ size: e.target.value });
-  };
-
-  showAdd() { 
-    this.refs.addBox.style.display = 'block';
-  };
-  closeAdd() {
-    this.refs.addBox.style.display = 'none';
-  };
-
-  
   render() {
-    const { size } = this.state;
-    const columns = [
-            {
-                title: '课程ID',
-                dataIndex: 'id',
-                key: 'id',
-                render: text => <a>{text}</a>,
-            },
-            {
-                title: '科目',
-                dataIndex: 'type',
-                key: 'types',
-                render: text => <a>{text}</a>,
-            },
-            {
-                title: '章节',
-                dataIndex: 'chapter',
-                key: 'chapter',
-            },
-            {
-                title: '题库文件',
-                dataIndex: 'file',
-                key: 'file',
-            },
-            {
-                title: '是否删除',
-                key: 'action',
-                render: (text, record) => (
-                    <span>
-                        {/* <a>Invite {record.name}</a> */}
-                        {/* <Divider type="vertical" /> */}
-                        {/* //传入text的id作为实参 */}
-                        <a onClick={this.deletUser.bind(this, text.id)}>删除</a>
-                    </span>
-                ),
-            },
-    ];
-    
-    const {
-      loading,
-      selectedRowKeys
-    } = this.state;
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    };
-    const hasSelected = selectedRowKeys.length > 0;
-    
+    const { getFieldDecorator } = this.props.form;
     return (
-      <div className="addView">
-        <div className="addExam">
-          <span className="addTitle">题库添加</span>
+      <div className="coursesBankBox-2">
+        <div className="banktitle-2">题库添加</div>
+        <div className="bankheader">
+          <p>试题添加 / 添加题目 / 单选框</p>
         </div>
-        <div className="btnBox">
-          <Button icon="plus" className="addBtn" size={size} style={{ backgroundColor: '#32CCA8', color: 'white' }} onClick={this.showAdd.bind(this)}>
-          添加
-        </Button>
-        <Button icon="delete" className="deleteBtn" size={size} style={{backgroundColor:'#E6BC1A',color:'white'}}>
-          删除
-        </Button>
+
+        <div className="bank-content">
+          <Form labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} ref="form">
+            <Form.Item label="从属">
+              <Cascader
+                options={this.state.courses}
+                expandTrigger="hover"
+                displayRender={displayRender}
+                onChange={this.onCascaderChange.bind(this)}
+                style={{ width: "200px" }}
+                placeholder="请选择课程"
+              />
+            </Form.Item>
+
+            <Form.Item label="题干" ref="title">
+              {getFieldDecorator("stem", {
+                rules: [{ required: true }]
+              })(<TextArea rows={4} />)}
+            </Form.Item>
+
+            <Radio.Group
+              name="radiogroup"
+              defaultValue={1}
+              className="bankSelectcontent"
+            >
+              <Form.Item label="选项A" ref="textA">
+                {getFieldDecorator("selectA", {
+                  rules: [{ required: true }]
+                })(<TextArea rows={4} />)}
+              </Form.Item>
+              <div className="readySelect">
+                <Radio value={11}>正确答案</Radio>
+              </div>
+              <Form.Item label="选项B" ref="textB">
+                {getFieldDecorator("selectB", {
+                  rules: [{ required: true }]
+                })(<TextArea rows={4} />)}
+              </Form.Item>
+              <div className="readySelect">
+                <Radio value={22}>正确答案</Radio>
+              </div>
+              <Form.Item label="选项C" ref="textC">
+                {getFieldDecorator("selectC", {
+                  rules: [{ required: true }]
+                })(<TextArea rows={4} />)}
+              </Form.Item>
+              <div className="readySelect">
+                <Radio value={33}>正确答案</Radio>
+              </div>
+              <Form.Item label="选项D" ref="textD">
+                {getFieldDecorator("selectD", {
+                  rules: [{ required: true }]
+                })(<TextArea rows={4} />)}
+              </Form.Item>
+              <div className="readySelect">
+                <Radio value={44}>正确答案</Radio>
+              </div>
+            </Radio.Group>
+          </Form>
         </div>
-        <div className="examBox">
-          <div className="listContent"><Icon type="unordered-list" />内容列表</div>
-          <div className="addBox" ref='addBox'>
-           <div className="add">
-             <div className="addType">
-                 <span>科目类型：</span>
-                 <Cascader
-                   defaultValue={['zhejiang', 'hangzhou', 'xihu']}
-                   options={options}
-                   onChange={onChange}
-                   className='typeBtn'
-                 />
-             </div>
-            <Upload {...props} className="upBtn">
-                    <Button>
-                    <Icon type="upload" /> 上传试卷
-                    </Button>
-            </Upload>
-              <Button className="savaBtn" ref="savaBtn" onClick={this.closeAdd.bind(this)}>保存</Button>
-            </div>
-          </div>
-           <div>
-        <div>
-          <span>
-            {hasSelected ? `Selected ${selectedRowKeys.length} items` : ''}
-          </span>
-        </div>
-        <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.data} />
-      </div>
+
+        <div className="bank2-buttom">
+          <Button
+            type="primary"
+            style={{ background: "#43BB60" }}
+            onClick={this.toQuery.bind(this)}
+          >
+            保存并继续添加
+          </Button>
+          <Button
+            type="primary"
+            style={{ background: "#43BB60" }}
+            className="Bank2ButtonCenter"
+            // onClick={this.toQuery.bind(this)}
+            onClick={this.upload}
+          >
+            保存
+          </Button>
+          <Button
+            type="link"
+            onClick={this.toQuery.bind(this)}
+            style={{ color: "black" }}
+          >
+            返回
+          </Button>
         </div>
       </div>
     );
   }
 }
+export default Form.create()(ExaminationAdd);

@@ -1,14 +1,9 @@
 package com.ff.serviceImpl;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.ff.dao.CourseMapper;
 import com.ff.pojo.Course;
 import com.ff.pojo.Msg;
@@ -47,21 +42,6 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
-	public Msg selectCoursesByTopicId(Topic topic) {
-		Msg msg = new Msg();
-		// 根据科目id获得对应的课程列表
-		List<Course> courses = courseMapper.getCoursesByTopicId(topic.getId());
-		if (courses.size() == 0) {
-			msg.setCode(2);
-			msg.setMsg("没有科目(" + topic.getName() + ")对应的课程，请添加课程");
-		} else {
-			msg.setCode(1);
-			msg.setObject(courseMapper.getCoursesByTopicId(topic.getId()));
-		}
-		return msg;
-	}
-
-	@Override
 	public Msg insertCourses(Course course, HttpServletRequest request) {
 		Msg msg = new Msg();
 
@@ -92,6 +72,51 @@ public class CourseServiceImpl implements CourseService {
 			msg.setMsg("增加(" + course.getName() + ")课程失败!");
 		}
 
+		return msg;
+	}
+
+	@Override
+	public Msg selectCourseAllLeaf() {
+		Msg msg = new Msg();
+
+		// 获得课程数据
+		List<Course> list = courseMapper.selectCourseAllLeaf();
+		if (list != null && list.size() >= 1) {
+			msg.setCode(1);
+			msg.setMsg("操作成功!");
+			msg.setObject(list);
+		}
+
+		return msg;
+	}
+
+	@Override
+	public Msg selectCourseAndChapters() {
+
+		Msg msg = new Msg();
+
+		// 获得课程数据
+		List<Course> list = courseMapper.selectCourseAndChapters();
+		if (list != null && list.size() >= 1) {
+			msg.setCode(1);
+			msg.setMsg("操作成功!");
+			msg.setObject(list);
+		}
+
+		return msg;
+	}
+
+	@Override
+	public Msg selectAllQuestionsOfCourses() {
+
+		Msg msg = new Msg();
+		msg.setMsg("查询失败！");
+
+		List<Course> list = courseMapper.selectAllQuestionsOfCourses();
+		if (list != null && list.size() >= 1) {
+			msg.setObject(list);
+			msg.setMsg("查询成功！！");
+		}
 		return msg;
 	}
 

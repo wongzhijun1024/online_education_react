@@ -26,6 +26,21 @@ public interface CourseMapper {
 	List<Course> selectCourseAll();
 
 	/**
+	 * 查询所有的课程,包含子节点
+	 * 
+	 * @return
+	 */
+
+	List<Course> selectCourseAllLeaf();
+
+	/**
+	 * 查询课程和课程里面的章节
+	 * 
+	 * @return 课程
+	 */
+	List<Course> selectCourseAndChapters();
+
+	/**
 	 * 根据科目的id号查询对应课程
 	 * 
 	 * @param id 科目id
@@ -40,4 +55,11 @@ public interface CourseMapper {
 	 * @return 返回对应的课程
 	 */
 	Course getCourseByName(String name);
+
+	/**
+	 * 查询所有课程里面的题
+	 * 
+	 * @return
+	 */
+	List<Course> selectAllQuestionsOfCourses();
 }

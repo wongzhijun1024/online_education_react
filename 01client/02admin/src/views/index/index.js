@@ -9,7 +9,6 @@ export default class Index extends React.Component {
       <Redirect to="/login" />,
 
       <Redirect to="/home/test" />
-
-    );
+    ) 
   }
 }

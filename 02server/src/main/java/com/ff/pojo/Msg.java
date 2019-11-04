@@ -46,4 +46,9 @@ public class Msg {
 		this.object = object;
 	}
 
+	@Override
+	public String toString() {
+		return "Msg [msg=" + msg + ", code=" + code + ", object=" + object + "]";
+	}
+
 }

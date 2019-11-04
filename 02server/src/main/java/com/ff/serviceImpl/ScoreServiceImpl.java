@@ -10,18 +10,18 @@ import com.ff.pojo.Score;
 import com.ff.service.ScoreService;
 
 @Service
-public class ScoreServiceImpl implements ScoreService{
+public class ScoreServiceImpl implements ScoreService {
 	@Autowired
 	ScoreMapper scoreMaper;
-	
-	//保存学生考试成绩
+
+	// 保存学生考试成绩
 	@Override
 	public int insertScore(Score record) {
 		// TODO Auto-generated method stub
 		return scoreMaper.insertScore(record);
 	}
 
-	//根据学生姓名和试卷名称查询考试成绩
+	// 根据学生姓名和试卷名称查询考试成绩
 	@Override
 	public List<Score> selectByEtitleAndStuName(Score record) {
 		// TODO Auto-generated method stub
@@ -46,5 +46,4 @@ public class ScoreServiceImpl implements ScoreService{
 		return scoreMaper.selectScoreByStuName(name);
 	}
 
-	
 }

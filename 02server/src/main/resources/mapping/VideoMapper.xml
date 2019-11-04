@@ -4,38 +4,47 @@
 	<resultMap id="videoMap" type="com.ff.pojo.Video">
 		<id column="id" property="id" />
 		<result column="name" property="name" />
-		<result column="chapterOrder" property="order" />
+		<result column="chapter_id" property="chapterId" />
+		<result column="v_order" property="order" />
+		<result column="url" property="url" />
 	</resultMap>
 
 	<!-- 根据章节id获得视频 -->
-	<select id="getVideosByChapterId" resultMap="videoMap">
-		select *from video
-		where chapter_id = #{id} order by v_order
+	<select id="selectVideosByChapterId" resultMap="videoMap">
+		select * from
+		videos
+		where chapter_id = #{id}
 	</select>
 
 	<!-- 增加新视频 -->
 	<insert id="insert" parameterType="com.ff.pojo.Video"
 		keyProperty="id" useGeneratedKeys="true">
-		insert into video
+		insert into videos
 		(name,chapter_id,v_order,url)
 		values (#{name},
-		#{chapter_id},#{order},#{url})
+		#{chapterId},#{order},#{url})
 	</insert>
 
 
 
 	<!-- 查询所有视频 -->
-	<select id="getAllVideo" resultMap="videoMap">
-		select * from video
+	<select id="selectVideosByName" resultMap="videoMap">
+		select * from videos
+		where name = #{name}
 	</select>
-	
-	
-		<!-- 根据视频信息查询视频 -->
-	<select id="getVideo" resultMap="videoMap">
-		select * from video where id = #{id} 
+
+
+
+
+
+	<!-- 根据视频信息查询视频 -->
+	<select id="selectVideo" resultMap="videoMap">
+		select * from video where id
+		=
+		#{id}
 	</select>
-	
-	
+
+
 
 	<!-- 根据id更新视频 -->
 	<update id="updateById" parameterType="com.ff.pojo.Video">
@@ -56,5 +65,23 @@
 		</set>
 		where id = #{id}
 	</update>
+
+	<!-- 根据chapterId更新视频 -->
+	<update id="updateByVideoId" parameterType="com.ff.pojo.Video">
+		update videos
+		<set>
+			<if test="url != null">
+				url = #{url},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="order != null">
+				v_order = #{order},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
 
 </mapper>

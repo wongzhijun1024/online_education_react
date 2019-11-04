@@ -12,39 +12,46 @@ import com.ff.pojo.Course;
 import com.ff.pojo.Msg;
 import com.ff.service.ChapterService;
 
-
 @Controller
 @RequestMapping("/noi")
 public class ChapterController {
 	@Autowired
 	private ChapterService chapterService;
-	
+
 	/**
 	 * 根据科目的ID查询对应的课程
+	 * 
 	 * @return
 	 */
-	@RequestMapping(method=RequestMethod.GET,value="allChapters")
+	@RequestMapping(value = "chapters/all")
 	@ResponseBody
 	public Msg selectAllChapter() {
 		return chapterService.selectAllChapter();
 	}
-	
+
 	/**
 	 * 根据科目的ID查询对应的课程
+	 * 
 	 * @return
 	 */
-	@RequestMapping(method=RequestMethod.GET,value="chaptersByCourseId")
-	@ResponseBody  
-	public Msg selectChaptersByCourseId(Course course,HttpServletResponse resp, HttpServletRequest req) {
+	@RequestMapping(value = "chaptersByCourseId")
+	@ResponseBody
+	public Msg selectChaptersByCourseId(Course course, HttpServletResponse resp, HttpServletRequest req) {
 		return chapterService.selectChaptersByCourseId(course);
 	}
-	
-	
-	@RequestMapping(value="addChapter")
+
+	@RequestMapping(value = "chaptersByName")
 	@ResponseBody
-	public Msg addChapter(Chapter chapter,HttpServletResponse resp, HttpServletRequest req) {
+	public Msg selectChaptersByName(Chapter chapter, HttpServletResponse resp, HttpServletRequest req) {
+
+		return chapterService.selectChaptersByName(chapter);
+	}
+
+	@RequestMapping(value = "chapter/add")
+	@ResponseBody
+	public Msg addChapter(Chapter chapter, HttpServletResponse resp, HttpServletRequest req) {
 
 		return chapterService.insertChapter(chapter);
 	}
-	
+
 }

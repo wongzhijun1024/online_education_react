@@ -1,55 +1,50 @@
-*{
-    padding: 0px;
-    margin: 0px;
-}
-.courseBox{
-    width: 100%;
+
+.courseBox {
+    width: 90%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.pageHeader{
+
+.pageHeader {
     width: 90%;
     height: 40px;
     display: flex;
     align-items: center;
     position: relative;
     border-bottom: 2px solid gainsboro;
-    margin:20px 0px 30px 0px;
+    margin: 20px 0px 30px 0px;
 }
-.header_left{
+
+.header_left {
     font-size: 18px;
 }
-.header_right{
+
+.header_right {
     height: 32px;
     border-radius: 3px;
-    background-color: #5CB85C;
     display: flex;
     align-items: center;
     position: absolute;
     right: 0;
 }
-.headerBtn{
+
+.headerBtn {
+    background-color: #5CB85C;
     padding: 0px 10px;
     color: white;
 }
-.headerBtn:hover{
-    color: white;
-}
-.nav{
+
+.btnGroup {
     width: 90%;
-    list-style: none;
-    /* border-bottom: 1px solid #DCDCDC; */
+    margin-bottom: 30px;
 }
-.navTitle>a{
-    color: #555;
-    padding: 10px 15px;
-    cursor: default;
-    border: 1px solid #DCDCDC;
+
+.btnGroup>a {
+    padding: 7px 10px;
+    border: 1px solid #CCCCCC;
+    color: #333333;
     border-radius: 3px;
-    border-bottom-color: transparent;
-}
-.btnGroup{
-    
+    font-size: 12px;
 }
