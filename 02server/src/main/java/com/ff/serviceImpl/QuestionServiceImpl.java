@@ -39,5 +39,17 @@ public class QuestionServiceImpl implements QuestionService {
 
 		return msg;
 	}
+	@Override
+	public Msg selectQuestionsByChapterid(Question question){
+		Msg msg = new Msg();
+		List<Question> list = questionMapper.selectQuestionsBychapterId(question.getId());
+		if(list.size()>=1) {
+			msg.setMsg("操作成功");
+			msg.setCode(1);
+			msg.setObject(list);
+		}
+		return msg;
+		
+	}
 
 }

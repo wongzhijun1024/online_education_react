@@ -22,5 +22,12 @@ public class QuestionController {
 
 		return questionService.insert(question);
 	}
+	
+	@RequestMapping(value = "question/and/chapterid")
+	@ResponseBody
+	public Msg selectQuestionbyid(Question question, HttpServletResponse resp, HttpServletRequest request) {
 
+		return questionService.selectQuestionsByChapterid(question);
+	}
+	
 }
