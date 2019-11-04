@@ -60,6 +60,7 @@ export default class CourseDocument extends React.Component {
   }
 
   handleChange = value => {
+    console.log(this.props);
     let id = value;
     let that = this;
     net.get(
@@ -93,7 +94,7 @@ export default class CourseDocument extends React.Component {
         render: ob => {
           let url = ob.url;
           let id = ob.id;
-          if (url == 0) {
+          if (this.state.url==0 && url == 0) {
             return (
               <Upload 
               onRemove={this.removeFile} 
@@ -237,10 +238,6 @@ export default class CourseDocument extends React.Component {
       function (ob) {
         if(ob.msg=="更新成功！"){
           console.log(ob);
-          
-          that.setState({
-            url:ob.object.url,
-          })
         }
       }
     );
