@@ -57,17 +57,13 @@ export default class CourseDocument extends React.Component {
   };
   }
 
-  handleChange = value => {
+  handleChange = value => {;
+    let id = value;
     let that = this;
-    console.log(value);
-    this.setState({
-      chapterId: value
-    });
-    let chapterId = this.state.chapterId;
     net.get(
       "videosByChapterId",
       {
-        id: chapterId
+        id: id
       },
       function (ob) {
         that.setState({
@@ -96,11 +92,25 @@ export default class CourseDocument extends React.Component {
         render: ob => {
           let url = ob.url;
           let id = ob.id;
-          return(
-             <Button 
-             onClick = {this.playVideo.bind(null,url,id)} 
-             style={{ background: "#43BB60",color:"white"}}>上传视频</Button>
-          );
+          if (url == 0) {
+            return (
+              <Upload 
+              onRemove={this.removeFile} 
+              beforeUpload={this.beforeUpload}
+              onChange = {this.beforeUpload2.bind(null,id)}
+              >
+                  <Button style={{ background: "#43BB60", color: "white" ,width:"120px"}}>
+                    <Icon type="upload" /> 上传视频
+                  </Button>
+              </Upload>
+            );
+          }else{
+            return (
+              <Button
+                onClick={this.playVideo.bind(null, url)}
+                style={{ background: "#43BB60", color: "white" ,width:"120px"}}>播放视频</Button>
+            );
+          }
         }
       }
     ];
@@ -241,6 +251,24 @@ export default class CourseDocument extends React.Component {
     });
   };
 
+  beforeUpload2 = (num) => {
+    let id = num;
+    let fileList = this.state.fileList
+    let that = this;
+    net.uploadFile(
+      "video/update",
+      {
+        id: id,
+        files: fileList
+      },
+      function (ob) {
+        if(ob.msg=="更新成功！"){
+          console.log(ob);
+        }
+      }
+    );
+   
+  };
   addCourseFiles() {
     this.refs.background.style.display = "block";
     this.refs.addFiles.style.display = "block";

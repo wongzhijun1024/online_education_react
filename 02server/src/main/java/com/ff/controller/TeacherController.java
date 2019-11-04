@@ -47,7 +47,7 @@ public class TeacherController {
 	@ResponseBody
 	@RequestMapping(value = "teacherAdd")
 	public Object insertTeacher(Teacher teacher, HttpServletResponse response, HttpServletRequest request) {
-
+		System.out.print(teacher);
 		return teacherService.insertTeacher(teacher, request);
 
 	}
