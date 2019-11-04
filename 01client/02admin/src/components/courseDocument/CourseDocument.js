@@ -60,15 +60,10 @@ export default class CourseDocument extends React.Component {
   handleChange = value => {;
     let id = value;
     let that = this;
-    console.log(value);
-    this.setState({
-      chapterId: value
-    });
-    let chapterId = this.state.chapterId;
     net.get(
       "videosByChapterId",
       {
-        id: chapterId
+        id: id
       },
       function (ob) {
         that.setState({
@@ -97,7 +92,7 @@ export default class CourseDocument extends React.Component {
         render: ob => {
           let url = ob.url;
           let id = ob.id;
-          if (this.state.url==0 && url == 0) {
+          if (url == 0) {
             return (
               <Upload 
               onRemove={this.removeFile} 
