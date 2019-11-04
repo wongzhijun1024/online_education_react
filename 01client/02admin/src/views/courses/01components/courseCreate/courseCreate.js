@@ -122,14 +122,20 @@ export default class MyCourseCreate extends React.Component {
     )
   };
   upload =e=> {
-    let that = this;
     let chapterId = this.state.chapterId;
     console.log(chapterId);
-    
+    let questionData = this.state.questionData;
+    let questionIds=[];
+    questionData.map(function (item) {
+      questionIds.push(item.id);
+      console.log(questionIds);
+      return questionIds;
+    });
+   
     net.post(
       "insert/exam/chapter",
       {
-        chapterId: 0, questionIds: [1,2,3,4]
+        chapterId: chapterId, questionIds: questionIds
       },
       function (ob) {
         console.log(ob);
@@ -167,7 +173,6 @@ export default class MyCourseCreate extends React.Component {
                 treeDefaultExpandAll
                 onChange={this.handleChange}
                 key="chapter"
-                // ref={questionByChapter}
               >
               </TreeSelect>
             </div>
