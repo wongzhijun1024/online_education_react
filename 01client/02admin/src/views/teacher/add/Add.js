@@ -26,7 +26,13 @@ const columns = [
   },
   {
     title: "照片",
-    dataIndex: "tkey"
+    dataIndex: "tkey",
+    render:(tkey)=>{
+        console.log(tkey);
+        return(
+          <img src = {tkey} className="tea_img"/>
+        );
+    }
   },
   {
     title: "介绍",

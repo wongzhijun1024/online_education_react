@@ -2,7 +2,6 @@ import React from "react";
 import "./courseTest.css";
 import { Icon, Button, Radio, Table, Upload, message, Select } from "antd";
 import net from "../../../../utils/net";
-import CourseCreate from "../courseCreate/courseCreate";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 const { Option } = Select;
 // 课程信息测试数据
@@ -46,7 +45,7 @@ export default class MyCourseTest extends React.Component {
               }
               //获取第一个章节为默认值
             let temp = chapters[0].name;
-            console.log(chapters[0].questions);
+            // console.log(chapters[0].questions);
             return (
               <Select
                 defaultValue={temp}
@@ -75,7 +74,12 @@ export default class MyCourseTest extends React.Component {
   }
   componentDidMount() {
     let that = this;
-    net.get("questions/all", {}, function (ob) {
+    // net.get("questions/all", {}, function (ob) {
+    //   that.setState({
+    //     allLeaf: ob.data.object
+    //   });
+    // });
+    net.get("courses/and/chapters", {}, function (ob) {
       that.setState({
         allLeaf: ob.data.object
       });
@@ -99,7 +103,9 @@ export default class MyCourseTest extends React.Component {
         
       }
     }
-    // return <Table columns={columns} dataSource={testData} pagination={false} />;
+    return <Table columns={columns}
+      // dataSource={testData}
+      pagination={false} />;
   };
   render() {
     return (

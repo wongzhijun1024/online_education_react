@@ -24,7 +24,14 @@ public class TeacherServiceImpl implements TeacherService {
 	public Msg selectTeachers() {
 
 		Msg msg = new Msg();
-		msg.setObject(teacherMapper.selectTeachers());
+		List<Teacher> list = teacherMapper.selectTeachers();
+		int length = list.size();
+		CosTool cosTool = new CosTool();
+		for (int i = 0; i < length; i++) {
+			String key = list.get(i).getTkey();
+			list.get(i).setTkey(cosTool.getUrl(key));
+		}
+		msg.setObject(list);
 		msg.setCode(1);
 
 		return msg;
@@ -44,7 +51,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 		CosTool cosTool = new CosTool();
 		List<String> keyList = cosTool.uploadFile(CosTool.IMAGE_FOLDER, request);
-		System.out.print(keyList);
+
 		if (keyList.size() == 0) {
 			msg.setMsg("图片添加失败!");
 			return msg;

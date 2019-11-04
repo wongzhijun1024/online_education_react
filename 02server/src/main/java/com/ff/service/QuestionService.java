@@ -1,5 +1,6 @@
 package com.ff.service;
 
+import com.ff.pojo.Chapter;
 import com.ff.pojo.Msg;
 import com.ff.pojo.Question;
 
@@ -19,13 +20,13 @@ public interface QuestionService {
 	 * @return
 	 */
 	Msg selectQuestionsAll();
-	
+
 	/**
 	 * 通过章节id查询题
 	 * 
 	 * @return
 	 */
-	
-	Msg selectQuestionsByChapterid(Question question);
+
+	Msg selectQuestionsByChapterid(Chapter chapter);
 
 }
